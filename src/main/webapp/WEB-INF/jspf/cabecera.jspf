@@ -1,0 +1,16 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page pageEncoding="UTF-8" %>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<header>
+<%-- href="<c:import url="/jsp/portada.jsp">" --%>
+<a  class="d-block text-center font-weight-bolder text-reset" style="background-color: #ffcc00;min-height: 120px; font-size: 400%;">Cinuja</a>    
+<table class="table shadow-lg">
+    <tr>
+        <th scope="col"><button type="button" class="mx-auto btn btn-success">Película</button></th>
+        <th scope="col">Usuario</th>
+    </tr>
+</table>
+
+</header>
