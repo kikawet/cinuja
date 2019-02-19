@@ -8,14 +8,29 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <a href="../../../../nb-configuration.xml"></a>
+        <%@include file="../WEB-INF/jspf/links.jspf" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>JSP portada</title>
     </head>
     <body>
         <%@include file="../WEB-INF/jspf/cabecera.jspf" %>
         
+        <section class="d-inline-flex">
+            <h1>CONTENIDO</h1>
+            <ul>
+            <c:forEach var="variable" begin="1" end="10" step="1">
+                <li class="d-block"> ${variable} </li> 
+            </c:forEach>
+            </ul>
+          
+        </section>
         
-        
+        <aside class="d-inline-flex">
+            
+            <h2>LATERAL</h2>
+        </aside>
+
     </body>
 </html>
+  
