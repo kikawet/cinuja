@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,29 +16,29 @@
     <%@include file="../WEB-INF/jspf/cabecera.jspf" %>
     <body>
         <div class="card">
-            <img class="card-img-top" src="<%--c:out value="${perfil.foto}" escapeXml="true" default="https://placeimg.com/200/300/animals"--%>">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <img class="card-img justify-content-center mx-auto mt-5 " style="max-width: 128px" src=https://pictures-of-cats.org/wp-content/uploads/images/fat-cat.jpg">
+            <div class="card-body mx-auto">
+                <p class="card-text ">Nick: ${perfil.nick} </p>
+                <p class="card-text ">Nombre: ${perfil.nombre} </p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Director favorito</li>
-                <li class="list-group-item">Pelicula favorita</li>
+                <li class="list-group-item">Director favorito: ${perfil.dFav}</li>
+                <li class="list-group-item">Pelicula favorita: ${perfil.pFav}</li>
             </ul>
 
             <div class="card-body col-xs-6">
-                <div class="col-xs-6">
-                    <h2 class="sub-header col-xs-6">Subtitle</h2>
+                <div class=" d-block">
+                    <h2 class="sub-header col-xs-6">Comentarios</h2>
                     <div class="table-responsive col-xs-6">
                         <table class="table table-striped col-xs-6">
+                            <tr> 
+                                <th>Calificación</th>
+                                <th>Película</th>
+                                <th>Comentario</th>
+                            </tr>
                         </table>
                     </div>
-                </div>
-                <div class="col-xs-6">
-                    <h2 class="sub-header">Latest Incidents</h2>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                        </table></div>
-                </div>
+                </div>               
             </div>
     </body>
 </html>
