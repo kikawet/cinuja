@@ -9,33 +9,169 @@
 <html>
     <head>
     <a href="../../../../nb-configuration.xml"></a>
-        <%@include file="../WEB-INF/jspf/links.jspf" %>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP portada</title>
-    </head>
-    <body>
+    <%@include file="../WEB-INF/jspf/links.jspf" %>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP portada</title>
+</head>
+<body>
+
+    <header class="cabecera">
+
         <%@include file="../WEB-INF/jspf/cabecera.jspf" %>
-        
-        <section class="d-inline-flex">
-            <h1>Películas</h1>
-            <%--
-            No tengo claro como mostrar los datos de las películas
-            @TODO
-            --%>
-            <ul>
-            <c:forEach var="variable" begin="1" end="10" step="1">
-                <li class="d-inline"> ${variable} </li> 
-            </c:forEach>
+
+    </header>
+
+
+    <main class="row">
+        <nav class="col-md-2">
+            <h1>Géneros</h1>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Acción y aventura</li>
+                <li class="list-group-item">Adultos (+18)</li>
+                <li class="list-group-item">Bélico</li>
+                <li class="list-group-item">Ciencia ficción</li>
+                <li class="list-group-item">Comedia</li>
+                <li class="list-group-item">Deportes</li>
+                <li class="list-group-item">Dibujos animados</li>
+                <li class="list-group-item">Documentales</li>
+                <li class="list-group-item">Drama</li>
+                <li class="list-group-item">Familiar</li>
+                <li class="list-group-item">Mafia</li>
+                <li class="list-group-item">Música</li>
+                <li class="list-group-item">Romántica</li>
+                <li class="list-group-item">Terror</li>
+                <li class="list-group-item">Thriller</li>
             </ul>
-          
-        </section>
+        </nav>
+
+
+
+
+
+
         
-        <!--aside class="d-inline-flex">
+            <nav class="col-md-2">
+                <div class="card" style="width: 14rem;">
+                    <img src="http://es.web.img2.acsta.net/medias/nmedia/18/67/70/14/20077949.jpg"  class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Uno de los nuestros (1990)</h5>
+                        <p class="card-text">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Martin Scorsese</li>
+                            <li class="list-group-item">Mafia</li>
 
-            <h2>LATERAL</h2>
+                        </ul>
+                        <div class="card-body">
+                            <a href="usuario.jsp" class="card-link">Favoritas</a>
+                            <a href="usuario.jsp" class="card-link">Ver/hacer criticas</a>
+                        </div>
+                    </div>
+
+            </nav>
+
             
-        </aside-->
 
-    </body>
+
+       
+
+
+        <nav class="col-md-2">
+            <div class="card" style="width: 14rem;">
+                <img src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2016/09/pulp-fiction_0.jpg"   class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">Pulp Fiction 
+                        <p>(1997)
+                        </p></h5>
+                    <p class="card-text">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Quentin Tarantino</li>
+                        <li class="list-group-item">Mafia</li>
+
+                    </ul>
+                    <div class="card-body">
+                        <a href="usuario.jsp" class="card-link">Favoritas</a>
+                        <a href="usuario.jsp" class="card-link">Ver/hacer criticas</a>
+                    </div>
+                </div>
+
+        </nav>
+
+    
+
+    <nav class="col-md-2">
+        <div class="card" style="width: 14rem;">
+            <img src="https://twistedsifter.files.wordpress.com/2015/10/53-saving-private-ryan.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Salvar al soldado Bryan (1998)</h5>
+                <p class="card-text">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Steven Spielberg</li>
+                    <li class="list-group-item">Bélico</li>
+
+                </ul>
+                <div class="card-body">
+                    <a href="usuario.jsp" class="card-link">Favoritas</a>
+                    <a href="usuario.jsp" class="card-link">Ver/hacer criticas</a>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </nav>
+
+
+    <nav class="col-md-2">
+        <div class="card" style="width: 14rem;">
+            <img src="https://educayaprende.com/wp-content/uploads/2014/05/ratatouille-cover-caratula-dvd-disney-pixar.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Ratatouille <p>
+                        (2007)
+                    </p></h5>
+                <p class="card-text">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Pixar</li>
+                    <li class="list-group-item">Dibujos animados</li>
+
+                </ul>
+                <div class="card-body">
+                    <a href="usuario.jsp" class="card-link">Favoritas</a>
+                    <a href="usuario.jsp" class="card-link">Ver/hacer criticas</a>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </nav>
+            
+             <nav class="col-md-2">
+        <div class="card" style="width: 14rem;">
+            <img src="https://www.heraldo.es/ocio/sites/default/files/bohemian.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Bohemian Rhapsody (2018) <p>
+                        
+                    </p></h5>
+                <p class="card-text">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Bryan Singer</li>
+                    <li class="list-group-item">Música</li>
+
+                </ul>
+                <div class="card-body">
+                    <a href="usuario.jsp" class="card-link">Favoritas</a>
+                    <a href="usuario.jsp" class="card-link">Ver/hacer criticas</a>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </nav>
+
+</main>
+</body>
 </html>
-  
