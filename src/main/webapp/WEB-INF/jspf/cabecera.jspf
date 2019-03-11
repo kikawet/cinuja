@@ -3,15 +3,15 @@
 <%@include file="../jspf/links.jspf" %>
 
 <header>
-<%-- href="<c:import url="/jsp/portada.jsp">" --%>
-<a  class="d-block text-center font-weight-bolder text-reset" style="background-color: #ffcc00;min-height: 120px; font-size: 400%;">Cinuja</a>   
+    <%-- href="<c:import url="/jsp/portada.jsp">" --%>
+    <a  class="d-block text-center font-weight-bolder text-reset" style="background-color: #ffcc00;min-height: 120px; font-size: 400%;">Cinuja</a>   
 
 
-<nav class="navbar navbar-expand-lg bg-light  navbar-light justify-content-center">
-    
-    <a class="navbar-bar nav-link" href="${pageContext.request.contextPath}/jsp/portada.jsp">Películas</a>
-    <a class="navbar-bar nav-link" href="${pageContext.request.contextPath}/jsp/usuario.jsp">Usuario</a>    
-    
-</nav>
+    <nav class="navbar navbar-expand-lg bg-light  navbar-light justify-content-center">
+
+        <a class="navbar-bar nav-link" href="${pageContext.request.contextPath}/jsp/portada.jsp">Películas</a>
+        <a class="navbar-bar nav-link" href="${pageContext.request.contextPath}/jsp/usuario.jsp">Usuario</a>    
+
+    </nav>
 
 </header>
