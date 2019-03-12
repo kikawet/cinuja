@@ -42,6 +42,7 @@
                     <li class="list-group-item text-truncate text-md-center">Romántica</li>
                     <li class="list-group-item text-truncate text-md-center">Terror</li>
                     <li class="list-group-item text-truncate text-md-center">Thriller</li>
+                    <li class="list-group-item text-truncate text-md-center"></li>
                 </ul>
             </nav>
         </aside>
@@ -59,8 +60,8 @@
                                 <li class="list-group-item">Mafia</li>
                             </ul>
                             <div class="card-body">
-                                <a href="usuario.jsp" class="card-link">Favoritas</a>
-                                <a href="usuario.jsp" class="card-link">Ver/hacer criticas</a>
+                                <a href="pelicula.jsp" class="card-link">Favoritas</a>
+                                <a href="pelicula.jsp" class="card-link">Ver/hacer criticas</a>
                             </div>
                         </div>
                 </nav>
@@ -78,7 +79,7 @@
                                 <li class="list-group-item">Mafia</li>
                             </ul>
                             <div class="card-body">
-                                <a href="usuario.jsp" class="card-link">Favoritas</a>
+                                <a href="login.jsp" class="card-link">Favoritas</a>
                                 <a href="usuario.jsp" class="card-link">Ver/hacer criticas</a>
                             </div>
                         </div>
@@ -232,7 +233,7 @@
                                 <li class="list-group-item">Música</li>
                             </ul>
                             <div class="card-body">
-                                <a href="usuario.jsp" class="card-link">Favoritas</a>
+                                <a href="login.jsp" class="card-link">Favoritas</a>
                                 <a href="usuario.jsp" class="card-link">Ver/hacer criticas</a>
                             </div>
                         </div>
@@ -240,6 +241,25 @@
                 </nav>
 
                 <nav class="col-md my-md-3">
+                    <div class="card" style="width: 14rem;">
+                        <img src="https://www.heraldo.es/ocio/sites/default/files/bohemian.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Bohemian Rhapsody (2018) <p>
+                                </p></h5>
+                            <p class="card-text">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Bryan Singer</li>
+                                <li class="list-group-item">Música</li>
+                            </ul>
+                            <div class="card-body">
+                                <a href="usuario.jsp" class="card-link">Favoritas</a>
+                                <a href="usuario.jsp" class="card-link">Ver/hacer criticas</a>
+                            </div>
+                        </div>
+                    </div>   
+                </nav>
+                
+           <nav class="col-md my-md-3">
                     <div class="card" style="width: 14rem;">
                         <img src="https://www.heraldo.es/ocio/sites/default/files/bohemian.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
