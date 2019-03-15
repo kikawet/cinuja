@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Usuario</title>
     </head>
-    <%@include file="../WEB-INF/jspf/cabecera.jspf" %>
+    <%@include file="/WEB-INF/jspf/cabecera.jspf" %>
     <body>
         <div class="card">
             <img class="card-img justify-content-center mx-auto mt-5 " style="max-width: 128px" src=https://pictures-of-cats.org/wp-content/uploads/images/fat-cat.jpg">
@@ -22,8 +22,8 @@
                 <p class="card-text ">Nombre: ${perfil.nombre} </p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Director favorito: ${perfil.dFav}</li>
-                <li class="list-group-item">Pelicula favorita: ${perfil.pFav}</li>
+                <li class="list-group-item">Director favorito: ${perfil.dFavorito}</li>
+                <li class="list-group-item">Pelicula favorita: ${perfil.pFavorita}</li>
             </ul>
 
             <div class="card-body col-xs-6">

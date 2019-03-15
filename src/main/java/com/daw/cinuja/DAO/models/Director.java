@@ -12,10 +12,11 @@ import java.util.Date;
  * @author lopez
  */
 public class Director {
+
     private String nombre;
     private Date fnacimiento;
     private String foto;
     private String apellidos;
     private String biografia;
-    private Pelicula [] peliculas;
+    private Pelicula[] peliculas;
 }

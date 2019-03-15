@@ -7,7 +7,7 @@ package com.daw.cinuja.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +18,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lopez
  */
-@WebServlet(name = "Controller", urlPatterns = {"/portada"})
-public class Controller extends HttpServlet {
+@WebServlet(name = "Usuario", urlPatterns = {"/perfil"})
+public class Usuario extends HttpServlet {
 
+    @Inject
+    private Usuario usuario;    
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,12 +35,8 @@ public class Controller extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        request.setCharacterEncoding("UTF-8"); //Accept UTF-8 parameters
-
         response.setContentType("text/html;charset=UTF-8");
-
-        //request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
+     
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,8 +51,10 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        request.getRequestDispatcher("/WEB-INF/jsp/portada.jsp").forward(request, response);
+        processRequest(request, response);
+        
+        
+        request.getRequestDispatcher("/WEB-INF/jsp/usuario.jsp").forward(request, response);
     }
 
     /**

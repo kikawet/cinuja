@@ -12,6 +12,7 @@ import java.util.Date;
  * @author lopez
  */
 public class Comentario {
+
     private Usuario usuario;
     private Pelicula pelicula;
     private Date fecha;

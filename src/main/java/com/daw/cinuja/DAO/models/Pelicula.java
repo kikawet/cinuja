@@ -9,14 +9,17 @@ import java.util.Date;
 
 /**
  * Para almacenar las preferencias y los datos de un usuario
+ *
  * @author lopez
  */
+
 public class Pelicula {
+
     private String nombre;
     private Date fecha;//estreno
     private String foto;//url
     private float nota;
-    public String [] generos= {"",""};
+    public String[] generos = {"", ""};
     private int genero;//indice
     private String descripcion;
     private boolean restriccionEdad;//restricción de edad

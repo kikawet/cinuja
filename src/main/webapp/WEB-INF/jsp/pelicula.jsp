@@ -14,7 +14,7 @@
 
     <header class="cabecera">
 
-        <%@include file="../WEB-INF/jspf/cabecera.jspf" %>
+        <%@include file="/WEB-INF/jspf/cabecera.jspf" %>
 
     </header>
 
