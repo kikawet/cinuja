@@ -33,16 +33,20 @@ public class PeliculaDAOList implements PeliculaDAO {
         p.setFecha(new Date(1990, 1, 1));
         d.setNombre("Martin Scorsese");
         p.setDirector(d);
-        p.setGenero(PeliculaDAO.generos.indexOf("Mafia"));   
+        p.setGenero(PeliculaDAO.generos.indexOf("Mafia"));
         peliculas.add(p);
-        
+
+        p = new Pelicula();
+        d = new Director();
         p.setFoto("https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2016/09/pulp-fiction_0.jpg");
         p.setTitulo("Pulp Fiction");
         p.setFecha(new Date(1997, 1, 1));
         d.setNombre("Quentin Tarantino");
         p.setDirector(d);
         peliculas.add(p);
-        
+
+        p = new Pelicula();
+        d = new Director();
         p.setFoto("https://twistedsifter.files.wordpress.com/2015/10/53-saving-private-ryan.jpg");
         p.setTitulo("Salvar al soldado Bryan");
         p.setFecha(new Date(1998, 1, 1));
@@ -50,7 +54,9 @@ public class PeliculaDAOList implements PeliculaDAO {
         p.setDirector(d);
         p.setGenero(PeliculaDAO.generos.indexOf("Bélico"));
         peliculas.add(p);
-        
+
+        p = new Pelicula();
+        d = new Director();
         p.setFoto("https://educayaprende.com/wp-content/uploads/2014/05/ratatouille-cover-caratula-dvd-disney-pixar.jpg");
         p.setTitulo("Ratatouille");
         p.setFecha(new Date(2007, 1, 1));
@@ -58,13 +64,18 @@ public class PeliculaDAOList implements PeliculaDAO {
         p.setDirector(d);
         p.setGenero(PeliculaDAO.generos.indexOf("Dibujos animados"));
         peliculas.add(p);
-        
+
+        p = new Pelicula();
+        d = new Director();
         p.setFoto("https://www.heraldo.es/ocio/sites/default/files/bohemian.jpg");
         p.setTitulo("Bohemian Rhapsody");
         p.setFecha(new Date(2018, 1, 1));
         d.setNombre("Bryan Singer");
         p.setDirector(d);
         p.setGenero(PeliculaDAO.generos.indexOf("Música"));
+        peliculas.add(p);
+        peliculas.add(p);
+        peliculas.add(p);
         peliculas.add(p);
     }
 

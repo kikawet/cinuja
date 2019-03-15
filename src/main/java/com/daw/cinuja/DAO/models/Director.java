@@ -25,8 +25,6 @@ public class Director {
     public Director() {
     }
 
-    
-    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -92,7 +90,5 @@ public class Director {
     public void setPeliculas(List<Pelicula> peliculas) {
         this.peliculas = peliculas;
     }
-    
-    
-    
+
 }

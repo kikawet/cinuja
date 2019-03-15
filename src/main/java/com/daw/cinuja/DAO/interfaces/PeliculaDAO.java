@@ -17,12 +17,14 @@ import java.util.List;
 public interface PeliculaDAO {
 
     /**
-     *generos posibles de las peliculas
+     * generos posibles de las peliculas
      */
-    static public List<String> generos = new ArrayList<>(Arrays.asList("Acción y aventura","Adultos (+18)","Bélico","Ciencia ficción","Comedia","Deportes","Dibujos animados","Documentales",
-    "Drama","Familiar","Mafia","Música","Romántica","Terror","Thriller"));
+    public static final List<String> generos = new ArrayList<>(Arrays.asList("Acción y aventura", "Adultos (+18)", "Bélico", "Ciencia ficción", "Comedia", "Deportes", "Dibujos animados", "Documentales",
+            "Drama", "Familiar", "Mafia", "Música", "Romántica", "Terror", "Thriller"));
+
     List<Pelicula> getPeliculas();
+
     boolean insertar(Pelicula p);
+
     boolean borrar(Pelicula p);
-    
 }

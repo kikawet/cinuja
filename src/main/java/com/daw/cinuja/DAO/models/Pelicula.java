@@ -13,7 +13,6 @@ import java.util.Objects;
  *
  * @author lopez
  */
-
 public class Pelicula {
 
     private String titulo;
@@ -117,7 +116,5 @@ public class Pelicula {
     public void setDirector(Director director) {
         this.director = director;
     }
-    
-    
-    
+
 }

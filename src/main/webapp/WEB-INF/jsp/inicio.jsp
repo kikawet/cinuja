@@ -8,11 +8,11 @@
 <!DOCTYPE html>
 <html>
 
-
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP inicio</title>
     </head>
+
     <body class="bg-secondary">
         <%@include file="../WEB-INF/jspf/cabecera.jspf" %>
         <div style="height: 700px; ">
@@ -22,17 +22,15 @@
                         <div class="col-md-4 mb-3">
                             <label for="validationServer01">Nombre</label>
                             <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Nombre" value="${us.nombre}" required>
-                            <div class="valid-feedback">
-
-                            </div>
+                            <div class="valid-feedback"></div>
                         </div>
+
                         <div class="col-md-4 mb-3">
                             <label for="validationServer02">Apellidos</label>
                             <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Apellidos" value="${us.apellido}" required>
-                            <div class="valid-feedback">
-
-                            </div>
+                            <div class="valid-feedback"></div>                            
                         </div>
+
                         <div class="col-md-4 mb-3">
                             <label for="validationServerUsername">Nick</label>      
                             <input type="text" class="form-control input-group is-valid" id="validationServerUsername" placeholder="Nick" aria-describedby="inputGroupPrepend3" required>
@@ -40,22 +38,22 @@
                                 Escoja un link que no esté usando otro usuario
                             </div>
                         </div>
+
                     </div>
+
                     <div class="form-row ">
                         <div class="col-md-3 mb-3 ml-auto">
                             <label for="validationServer04">Contraseña</label>
                             <input type="text" class="form-control is-valid" id="validationServer04" placeholder="Contraseña" required>
-                            <div class="valid-feedback">
-
-                            </div>
+                            <div class="valid-feedback"></div>
                         </div>
+
                         <div class="col-md-3 mb-3 mr-auto">
                             <label for="validationServer05">Repetir Contraseña</label>
                             <input type="text" class="form-control is-valid" id="validationServer05" placeholder="Contraseña" required>
-                            <div class="valid-feedback">
-
-                            </div>
+                            <div class="valid-feedback"></div>
                         </div>
+
                     </div>
                     <div class="form-group">
                         <div class="form-check">

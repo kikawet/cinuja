@@ -6,18 +6,16 @@
     <%-- href="<c:import url="/jsp/portada.jsp">" --%>
     <a  class="d-block text-center font-weight-bolder text-reset" style="background-color: #f96805;min-height: 120px; font-size: 400%;">CinUJA</a>   
 
-
     <nav class="navbar navbar-expand-lg bg-light  navbar-light justify-content-center">
-
         <a class="navbar-bar nav-link" href="portada">Películas</a>        
-        
+
         <c:if test="${empty pageContext.request.remoteUser}">
-        <a class="navbar-bar nav-link" href="perfil">Login</a> 
+            <a class="navbar-bar nav-link" href="perfil">Login</a> 
         </c:if>
-        
+
         <c:if test="${not empty pageContext.request.remoteUser}">
-        <a class="navbar-bar nav-link" href="perfil">Usuario</a>    
-        <a class="navbar-bar nav-link" href="logout">LogOut</a> 
+            <a class="navbar-bar nav-link" href="perfil">Usuario</a>    
+            <a class="navbar-bar nav-link" href="logout">LogOut</a> 
         </c:if>
     </nav>
 

@@ -14,9 +14,10 @@ import java.util.List;
  * @author lopez
  */
 public interface ComentarioDAO {
-    
+
     List<Comentario> getComentarios(Pelicula p);
+
     boolean insertar(Comentario c);
+
     boolean borrar(Comentario c);
-    
 }

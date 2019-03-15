@@ -48,19 +48,10 @@
         </style>
     </head>
 
-
     <body>
-
-
         <header class="cabecera">
-
             <%@include file="../WEB-INF/jspf/cabecera.jspf" %>
-
         </header>
-
-
-
-
 
         <div class="wrapper">
 
@@ -77,21 +68,6 @@
 
             </form>
 
-
-
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
     </body>
-
 </html>

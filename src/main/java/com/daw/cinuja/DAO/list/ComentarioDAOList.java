@@ -9,10 +9,8 @@ import com.daw.cinuja.DAO.interfaces.ComentarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.qualifiers.DAOList;
-import java.util.HashMap;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 
@@ -22,14 +20,14 @@ import javax.ws.rs.core.MultivaluedMap;
  */
 @ApplicationScoped
 @DAOList
-public class ComentarioDAOList implements ComentarioDAO{
+public class ComentarioDAOList implements ComentarioDAO {
 
-    private MultivaluedMap<Pelicula,Comentario> comentarios;
-    
-    public ComentarioDAOList() {     
+    private MultivaluedMap<Pelicula, Comentario> comentarios;
+
+    public ComentarioDAOList() {
         comentarios = new MultivaluedHashMap<>();
     }
-    
+
     @Override
     public List<Comentario> getComentarios(Pelicula p) {
         return comentarios.get(p);
@@ -45,5 +43,5 @@ public class ComentarioDAOList implements ComentarioDAO{
     public boolean borrar(Comentario c) {
         return comentarios.remove(c.getPelicula(), c);
     }
-    
+
 }

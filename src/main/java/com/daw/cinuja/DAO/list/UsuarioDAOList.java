@@ -16,21 +16,22 @@ import javax.enterprise.context.ApplicationScoped;
  * @author lopez
  */
 @ApplicationScoped
-public class UsuarioDAOList implements UsuarioDAO{
+public class UsuarioDAOList implements UsuarioDAO {
 
     private List<Usuario> usuarios;
 
     public UsuarioDAOList() {
         usuarios = new ArrayList<>();
     }
-    
+
     @Override
     public Usuario getUsuario(String nick) {
         Usuario u = null;
         int i = 0;
-        while(i < usuarios.size() && u == null){
-            if(usuarios.get(i).getNick() == nick)
+        while (i < usuarios.size() && u == null) {
+            if (usuarios.get(i).getNick() == nick) {
                 u = usuarios.get(i);
+            }
             i++;
         }
         return u;
@@ -45,5 +46,5 @@ public class UsuarioDAOList implements UsuarioDAO{
     public boolean borrar(Usuario u) {
         return usuarios.remove(u);
     }
-    
+
 }

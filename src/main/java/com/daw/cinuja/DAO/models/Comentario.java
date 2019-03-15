@@ -98,7 +98,5 @@ public class Comentario {
     public void setValoracion(float valoracion) {
         this.valoracion = valoracion;
     }
-    
-    
-    
+
 }

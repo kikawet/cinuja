@@ -13,9 +13,10 @@ import java.util.List;
  * @author lopez
  */
 public interface UsuarioDAO {
-    
+
     Usuario getUsuario(String nick);
+
     boolean insertar(Usuario u);
+
     boolean borrar(Usuario u);
-    
 }

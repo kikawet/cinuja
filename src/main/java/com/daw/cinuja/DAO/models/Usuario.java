@@ -10,7 +10,7 @@ import java.util.Objects;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-enum Roles {
+enum Roles {//cambiar a String e intentar hacer lo mismo que con los generos
     user,
     admin
 }
@@ -22,7 +22,7 @@ enum Roles {
  */
 @Named(value = "perfil")
 @SessionScoped
-public class Usuario implements Serializable{
+public class Usuario implements Serializable {
 
     private String nick;
     private String nombre;
@@ -32,10 +32,10 @@ public class Usuario implements Serializable{
     private Roles rol;
     private Pelicula pFavorita;
     private Director dFavorito;
-    
+
     public Usuario() {
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -57,7 +57,6 @@ public class Usuario implements Serializable{
         final Usuario other = (Usuario) obj;
         return true;
     }
-
 
     public String getNick() {
         return nick;
@@ -122,8 +121,5 @@ public class Usuario implements Serializable{
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-    
-    
-    
-    
+
 }
