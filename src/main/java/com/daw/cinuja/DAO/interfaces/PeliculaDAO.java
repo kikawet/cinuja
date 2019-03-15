@@ -6,6 +6,8 @@
 package com.daw.cinuja.DAO.interfaces;
 
 import com.daw.cinuja.DAO.models.Pelicula;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -13,7 +15,12 @@ import java.util.List;
  * @author lopez
  */
 public interface PeliculaDAO {
-    
+
+    /**
+     *generos posibles de las peliculas
+     */
+    static public List<String> generos = new ArrayList<>(Arrays.asList("Acción y aventura","Adultos (+18)","Bélico","Ciencia ficción","Comedia","Deportes","Dibujos animados","Documentales",
+    "Drama","Familiar","Mafia","Música","Romántica","Terror","Thriller"));
     List<Pelicula> getPeliculas();
     boolean insertar(Pelicula p);
     boolean borrar(Pelicula p);

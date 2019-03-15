@@ -6,6 +6,7 @@
 package com.daw.cinuja.DAO.models;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -27,13 +28,36 @@ public class Usuario implements Serializable{
     private String nombre;
     private String apellidos;
     private String foto;//por ahora una url
-    //String contrasena;// no se usa
+    private String contrasena;// no se usa
     private Roles rol;
     private Pelicula pFavorita;
     private Director dFavorito;
-
+    
     public Usuario() {
     }
+    
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.nick);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        return true;
+    }
+
 
     public String getNick() {
         return nick;
@@ -89,6 +113,14 @@ public class Usuario implements Serializable{
 
     public void setdFavorito(Director dFavorito) {
         this.dFavorito = dFavorito;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
     
     
