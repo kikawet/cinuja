@@ -8,8 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <a href="../../../../nb-configuration.xml"></a>
-    <%@include file="../WEB-INF/jspf/links.jspf" %>
+    <%@include file="/WEB-INF/jspf/links.jspf" %>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>JSP portada</title>
 </head>
@@ -17,7 +16,7 @@
 
     <header class="cabecera">
 
-        <%@include file="../WEB-INF/jspf/cabecera.jspf" %>
+        <%@include file="/WEB-INF/jspf/cabecera.jspf" %>
 
     </header>
 
