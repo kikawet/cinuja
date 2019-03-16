@@ -31,8 +31,11 @@ public class PeliculaDAOList implements PeliculaDAO {
         p.setFoto("http://es.web.img2.acsta.net/medias/nmedia/18/67/70/14/20077949.jpg");
         p.setTitulo("Uno de los nuestros");
         p.setFecha(new Date(1990, 1, 1));
+        p.setUrl("uno-de-los-nuestros");
         d.setNombre("Martin Scorsese");
+        d.setFoto("http://d3iln1l77n73l7.cloudfront.net/couch_images/attachments/000/057/537/original/Martin_Scorsese.jpg?2014");
         p.setDirector(d);
+        p.setDescripcion("Un hombre de Brooklyn busca la fama y la fortuna en el crimen organizado");
         p.setGenero(PeliculaDAO.generos.indexOf("Mafia"));
         peliculas.add(p);
 
@@ -41,8 +44,10 @@ public class PeliculaDAOList implements PeliculaDAO {
         p.setFoto("https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2016/09/pulp-fiction_0.jpg");
         p.setTitulo("Pulp Fiction");
         p.setFecha(new Date(1997, 1, 1));
+        p.setUrl("pulp-fiction");
         d.setNombre("Quentin Tarantino");
         p.setDirector(d);
+        p.setGenero(PeliculaDAO.generos.indexOf("Mafia"));
         peliculas.add(p);
 
         p = new Pelicula();
@@ -50,6 +55,7 @@ public class PeliculaDAOList implements PeliculaDAO {
         p.setFoto("https://twistedsifter.files.wordpress.com/2015/10/53-saving-private-ryan.jpg");
         p.setTitulo("Salvar al soldado Bryan");
         p.setFecha(new Date(1998, 1, 1));
+        p.setUrl("salvar-al-soldado-bryan");
         d.setNombre("Steven Spielberg");
         p.setDirector(d);
         p.setGenero(PeliculaDAO.generos.indexOf("Bélico"));
@@ -60,6 +66,7 @@ public class PeliculaDAOList implements PeliculaDAO {
         p.setFoto("https://educayaprende.com/wp-content/uploads/2014/05/ratatouille-cover-caratula-dvd-disney-pixar.jpg");
         p.setTitulo("Ratatouille");
         p.setFecha(new Date(2007, 1, 1));
+        p.setUrl("ratatouille");
         d.setNombre("Pixar");
         p.setDirector(d);
         p.setGenero(PeliculaDAO.generos.indexOf("Dibujos animados"));
@@ -70,6 +77,7 @@ public class PeliculaDAOList implements PeliculaDAO {
         p.setFoto("https://www.heraldo.es/ocio/sites/default/files/bohemian.jpg");
         p.setTitulo("Bohemian Rhapsody");
         p.setFecha(new Date(2018, 1, 1));
+        p.setUrl("bohemian-rhapsody");
         d.setNombre("Bryan Singer");
         p.setDirector(d);
         p.setGenero(PeliculaDAO.generos.indexOf("Música"));

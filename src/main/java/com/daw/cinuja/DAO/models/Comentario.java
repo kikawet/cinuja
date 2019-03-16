@@ -17,6 +17,7 @@ public class Comentario {
     private Usuario usuario;
     private Pelicula pelicula;
     private Date fecha;
+    private String titulo;
     private String texto;
     private float valoracion;
 
@@ -97,6 +98,14 @@ public class Comentario {
 
     public void setValoracion(float valoracion) {
         this.valoracion = valoracion;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
 }

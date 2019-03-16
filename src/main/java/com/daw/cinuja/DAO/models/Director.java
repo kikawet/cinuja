@@ -8,11 +8,15 @@ package com.daw.cinuja.DAO.models;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author lopez
  */
+@Named(value = "director")
+@ApplicationScoped
 public class Director {
 
     private String nombre;
@@ -20,7 +24,6 @@ public class Director {
     private String foto;
     private String apellidos;
     private String biografia;
-    private List<Pelicula> peliculas;
 
     public Director() {
     }
@@ -81,14 +84,6 @@ public class Director {
 
     public void setBiografia(String biografia) {
         this.biografia = biografia;
-    }
-
-    public List<Pelicula> getPeliculas() {
-        return peliculas;
-    }
-
-    public void setPeliculas(List<Pelicula> peliculas) {
-        this.peliculas = peliculas;
     }
 
 }

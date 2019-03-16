@@ -7,15 +7,20 @@ package com.daw.cinuja.DAO.models;
 
 import java.util.Date;
 import java.util.Objects;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 
 /**
  * Para almacenar las preferencias y los datos de un usuario
  *
  * @author lopez
  */
+@Named(value = "peli")
+@ApplicationScoped
 public class Pelicula {
 
     private String titulo;
+    private String url;
     private Date fecha;//estreno
     private String foto;//url
     private float nota;
@@ -115,6 +120,14 @@ public class Pelicula {
 
     public void setDirector(Director director) {
         this.director = director;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
 }

@@ -7,14 +7,10 @@ package com.daw.cinuja.servlets;
 
 import com.daw.cinuja.DAO.interfaces.ComentarioDAO;
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
-import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
-import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.qualifiers.DAOList;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
+import java.io.PrintWriter;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,14 +22,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lopez
  */
-@WebServlet(name = "Controller", urlPatterns = {"/portada/*"})
-public class ControllerServlet extends HttpServlet {
+@WebServlet(name = "PeliculaServlet", urlPatterns = {"/pelicula/*"})
+public class PeliculaServlet extends HttpServlet {
 
     @Inject
     private PeliculaDAO peliculas;
-
-    @Inject
-    private UsuarioDAO usuarios;
 
     @Inject
     @DAOList
@@ -50,33 +43,8 @@ public class ControllerServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        request.setCharacterEncoding("UTF-8"); //Accept UTF-8 parameters
-
         response.setContentType("text/html;charset=UTF-8");
 
-        if (comentarios.getComentarios(peliculas.getPeliculas().get(0)) == null) {
-            Comentario c = new Comentario();
-            c.setPelicula(peliculas.getPeliculas().get(0));
-            c.setUsuario(usuarios.getUsuario("gordito"));
-            c.setTitulo("Maravillosa");
-            c.setTexto("La mejor pelicula de mi vida.");
-            comentarios.insertar(c);
-
-            c = new Comentario();
-            c.setPelicula(peliculas.getPeliculas().get(0));
-            c.setUsuario(usuarios.getUsuario("boa"));
-            c.setTitulo("No está mal");
-            c.setTexto("Es bastante entretenida pero prefiero ver Salvame.");
-            comentarios.insertar(c);
-
-            c = new Comentario();
-            c.setPelicula(peliculas.getPeliculas().get(0));
-            c.setUsuario(usuarios.getUsuario("weeb"));
-            c.setTitulo("Aburrida");
-            c.setTexto("Yo me aburrí. Preferiría morirme en este momento.");
-            comentarios.insertar(c);
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -92,23 +60,19 @@ public class ControllerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        request.getSession().setAttribute("generos", PeliculaDAO.generos);
 
-        List<Pelicula> p = new ArrayList<>(peliculas.getPeliculas());
-        String genero = request.getParameter("genero");
-
-        if (genero != null) {
-            int hashGenero = new Integer(genero);
-            for (int i = p.size() - 1; i >= 0; i--) {
-                if (PeliculaDAO.generos.get(p.get(i).getGenero()).hashCode() != hashGenero) {
-                    p.remove(i);
-                }
+        Pelicula p = null;
+        int i = 0;
+        while (i < peliculas.getPeliculas().size() && p == null) {
+            if (request.getPathInfo().substring(1).equals(peliculas.getPeliculas().get(i).getUrl())) {
+                p = peliculas.getPeliculas().get(i);
             }
+            i++;
         }
 
-        request.setAttribute("peliculas", p);
-
-        request.getRequestDispatcher("/WEB-INF/jsp/portada.jsp").forward(request, response);
+        request.setAttribute("pelicula", p);
+        request.setAttribute("comentarios", comentarios.getComentarios(p));
+        request.getRequestDispatcher("/WEB-INF/jsp/pelicula.jsp").forward(request, response);
     }
 
     /**
@@ -132,7 +96,7 @@ public class ControllerServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Servlet que controla la portada";
+        return "Short description";
     }// </editor-fold>
 
 }

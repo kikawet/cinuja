@@ -24,7 +24,7 @@
                     <h1 class="text-truncate text-md-center">Géneros</h1>                    
                     <ul class="list-group list-group-flush">
                         <c:forEach items="${generos}" var="genero">
-                            <li class="list-group-item text-truncate text-md-center"> <a href="portada?genero=${genero.hashCode()}" > ${genero}</a> </li>
+                            <li class="list-group-item text-truncate text-md-center"> <a class="navbar-bar nav-link" href="portada?genero=${genero.hashCode()}" > ${genero}</a> </li>
                             </c:forEach>
                     </ul>
                 </nav>
@@ -32,6 +32,10 @@
 
             <section class="my-md-3 container justify-content-center" >
                 <div class="my-md-3 row">   
+
+                    <c:if test="${empty peliculas}">
+                        <p>No hay películas de ese género</p>
+                    </c:if>
 
                     <c:forEach items="${peliculas}" var="p">                    
                         <nav class="col-md my-md-3">
@@ -46,7 +50,7 @@
                                     </ul>
                                     <div class="card-body">
                                         <a href="pelicula.jsp" class="card-link">Favoritas</a>
-                                        <a href="pelicula.jsp" class="card-link">Ver/hacer criticas</a>
+                                        <a href="pelicula/${p.url}" class="card-link">Ver/hacer criticas</a>
                                     </div>
                                 </div>
                         </nav>                        

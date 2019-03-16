@@ -28,7 +28,7 @@ public class Usuario implements Serializable {
     private String nombre;
     private String apellidos;
     private String foto;//por ahora una url
-    private String contrasena;// no se usa
+    private String contrasena;// solo se usa para registrar
     private Roles rol;
     private Pelicula pFavorita;
     private Director dFavorito;
@@ -55,6 +55,9 @@ public class Usuario implements Serializable {
             return false;
         }
         final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.nick, other.nick)) {
+            return false;
+        }
         return true;
     }
 

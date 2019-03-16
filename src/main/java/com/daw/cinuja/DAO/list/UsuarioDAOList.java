@@ -22,6 +22,24 @@ public class UsuarioDAOList implements UsuarioDAO {
 
     public UsuarioDAOList() {
         usuarios = new ArrayList<>();
+
+        Usuario u = new Usuario();
+        u.setNick("gordito");
+        u.setFoto("https://ct.yimg.com/cy/1904/44016886825_e02d29_128sq.jpg");
+        u.setNombre("José Tomas");
+        usuarios.add(u);
+
+        u = new Usuario();
+        u.setNick("boa");
+        u.setFoto("https://66.media.tumblr.com/avatar_ea54a1bd0195_128.pnj");
+        u.setNombre("Pescues");
+        usuarios.add(u);
+
+        u = new Usuario();
+        u.setNick("weeb");
+        u.setFoto("http://pm1.narvii.com/6265/5bba4fd8638ebdea1100eb9b06940944a8913fc0_128.jpg");
+        u.setNombre("Rodrigo");
+        usuarios.add(u);
     }
 
     @Override
