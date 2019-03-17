@@ -5,20 +5,41 @@
  */
 package com.daw.cinuja.DAO.models;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
+import javax.enterprise.context.ApplicationScoped;
+import javax.validation.Valid;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author lopez
  */
+@ApplicationScoped
 public class Comentario {
 
+    @NotNull(message = "Un comentario necesita un usuario")
+    @Valid
     private Usuario usuario;
+    @NotNull(message = "Un comentario necesita estar en una pelicula")
+    @Valid
     private Pelicula pelicula;
-    private Date fecha;
+    @NotNull(message = "Se necesita saber cuando se escribio el comentario")
+    @Past(message = "La fecha en el comentario tiene que ser anterior a la actual")
+    private Calendar fecha;
+    @NotNull(message = "Todos los comentarios necesitan un titulo")
+    @Size(min = 3, max = 10, message = "El titulo debe de tener un tamaño entre {min} y {max}")
     private String titulo;
+    @NotNull(message = "El texto de un comentario es necesario")
+    @Size(min = 3, max = 256, message = "El texto no tiene un tamaño entre {min} y {max}")
     private String texto;
+    @DecimalMin(value = "0", inclusive = true, message = "La nota debe de ser mayor de {value}")
+    @DecimalMax(value = "5", inclusive = true, message = "La nota debe ser menor de {value}")
     private float valoracion;
 
     @Override
@@ -42,12 +63,7 @@ public class Comentario {
             return false;
         }
         final Comentario other = (Comentario) obj;
-        if (Float.floatToIntBits(this.valoracion) != Float.floatToIntBits(other.valoracion)) {
-            return false;
-        }
-        if (!Objects.equals(this.texto, other.texto)) {
-            return false;
-        }
+
         if (!Objects.equals(this.usuario, other.usuario)) {
             return false;
         }
@@ -76,14 +92,6 @@ public class Comentario {
         this.pelicula = pelicula;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
     public String getTexto() {
         return texto;
     }
@@ -106,6 +114,14 @@ public class Comentario {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public Calendar getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Calendar fecha) {
+        this.fecha = fecha;
     }
 
 }

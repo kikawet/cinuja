@@ -24,6 +24,12 @@ public class UsuarioDAOList implements UsuarioDAO {
         usuarios = new ArrayList<>();
 
         Usuario u = new Usuario();
+        u.setNick("pescues");
+        u.setNombre("flo");
+        u.setFoto("https://cdn.discordapp.com/avatars/324587602042814464/63784f02344fafe52b780e5a0477c752.png?size=128");
+        usuarios.add(u);
+
+        u = new Usuario();
         u.setNick("gordito");
         u.setFoto("https://ct.yimg.com/cy/1904/44016886825_e02d29_128sq.jpg");
         u.setNombre("José Tomas");
@@ -47,7 +53,7 @@ public class UsuarioDAOList implements UsuarioDAO {
         Usuario u = null;
         int i = 0;
         while (i < usuarios.size() && u == null) {
-            if (usuarios.get(i).getNick() == nick) {
+            if (usuarios.get(i).getNick().equals(nick)) {
                 u = usuarios.get(i);
             }
             i++;
@@ -57,7 +63,7 @@ public class UsuarioDAOList implements UsuarioDAO {
 
     @Override
     public boolean insertar(Usuario u) {
-        return usuarios.add(u);
+        return (!usuarios.contains(u)) ? (usuarios.add(u)) : (false);
     }
 
     @Override

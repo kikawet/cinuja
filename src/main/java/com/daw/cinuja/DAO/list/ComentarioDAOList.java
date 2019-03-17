@@ -35,6 +35,7 @@ public class ComentarioDAOList implements ComentarioDAO {
 
     @Override
     public boolean insertar(Comentario c) {
+        //if(comentarios.isEmpty() || comentarios.get(c.getPelicula()).isEmpty() || !comentarios.get(c.getPelicula()).contains(c))
         comentarios.add(c.getPelicula(), c);
         return comentarios.get(c.getPelicula()).contains(c);
     }

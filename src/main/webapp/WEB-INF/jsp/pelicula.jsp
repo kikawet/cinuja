@@ -1,11 +1,11 @@
-
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <%--a href="../../../../nb-configuration.xml"></a--%>
         <%@include file="/WEB-INF/jspf/links.jspf" %>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" charset=UTF-8">
         <title>JSP pelicula</title>
     </head>
 
@@ -66,12 +66,18 @@
                 <li class="media my-4">
                     <img src="${comentario.usuario.foto}" class="mr-4" alt="...">
                     <div class="media-body">
-                        <h3 class="mt-0 mb-1">${comentario.titulo}</h3>
-                        ${comentario.texto}
+                        <h3 class="mt-0 mb-1"> ${fn:escapeXml(comentario.titulo)} </h3>
+                        ${fn:escapeXml(comentario.texto)}
                     </div>
                 </li>
             </c:forEach>
         </ul>
+
+        <c:forEach items="${errores}" var="error">
+            <div class="alert alert-danger">
+                ${error.message}
+            </div>
+        </c:forEach>
 
         <aside class="my-md-4 container input-group justify-content-end">
             <form  method="POST">
@@ -79,10 +85,10 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon3">Titulo</span>
                     </div>
-                    <input type="text" class="form-control" id="basic-url" name="titulo">
+                    <input type="text" class="form-control" id="basic-url" name="titulo" value="${titulo}">
                 </div>
-                <textarea class="input-group-text form-control text-left" name="comentario" rows="10" cols="120" placeholder="Escribe aquí tus comentario"></textarea>
-                <input class="btn btn-primary form-control" type="button" value="Comentar">
+                <textarea class="input-group-text form-control text-left" name="comentario" rows="10" cols="120" placeholder="Escribe aquí tus comentario" >${texto}</textarea>
+                <input class="btn btn-primary form-control" type="submit" value="Comentar">
             </form>
         </aside>
 

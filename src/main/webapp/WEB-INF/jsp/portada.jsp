@@ -9,7 +9,7 @@
 <html>
     <head>
         <%@include file="/WEB-INF/jspf/links.jspf" %>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" charset=UTF-8">
         <title>JSP portada</title>
     </head>
     <body>
@@ -42,7 +42,7 @@
                             <div class="card" style="width: 14rem;">
                                 <img src="${p.foto}"  class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title">${p.titulo} (1990)</h5>
+                                    <h5 class="card-title">${p.titulo} (${p.fecha.get(1)})</h5><%-- Calendar.YEAR = 1 --%>
                                     <p class="card-text">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">${p.director.nombre}</li>
