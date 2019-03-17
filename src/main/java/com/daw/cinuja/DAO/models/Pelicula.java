@@ -5,28 +5,53 @@
  */
 package com.daw.cinuja.DAO.models;
 
+import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
+import javax.validation.Valid;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  * Para almacenar las preferencias y los datos de un usuario
  *
  * @author lopez
  */
-@Named(value = "peli")
 @ApplicationScoped
 public class Pelicula {
 
+    @NotNull(message = "Todas las peliculas necesitan tener un titulo")
+    @Size(min = 2, max = 30, message = "El titulo de una pelicula debe de tener entre {min} y {max} caracteres")
     private String titulo;
+    @NotNull(message = "Se necesita que la pelicuta tenga la url con la que se mostrara en el navegador")
+    @Pattern(regexp = "^[a-z]+(-[a-z]+)*", message = "La url no tiene el formato correcto (todo debe tener minusculas y separado por -)")
     private String url;
-    private Date fecha;//estreno
-    private String foto;//url
+    //tambien puede ser una pelicula no estrenada
+    //@Past(message = "La fecha en la que se estrenó la pelicula tiene que ser anterior a la actual")
+    private Calendar fecha;//estreno
+    @Pattern(regexp = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "La foto debe ser de una url")
+    private String foto;//url 
+    @DecimalMin(value = "0", inclusive = true, message = "La nota debe ser mayor de {value}")
+    @DecimalMax(value = "5", inclusive = true, message = "La nota debe ser menor de {value}")
     private float nota;
+    //@Size(min = 0/*,max = PeliculaDAO.generos.size()*/, message = "El genero debe de ser un indice de la lista de generos")
+    @Min(value = 0, message = "El genero debe de ser un indice de la lista de generos")
+    //@Max(value = PeliculaDAO.generos.size())
     private int genero;//indice
+    @Size(min = 3, max = 256, message = "El tamaño de la descripción debe de estar entre {min} y {max}")
     private String descripcion;
+    //debe de ser true si el genero es el de +18 pero no se poner esa restricción :/
     private boolean restriccionEdad;//restricción de edad
+    @Valid
     private Director director;
 
     @Override
@@ -64,14 +89,6 @@ public class Pelicula {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
     }
 
     public String getFoto() {
@@ -128,6 +145,14 @@ public class Pelicula {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Calendar getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Calendar fecha) {
+        this.fecha = fecha;
     }
 
 }

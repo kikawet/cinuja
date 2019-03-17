@@ -9,6 +9,10 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 enum Roles {//cambiar a String e intentar hacer lo mismo que con los generos
     user,
@@ -24,13 +28,21 @@ enum Roles {//cambiar a String e intentar hacer lo mismo que con los generos
 @SessionScoped
 public class Usuario implements Serializable {
 
+    @NotNull
+    @Size(min = 1, max = 20, message = "El nick de un usuario debe estar entre {min} y {max}")
     private String nick;
+    @Size(min = 3, max = 20, message = "El nombre de un usuario debe estar entre {min} y {max}")
     private String nombre;
+    @Size(min = 4, max = 20, message = "Los apellidos de un usuario debe estar entre {min} y {max}")
     private String apellidos;
+    @Pattern(regexp = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "La foto debe ser de una url")
     private String foto;//por ahora una url
+    @Size(min = 6, message = "La contraseña debe de tener un minimo de {min} caracteres")
     private String contrasena;// solo se usa para registrar
-    private Roles rol;
+    private Roles rol;//cambiar roles como los generos
+    @Valid
     private Pelicula pFavorita;
+    @Valid
     private Director dFavorito;
 
     public Usuario() {

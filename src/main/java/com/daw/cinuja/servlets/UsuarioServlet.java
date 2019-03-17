@@ -5,9 +5,17 @@
  */
 package com.daw.cinuja.servlets;
 
+import com.daw.cinuja.DAO.interfaces.ComentarioDAO;
+import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
+import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
+import com.daw.cinuja.DAO.models.Comentario;
+import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Usuario;
+import com.daw.cinuja.DAO.qualifiers.DAOList;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +32,16 @@ public class UsuarioServlet extends HttpServlet {
 
     @Inject
     private Usuario usuario;
+
+    @Inject
+    private UsuarioDAO usuarios;
+
+    @Inject
+    private PeliculaDAO peliculas;
+
+    @Inject
+    @DAOList
+    private ComentarioDAO comentarios;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -54,8 +72,29 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
 
-        usuario.setNick("flo");
-        usuario.setNombre("flo puto amo");
+        String user = "pescues";
+        if (usuarios.getUsuario(user) != null) {
+            usuario.setNick(usuarios.getUsuario(user).getNick());
+            usuario.setFoto(usuarios.getUsuario(user).getFoto());
+            usuario.setNombre(usuarios.getUsuario(user).getNombre());
+        }
+
+        ArrayList<Comentario> total = new ArrayList<>();
+
+        for (Pelicula p : peliculas.getPeliculas()) {
+            if (comentarios.getComentarios(p) != null) {
+                ArrayList<Comentario> c = new ArrayList<>(comentarios.getComentarios(p));
+                for (int i = c.size() - 1; i >= 0; i--) {
+                    if (!c.get(i).getUsuario().getNick().equals(user)) {
+                        c.remove(i);
+                    }
+                }
+                total.addAll(c);
+            }
+        }
+
+        request.getSession().setAttribute("comentarios", total);
+        request.getSession().setAttribute("generos", PeliculaDAO.generos);
 
         request.getRequestDispatcher("/WEB-INF/jsp/usuario.jsp").forward(request, response);
     }

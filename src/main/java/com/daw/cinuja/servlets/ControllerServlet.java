@@ -13,6 +13,8 @@ import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.qualifiers.DAOList;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 import javax.inject.Inject;
@@ -55,10 +57,11 @@ public class ControllerServlet extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
 
-        if (comentarios.getComentarios(peliculas.getPeliculas().get(0)) == null) {
+        if (comentarios.getComentarios(peliculas.getPeliculas().get(0)) == null || comentarios.getComentarios(peliculas.getPeliculas().get(0)).isEmpty()) {
             Comentario c = new Comentario();
             c.setPelicula(peliculas.getPeliculas().get(0));
             c.setUsuario(usuarios.getUsuario("gordito"));
+            c.setFecha(Calendar.getInstance());
             c.setTitulo("Maravillosa");
             c.setTexto("La mejor pelicula de mi vida.");
             comentarios.insertar(c);
@@ -66,6 +69,7 @@ public class ControllerServlet extends HttpServlet {
             c = new Comentario();
             c.setPelicula(peliculas.getPeliculas().get(0));
             c.setUsuario(usuarios.getUsuario("boa"));
+            c.setFecha(Calendar.getInstance());
             c.setTitulo("No está mal");
             c.setTexto("Es bastante entretenida pero prefiero ver Salvame.");
             comentarios.insertar(c);
@@ -73,6 +77,7 @@ public class ControllerServlet extends HttpServlet {
             c = new Comentario();
             c.setPelicula(peliculas.getPeliculas().get(0));
             c.setUsuario(usuarios.getUsuario("weeb"));
+            c.setFecha(Calendar.getInstance());
             c.setTitulo("Aburrida");
             c.setTexto("Yo me aburrí. Preferiría morirme en este momento.");
             comentarios.insertar(c);
