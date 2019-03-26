@@ -54,7 +54,7 @@ public class PeliculaDAOList implements PeliculaDAO {
         p = new Pelicula();
         d = new Director();
         p.setFoto("https://twistedsifter.files.wordpress.com/2015/10/53-saving-private-ryan.jpg");
-        p.setTitulo("Salvar al soldado Bryan");
+        p.setTitulo("Salvar al soldado Ryan");
         p.setFecha(new Calendar.Builder().setDate(1998, 1, 1).build());
         p.setUrl("salvar-al-soldado-bryan");
         d.setNombre("Steven Spielberg");
