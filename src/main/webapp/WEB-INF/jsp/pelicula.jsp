@@ -58,9 +58,9 @@
 
                 color: orange;
             }
-          
+
             #boton2 {
-                
+
                 position:relative;
                 right: 1px;
                 top: 1px;
@@ -70,7 +70,10 @@
 
             #carta {
 
-                top: 40px;
+                position:relative;
+                top: -30px;
+                left: 300px;
+
             }
 
         </style>
@@ -98,7 +101,7 @@
 
                             <form method="POST">
                                 <p class="clasificacion">
-                                
+
                                     <input id="radio1" type="radio" name="estrellas" value="5"><!--
                                     --><label for="radio1">★</label><!--
                                     --><input id="radio2" type="radio" name="estrellas" value="4"><!--
@@ -110,12 +113,12 @@
                                     --><input id="radio5" type="radio" name="estrellas" value="1"><!--
                                     --><label for="radio5">★</label>
                                 </p>
-                                 <button id="boton2" type="submit" class="btn btn-primary" form-control value="estrellas">Valorar</button>
-                                 
+                                <button id="boton2" type="submit" class="btn btn-primary" form-control value="estrellas">Valorar</button>
+
                             </form>
-                      
-                       
-                            <div id="carta" class="card" style="width: 10rem;">
+
+
+                            <div id="carta" class="card" style="width: 12rem;">
                                 <c:if test="${not empty pelicula.director.foto}">
                                     <img src="${pelicula.director.foto}" class="card-img-top" alt="...">
                                 </c:if>
@@ -127,7 +130,7 @@
 
 
 
-                            
+
                         </div>
                     </div>
                 </div>

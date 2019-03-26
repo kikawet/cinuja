@@ -12,14 +12,14 @@
         <meta http-equiv="Content-Type" content="text/html" charset=UTF-8">
         <title>JSP portada</title>
         <style>
-            
+
             #boton{
                 position:relative;
-                left:17px;
+                left:25px;
             }
-            
+
         </style>
-        
+
     </head>
     <body>
 
@@ -47,13 +47,16 @@
                     </c:if>
 
                     <c:forEach items="${peliculas}" var="p">           
-                        
+
                         <nav class="col-md my-md-3">
                             <div class="card" style="width: 15rem;">
-                                 <img src="${p.foto}"  class="card-img-top" alt="..."  > </a>
-                               
+                                <a href="pelicula/${p.url}">
+                                    <img href= pelicula/${p.url}" src="${p.foto}"  class="card-img-top" alt="..."  > 
+                                </a>
                                 <div class="card-body">
-                                    <h5 class="card-title"><i>${p.titulo} </i></h5><%-- Calendar.YEAR = 1 --%>
+                                    <a href="pelicula/${p.url}">
+                                        <h5 class="card-title"><i>${p.titulo} </i></h5><%-- Calendar.YEAR = 1 --%>
+                                    </a>
                                     <p class="card-text">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">${p.fecha.get(1)}</li>
@@ -61,15 +64,16 @@
                                         <li class="list-group-item">${generos[p.genero]}</li>
                                     </ul>
                                     <div class="card-body">
-                                         
-                                        <button id="boton" type="button" class="btn btn-warning btn-lg " >Favorita</button>
-                                        <a href="pelicula.jsp" class="card-link">Ver/hacer criticas</a>
+
+                                        <button id="boton" type="button" class="btn btn-warning btn-lg">Favorita</button>
+
+
                                     </div>
                                 </div>
-                                    </div>
-                            </nav>
-                        
-                                              
+                            </div>
+                        </nav>
+
+
                     </c:forEach>
 
                 </div>
