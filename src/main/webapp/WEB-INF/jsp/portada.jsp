@@ -18,6 +18,15 @@
                 left:25px;
             }
 
+            #boton3 {
+
+                position:relative;
+                right: -70px;
+                top: 100px;
+                width: 120px;
+                height: 60px;
+            }
+
         </style>
 
     </head>
@@ -37,7 +46,36 @@
                             </c:forEach>
                     </ul>
                 </nav>
+
+                <button id="boton3" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+                   ⚙
+                </button>
+
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Editar portada</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <button type="button" class="btn btn-primary">Editar</button>
+                                <button type="button" class="btn btn-success">Añadir</button>
+                                <button type="button" class="btn btn-danger">Borrar</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </aside>
+
+
 
             <section class="my-md-3 container d-flex justify-content-start">
                 <div class="my-md-3 row d-flex justify-content-start">   
@@ -63,12 +101,7 @@
                                         <li class="list-group-item">${p.director.nombre}</li>
                                         <li class="list-group-item">${generos[p.genero]}</li>
                                     </ul>
-                                    <div class="card-body">
 
-                                        <button id="boton" type="button" class="btn btn-warning btn-lg">Favorita</button>
-
-
-                                    </div>
                                 </div>
                             </div>
                         </nav>

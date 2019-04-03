@@ -67,7 +67,7 @@
                 width: 100px;
                 height: 40px;
             }
-
+         
             #carta {
 
                 position:relative;
@@ -150,6 +150,7 @@
                     <div class="media-body">
                         <h3 class="mt-0 mb-1"> ${fn:escapeXml(comentario.titulo)} </h3>
                         ${fn:escapeXml(comentario.texto)}
+                        <button type="button" class="btn btn-light">👍</button>
                     </div>
                 </li>
             </c:forEach>
@@ -168,6 +169,7 @@
                         <span class="input-group-text" id="basic-addon3">Titulo</span>
                     </div>
                     <input type="text" class="form-control" id="basic-url" name="titulo" value="${titulo}">
+
                 </div>
                 <textarea class="input-group-text form-control text-left" name="comentario" rows="10" cols="120" placeholder="Escribe aquí tus comentario" >${texto}</textarea>
                 <input class="btn btn-primary form-control" type="submit" value="Comentar">

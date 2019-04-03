@@ -20,6 +20,7 @@
             <div class="card-body mx-auto">
                 <p class="card-text ">Nick: ${fn:escapeXml(perfil.nick)} </p>
                 <p class="card-text ">Nombre: ${fn:escapeXml(perfil.nombre)} </p>
+                <button type="button" class="btn btn-danger">Cerrar sesión</button>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Director favorito: ${perfil.dFavorito}</li>
@@ -65,6 +66,8 @@
                                             <div class="media-body">
                                                 <h3 class="mt-0 mb-1"> ${fn:escapeXml(comentario.titulo)} </h3>
                                                 ${fn:escapeXml(comentario.texto)}
+                                                   <p> <p> <p> <button type="button" class="btn btn-success">Editar</button>
+                                                    <button type="button" class="btn btn-danger">Eliminar</button></p>
                                             </div>
                                         </td>
                                     </tr>
