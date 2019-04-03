@@ -19,20 +19,20 @@ import javax.inject.Inject;
  */
 @ApplicationScoped
 public class Init {
-    
+
     @Inject
     private PeliculaDAO p;
-    
+
     @Inject
     private UsuarioDAO u;
-    
+
     @Inject
     @DAOList
     private ComentarioDAO c;
-    
+
     @PostConstruct
-    private void init(){
+    private void init() {
         //crear los comentarios
     }
-    
+
 }

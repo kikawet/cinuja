@@ -37,13 +37,13 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
     public ComentarioDAOJDBC() {
     }
 
-    private static Comentario comentarioMapper(ResultSet rs,Pelicula p){
+    private static Comentario comentarioMapper(ResultSet rs, Pelicula p) {
         Comentario cm = new Comentario();
         cm.setPelicula(p);
 //        cm.setUsuario(usuario);
         return cm;
     }
-    
+
     @Override
     public List<Comentario> getComentarios(Pelicula p) {
         String query = "Select * from comentario as c , pelicula as p where c.pelicula = p.id AND p.url = " + p.getUrl();
@@ -51,8 +51,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
         try (
                 Connection conn = ds.getConnection();
                 Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery(query);
-                ) {
+                ResultSet rs = st.executeQuery(query);) {
 
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, null, ex);

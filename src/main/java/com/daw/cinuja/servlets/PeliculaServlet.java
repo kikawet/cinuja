@@ -56,6 +56,56 @@ public class PeliculaServlet extends HttpServlet {
         return p;
     }
 
+    protected void Stars(Pelicula p, int valoracion) {
+
+        p.setNota((p.getNota() + valoracion) / 2);
+    }
+
+    protected boolean Comentarios(HttpServletRequest request) {
+
+        String titulo = request.getParameter("titulo");
+        String texto = request.getParameter("comentario");
+
+        if (titulo == null) {
+            titulo = "";
+        }
+        if (texto == null) {
+            texto = "";
+        }
+
+        Comentario comentario = new Comentario();
+        Pelicula p = getPelicula(request);
+
+        comentario.setFecha(Calendar.getInstance());
+//        comentario.getFecha().set(Calendar.MILLISECOND, 0);
+        comentario.setPelicula(p);
+        comentario.setUsuario(usuarios.getUsuario("pescues"));
+        comentario.setTitulo(titulo);
+        comentario.setTexto(texto);
+
+        Set<ConstraintViolation<Comentario>> errores = validator.validate(comentario);
+
+        Iterator<ConstraintViolation<Comentario>> it = errores.iterator();
+        while (it.hasNext()) {
+            ConstraintViolation<Comentario> next = it.next();
+            if (next.getPropertyPath().toString().equals("fecha")) {
+                it.remove();
+            }
+        }
+
+        if (errores.isEmpty()) {
+            comentarios.insertar(comentario);
+            request.setAttribute("comentarios", comentarios.getComentarios(p));
+            return true;
+        } else {
+            request.setAttribute("titulo", titulo);
+            request.setAttribute("texto", texto);
+            request.setAttribute("errores", errores);
+            return false;
+        }
+
+    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -106,50 +156,28 @@ public class PeliculaServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
 
-        String titulo = request.getParameter("titulo");
-        String texto = request.getParameter("comentario");
-
-        if (titulo == null) {
-            titulo = "";
-        }
-        if (texto == null) {
-            texto = "";
-        }
-
-        Comentario comentario = new Comentario();
+        String estrellas = request.getParameter("estrellas");
         Pelicula p = getPelicula(request);
+        boolean pe = false;
 
-        comentario.setFecha(Calendar.getInstance());
-//        comentario.getFecha().set(Calendar.MILLISECOND, 0);
-        comentario.setPelicula(p);
-        comentario.setUsuario(usuarios.getUsuario("pescues"));
-        comentario.setTitulo(titulo);
-        comentario.setTexto(texto);
+        if (estrellas == null) {
+            if (Comentarios(request)) {
+                pe = true;
 
-        Set<ConstraintViolation<Comentario>> errores = validator.validate(comentario);
-
-        Iterator<ConstraintViolation<Comentario>> it = errores.iterator();
-        while (it.hasNext()) {
-            ConstraintViolation<Comentario> next = it.next();
-            if (next.getPropertyPath().toString().equals("fecha")) {
-                it.remove();
             }
+        } else {
+            Stars(p, new Integer(estrellas));
+            request.setAttribute("comentarios", comentarios.getComentarios(p));
+            pe = true;
         }
-
-        if (errores.isEmpty()) {
-            comentarios.insertar(comentario);
+        request.setAttribute("pelicula", p);
+        if (pe) {
             response.sendRedirect("/cinuja/pelicula/" + p.getUrl());
             return;
-        } else {
-            request.setAttribute("titulo", titulo);
-            request.setAttribute("texto", texto);
-            request.setAttribute("errores", errores);
         }
 
-        request.setAttribute("pelicula", p);
-        request.setAttribute("comentarios", comentarios.getComentarios(p));
-
         request.getRequestDispatcher("/WEB-INF/jsp/pelicula.jsp").forward(request, response);
+//        response.sendRedirect("cinuja/pelicula/"+p.getUrl());
 
     }
 

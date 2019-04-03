@@ -26,8 +26,8 @@ public class ComentarioDAOList implements ComentarioDAO {
 
     public ComentarioDAOList() {
         comentarios = new MultivaluedHashMap<>();
- 
-    //post construct en 2 a
+
+        //post construct en 2 a
     }
 
     @Override

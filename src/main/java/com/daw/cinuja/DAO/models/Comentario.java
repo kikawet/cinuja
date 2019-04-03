@@ -33,7 +33,7 @@ public class Comentario {
     @Past(message = "La fecha en el comentario tiene que ser anterior a la actual")
     private Calendar fecha;
     @NotNull(message = "Todos los comentarios necesitan un titulo")
-    @Size(min = 3, max = 10, message = "El titulo debe de tener un tamaño entre {min} y {max}")
+    @Size(min = 3, max = 20, message = "El titulo debe de tener un tamaño entre {min} y {max}")
     private String titulo;
     @NotNull(message = "El texto de un comentario es necesario")
     @Size(min = 3, max = 256, message = "El texto no tiene un tamaño entre {min} y {max}")
