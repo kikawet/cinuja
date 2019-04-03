@@ -14,7 +14,7 @@
     </head>
 
     <body class="bg-secondary">
-        <%@include file="../WEB-INF/jspf/cabecera.jspf" %>
+        <%@include file="/WEB-INF/jspf/cabecera.jspf" %>
         <div style="height: 700px; ">
             <div class="bg-white m-auto mh-700" style="height: 700px">
                 <form >
@@ -27,14 +27,14 @@
 
                         <div class="col-md-4 mb-3">
                             <label for="validationServer02">Apellidos</label>
-                            <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Apellidos" value="${us.apellido}" required>
-                            <div class="valid-feedback"></div>                            
+                            <input type="text" class="form-control is-invalid" id="validationServer02" placeholder="Apellidos" value="${us.apellido}" required>
+                            <div class="invalid-feedback"></div>                            
                         </div>
 
                         <div class="col-md-4 mb-3">
                             <label for="validationServerUsername">Nick</label>      
-                            <input type="text" class="form-control input-group is-valid" id="validationServerUsername" placeholder="Nick" aria-describedby="inputGroupPrepend3" required>
-                            <div class="valid-feedback">
+                            <input type="text" class="form-control input-group is-invalid" id="validationServerUsername" placeholder="Nick" aria-describedby="inputGroupPrepend3" required>
+                            <div class="invalid-feedback">
                                 Escoja un link que no esté usando otro usuario
                             </div>
                         </div>
@@ -57,11 +57,11 @@
                     </div>
                     <div class="form-group">
                         <div class="form-check">
-                            <input class="form-check-input is-valid" type="checkbox" value="" id="invalidCheck3" required>
+                            <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
                             <label class="form-check-label" for="invalidCheck3">
                                 Acepto los terminos de condición
                             </label>
-                            <div class="valid-feedback">
+                            <div class="invalid-feedback">
                                 Tú debes aceptar los terminos antes de registrarte
                             </div>
                         </div>

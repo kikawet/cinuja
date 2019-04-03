@@ -57,7 +57,7 @@
                                                         <li class="list-group-item">${generos[comentario.pelicula.genero]}</li>
                                                     </ul>
                                                     <div class="card-body">
-                                                        <a href="pelicula/${p.url}" class="card-link">Ver/hacer criticas</a>
+                                                        <a href="pelicula/${comentario.pelicula.url}" class="card-link">Ver/hacer criticas</a>
                                                     </div>
                                                 </div>
                                         </td>

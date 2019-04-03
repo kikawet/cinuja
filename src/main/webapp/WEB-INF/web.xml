@@ -5,4 +5,16 @@
             30
         </session-timeout>
     </session-config>
+    <data-source>
+        <name>java:global/jdbc/cinuja</name>
+        <class-name>org.apache.derby.jdbc.ClientConnectionPoolDataSource</class-name>        
+        <server-name>localhost</server-name>
+        <port-number>1527</port-number>
+        <database-name>Cinuja</database-name>
+        <user>flo</user>
+        <password>flo</password>                                
+        <initial-pool-size>2</initial-pool-size>
+        <max-pool-size>10</max-pool-size>
+        <min-pool-size>5</min-pool-size>
+    </data-source>
 </web-app>

@@ -9,7 +9,7 @@
 <html>
     <head>
     <a href="../../../../nb-configuration.xml"></a>
-    <%@include file="../WEB-INF/jspf/links.jspf" %>
+    <%@include file="/WEB-INF/jspf/links.jspf" %>
     <meta http-equiv="Content-Type" content="text/html" charset=UTF-8">
     <title>JSP pelicula</title>
 
@@ -50,7 +50,7 @@
 
     <body>
         <header class="cabecera">
-            <%@include file="../WEB-INF/jspf/cabecera.jspf" %>
+            <%@include file="/WEB-INF/jspf/cabecera.jspf" %>
         </header>
 
         <div class="wrapper">
@@ -58,7 +58,8 @@
             <form class="form-signin">
                 <h2 class="form-signin-heading text-center">CinUJA</h2>
                 <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
-                <input type="password" class="form-control" name="password" placeholder="Password" required="" />
+                <input type="password" class="form-control is-invalid" name="password" placeholder="Password" required="" />
+                <div class="invalid-feedback">La contraseña no puede estar vacia</div>
                 <label class="checkbox">
                     <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe">
                     Recuerdame

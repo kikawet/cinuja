@@ -138,7 +138,7 @@ public class PeliculaServlet extends HttpServlet {
 
         if (errores.isEmpty()) {
             comentarios.insertar(comentario);
-            response.sendRedirect("/cinuja/pelicula/"+p.getUrl());
+            response.sendRedirect("/cinuja/pelicula/" + p.getUrl());
             return;
         } else {
             request.setAttribute("titulo", titulo);
