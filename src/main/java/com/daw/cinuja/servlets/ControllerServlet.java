@@ -8,8 +8,10 @@ package com.daw.cinuja.servlets;
 import com.daw.cinuja.DAO.interfaces.ComentarioDAO;
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
+import com.daw.cinuja.DAO.list.Init;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
+import com.daw.cinuja.DAO.qualifiers.DAOJDBC;
 import com.daw.cinuja.DAO.qualifiers.DAOList;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,15 +34,19 @@ import javax.servlet.http.HttpServletResponse;
 public class ControllerServlet extends HttpServlet {
 
     @Inject
+    @DAOJDBC
     private PeliculaDAO peliculas;
 
     @Inject
+    @DAOJDBC
     private UsuarioDAO usuarios;
 
     @Inject
-    @DAOList
+    @DAOJDBC
     private ComentarioDAO comentarios;
 
+//    @Inject
+//    private Init datosListas;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -57,31 +63,6 @@ public class ControllerServlet extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
 
-        if (comentarios.getComentarios(peliculas.getPeliculas().get(0)) == null || comentarios.getComentarios(peliculas.getPeliculas().get(0)).isEmpty()) {
-            Comentario c = new Comentario();
-            c.setPelicula(peliculas.getPeliculas().get(0));
-            c.setUsuario(usuarios.getUsuario("gordito"));
-            c.setFecha(Calendar.getInstance());
-            c.setTitulo("Maravillosa");
-            c.setTexto("La mejor pelicula de mi vida.");
-            comentarios.insertar(c);
-
-            c = new Comentario();
-            c.setPelicula(peliculas.getPeliculas().get(0));
-            c.setUsuario(usuarios.getUsuario("boa"));
-            c.setFecha(Calendar.getInstance());
-            c.setTitulo("No está mal");
-            c.setTexto("Es bastante entretenida pero prefiero ver Salvame.");
-            comentarios.insertar(c);
-
-            c = new Comentario();
-            c.setPelicula(peliculas.getPeliculas().get(0));
-            c.setUsuario(usuarios.getUsuario("weeb"));
-            c.setFecha(Calendar.getInstance());
-            c.setTitulo("Aburrida");
-            c.setTexto("Yo me aburrí. Preferiría morirme en este momento.");
-            comentarios.insertar(c);
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -102,6 +83,8 @@ public class ControllerServlet extends HttpServlet {
         List<Pelicula> p = new ArrayList<>(peliculas.getPeliculas());
         String genero = request.getParameter("genero");
 
+        
+        
         if (genero != null) {
             int hashGenero = new Integer(genero);
             for (int i = p.size() - 1; i >= 0; i--) {

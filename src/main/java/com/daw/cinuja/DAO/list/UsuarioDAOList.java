@@ -7,6 +7,7 @@ package com.daw.cinuja.DAO.list;
 
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Usuario;
+import com.daw.cinuja.DAO.qualifiers.DAOList;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
@@ -16,36 +17,13 @@ import javax.enterprise.context.ApplicationScoped;
  * @author lopez
  */
 @ApplicationScoped
+@DAOList
 public class UsuarioDAOList implements UsuarioDAO {
 
     private List<Usuario> usuarios;
 
     public UsuarioDAOList() {
         usuarios = new ArrayList<>();
-
-        Usuario u = new Usuario();
-        u.setNick("pescues");
-        u.setNombre("flo");
-        u.setFoto("https://cdn.discordapp.com/avatars/324587602042814464/63784f02344fafe52b780e5a0477c752.png?size=128");
-        usuarios.add(u);
-
-        u = new Usuario();
-        u.setNick("gordito");
-        u.setFoto("https://ct.yimg.com/cy/1904/44016886825_e02d29_128sq.jpg");
-        u.setNombre("José Tomas");
-        usuarios.add(u);
-
-        u = new Usuario();
-        u.setNick("boa");
-        u.setFoto("https://66.media.tumblr.com/avatar_ea54a1bd0195_128.pnj");
-        u.setNombre("Pescues");
-        usuarios.add(u);
-
-        u = new Usuario();
-        u.setNick("weeb");
-        u.setFoto("http://pm1.narvii.com/6265/5bba4fd8638ebdea1100eb9b06940944a8913fc0_128.jpg");
-        u.setNombre("Rodrigo");
-        usuarios.add(u);
     }
 
     @Override

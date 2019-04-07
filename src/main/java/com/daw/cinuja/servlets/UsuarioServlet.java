@@ -11,6 +11,7 @@ import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Usuario;
+import com.daw.cinuja.DAO.qualifiers.DAOJDBC;
 import com.daw.cinuja.DAO.qualifiers.DAOList;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -32,15 +33,17 @@ public class UsuarioServlet extends HttpServlet {
 
     @Inject
     private Usuario usuario;
-
+    
     @Inject
+    @DAOJDBC
     private UsuarioDAO usuarios;
 
     @Inject
+    @DAOJDBC
     private PeliculaDAO peliculas;
 
     @Inject
-    @DAOList
+    @DAOJDBC
     private ComentarioDAO comentarios;
 
     /**
@@ -85,7 +88,7 @@ public class UsuarioServlet extends HttpServlet {
             if (comentarios.getComentarios(p) != null) {
                 ArrayList<Comentario> c = new ArrayList<>(comentarios.getComentarios(p));
                 for (int i = c.size() - 1; i >= 0; i--) {
-                    if (!c.get(i).getUsuario().getNick().equals(user)) {
+                    if (!c.get(i).getUsuario().equals(user)) {
                         c.remove(i);
                     }
                 }

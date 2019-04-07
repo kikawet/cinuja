@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html" charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
         <title>JSP Usuario</title>
     </head>
     <%@include file="/WEB-INF/jspf/cabecera.jspf" %>
@@ -65,6 +65,8 @@
                                             <div class="media-body">
                                                 <h3 class="mt-0 mb-1"> ${fn:escapeXml(comentario.titulo)} </h3>
                                                 ${fn:escapeXml(comentario.texto)}
+                                                <p> <button type="button" class="btn btn-success">Editar</button>
+                                                    <button type="button" class="btn btn-danger">Eliminar</button></p>
                                             </div>
                                         </td>
                                     </tr>

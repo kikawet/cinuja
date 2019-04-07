@@ -5,6 +5,7 @@
  */
 package com.daw.cinuja.DAO.models;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -26,7 +27,7 @@ public class Director {
     @Size(min = 3, max = 20, message = "El nombre del director tiene que estar entre {min} y {max} caracteres")
     private String nombre;
     @Past(message = "La fecha de nacimiento de un director debe ser anterior a la actual")
-    private Date fnacimiento;
+    private Calendar fnacimiento;
     @Pattern(regexp = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "La foto debe ser de una url")
     private String foto;
     @Size(min = 5, max = 30, message = "Los apellidos de un director deben estar entre {min} y {max} caracteres")
@@ -63,11 +64,11 @@ public class Director {
         this.nombre = nombre;
     }
 
-    public Date getFnacimiento() {
+    public Calendar getFnacimiento() {
         return fnacimiento;
     }
 
-    public void setFnacimiento(Date fnacimiento) {
+    public void setFnacimiento(Calendar fnacimiento) {
         this.fnacimiento = fnacimiento;
     }
 

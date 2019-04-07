@@ -5,11 +5,8 @@
  */
 package com.daw.cinuja.DAO.JDBC;
 
-import com.daw.cinuja.DAO.interfaces.ComentarioDAO;
-import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
-import com.daw.cinuja.DAO.models.Comentario;
+import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.models.Pelicula;
-import com.daw.cinuja.DAO.models.Usuario;
 import com.daw.cinuja.DAO.qualifiers.DAOJDBC;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,13 +14,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.sql.DataSource;
 
 /**
@@ -32,56 +27,56 @@ import javax.sql.DataSource;
  */
 @RequestScoped
 @DAOJDBC
-public class ComentarioDAOJDBC implements ComentarioDAO {
+public class PeliculaDAOJDBC implements PeliculaDAO {
 
     private Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
 
     @Resource(lookup = "java:global/jdbc/Cinuja")
     private DataSource ds;
-    
-    @Inject
-    @DAOJDBC
-    private UsuarioDAO usuarios;
 
-    public ComentarioDAOJDBC() {
+    public PeliculaDAOJDBC() {
     }
 
     @Override
-    public List<Comentario> getComentarios(Pelicula p) {
-        String query = "Select * from comentario as c , pelicula as p where c.pelicula = p.id AND p.url = '" + p.getUrl()+"'";
-        List<Comentario> comentarios = new ArrayList<>();
+    public List<Pelicula> getPeliculas() {
+        String query = "SELECT * "
+                + "FROM PELICULA as p "
+                + "LEFT JOIN director as d "
+                + "ON p.DIRECTOR = d.ID";
+        List<Pelicula> peliculas = new ArrayList<>();
+
         try (
                 Connection conn = ds.getConnection();
                 Statement st = conn.createStatement();
                 ResultSet rs = st.executeQuery(query);) {
 
             while (rs.next()) {
-                comentarios.add(Mapper.comentarioMapper(rs, p,usuarios.getUsuario(rs.getString("usuario"))));
+                peliculas.add(Mapper.peliculaMapper(rs, 0, Mapper.directorMapper(rs, 10)));
             }
 
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, null, ex);
         }
-        return comentarios;
+
+        return peliculas;
     }
 
     @Override
-    public boolean insertar(Comentario c) {
-        String query = "INSERT INTO COMENTARIO (PELICULA, USUARIO, FECHA, TITULO, TEXTO) VALUES (("
-                + "SELECT id"
-                + "FROM pelicula"
-                + "WHERE pelicula.nombre = ?"
-                + "),?,?,?,?)";
+    public boolean insertar(Pelicula p) {
+        String query = "INSERT INTO PELICULA (nombre,fecha,foto,url,VALORACION,genero,DESCRIPCION,RESTRICCION,director) VALUES (?,?,?,?,?,?,?,(SELECT id FROM director AS d WHERE d.nombre = ?))";
 
         boolean res = false;
         try (
                 Connection conn = ds.getConnection();
                 PreparedStatement st = conn.prepareStatement(query);) {
-            st.setString(1, c.getPelicula().getTitulo());
-            st.setString(2, c.getUsuario().getNick());
-            st.setDate(3, java.sql.Date.valueOf(c.getFecha().getCalendarType()), c.getFecha());
-            st.setString(4, c.getTitulo());
-            st.setString(5, c.getTexto());
+            st.setString(1, p.getTitulo());
+            st.setDate(2, java.sql.Date.valueOf(p.getFecha().getCalendarType()), p.getFecha());
+            st.setString(3, p.getFoto());
+            st.setString(4, p.getUrl());
+            st.setFloat(5, p.getNota());
+            st.setInt(6, p.getGenero());
+            st.setBoolean(7, p.isRestriccionEdad());
+            st.setString(8, p.getDirector().getNombre());
 
             res = st.execute();
         } catch (Exception e) {
@@ -91,15 +86,14 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
     }
 
     @Override
-    public boolean borrar(Comentario c) {
-        String query = "DELETE FROM comentario AS c WHERE c.usuario = ? AND c.pelicula = (SELECT id FROM pelicula WHERE pelciula.nombre = ?)";
+    public boolean borrar(Pelicula p) {
+        String query = "DELETE FROM pelicula AS p WHERE p.nombre = ?";
 
         boolean res = false;
         try (
                 Connection conn = ds.getConnection();
                 PreparedStatement st = conn.prepareStatement(query);) {
-            st.setString(1, c.getUsuario().getNick());
-            st.setString(2, c.getPelicula().getTitulo());
+            st.setString(1, p.getTitulo());
 
             res = st.execute();
 

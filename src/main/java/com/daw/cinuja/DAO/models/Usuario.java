@@ -14,11 +14,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-enum Roles {//cambiar a String e intentar hacer lo mismo que con los generos
-    user,
-    admin
-}
-
 /**
  * Para almacenar las preferencias y los datos de un usuario
  *
@@ -39,7 +34,7 @@ public class Usuario implements Serializable {
     private String foto;//por ahora una url
     @Size(min = 6, message = "La contraseña debe de tener un minimo de {min} caracteres")
     private String contrasena;// solo se usa para registrar
-    private Roles rol;//cambiar roles como los generos
+    private String rol;//cambiar roles como los generos
     @Valid
     private Pelicula pFavorita;
     @Valid
@@ -105,11 +100,11 @@ public class Usuario implements Serializable {
         this.foto = foto;
     }
 
-    public Roles getRol() {
+    public String getRol() {
         return rol;
     }
 
-    public void setRol(Roles rol) {
+    public void setRol(String rol) {
         this.rol = rol;
     }
 

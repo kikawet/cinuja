@@ -13,20 +13,19 @@ CREATE TABLE Director(
     id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     nombre VARCHAR(20) NOT NULL UNIQUE,
     f_nac DATE NOT NULL UNIQUE,
-    foto VARCHAR(30),
-    apellido1 VARCHAR(20),
-    apellido2 VARCHAR(20),
+    foto VARCHAR(300),
+    apellidos VARCHAR(40),
     biografia LONG VARCHAR,
     PRIMARY KEY(id)
 );
 
 CREATE TABLE Pelicula(
     id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    nombre VARCHAR(20) NOT NULL UNIQUE,
+    nombre VARCHAR(50) NOT NULL UNIQUE,
     fecha DATE NOT NULL UNIQUE,
-    foto VARCHAR(30),-- una url no se
+    foto VARCHAR(300),-- una url no se
     url VARCHAR(30),
-    valoracion FLOAT(5),
+    valoracion REAL,
     genero INTEGER,
     descripcion LONG VARCHAR,
     restriccion BOOLEAN,
@@ -37,11 +36,10 @@ CREATE TABLE Pelicula(
 CREATE TABLE Usuario(
     nick VARCHAR(20) NOT NULL,
     nombre VARCHAR(20),
-    apellido1 VARCHAR(20),
-    apellido2 VARCHAR(20),
-    foto VARCHAR(30),
+    apellidos VARCHAR(40),
+    foto VARCHAR(300),
     contrasena VARCHAR(20),
-    rol VARCHAR(3) CHECK( rol IN ('non','adm')),
+    rol VARCHAR(3) CHECK( rol IN ('non','adm')) NOT NULL,
     pelicula_fav INTEGER REFERENCES Pelicula(id), 
     director_fav INTEGER REFERENCES Director(id),
     PRIMARY KEY(nick)

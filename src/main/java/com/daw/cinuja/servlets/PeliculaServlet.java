@@ -10,6 +10,7 @@ import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
+import com.daw.cinuja.DAO.qualifiers.DAOJDBC;
 import com.daw.cinuja.DAO.qualifiers.DAOList;
 import java.io.IOException;
 import java.util.Calendar;
@@ -32,13 +33,15 @@ import javax.validation.Validator;
 public class PeliculaServlet extends HttpServlet {
 
     @Inject
+    @DAOJDBC
     private PeliculaDAO peliculas;
 
     @Inject
-    @DAOList
+    @DAOJDBC
     private ComentarioDAO comentarios;
 
     @Inject
+    @DAOJDBC
     private UsuarioDAO usuarios;
 
     @Inject
@@ -117,8 +120,8 @@ public class PeliculaServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
