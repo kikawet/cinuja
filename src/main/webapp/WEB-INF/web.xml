@@ -7,14 +7,43 @@
     </session-config>
     <data-source>
         <name>java:global/jdbc/Cinuja</name>
-        <class-name>org.apache.derby.jdbc.ClientConnectionPoolDataSource</class-name>        
+        <class-name>org.apache.derby.jdbc.ClientConnectionPoolDataSource</class-name>
         <server-name>localhost</server-name>
         <port-number>1527</port-number>
         <database-name>Cinuja</database-name>
         <user>flo</user>
-        <password>flo</password>                                
+        <password>flo</password>
         <initial-pool-size>2</initial-pool-size>
         <max-pool-size>10</max-pool-size>
         <min-pool-size>5</min-pool-size>
     </data-source>
+    <security-constraint>
+        <display-name>login</display-name>
+        <web-resource-collection>
+            <web-resource-name>perfiles</web-resource-name>
+            <description/>
+            <url-pattern>/perfil/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>non</role-name>
+            <role-name>adm</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>cinuja</realm-name>
+        <form-login-config>
+            <form-login-page>/WEB-INF/jsp/login.jsp</form-login-page>
+            <form-error-page>/WEB-INF/jsp/login.jsp?error=true</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>Usuario sin roles</description>
+        <role-name>non</role-name>
+    </security-role>
+    <security-role>
+        <description>permisos de administrador</description>
+        <role-name>adm</role-name>
+    </security-role>
 </web-app>

@@ -5,7 +5,6 @@
  */
 package com.daw.cinuja.DAO.JDBC;
 
-import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Director;
 import com.daw.cinuja.DAO.models.Pelicula;
@@ -13,19 +12,18 @@ import com.daw.cinuja.DAO.models.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
-import javax.inject.Inject;
 
 /**
  *
  * @author lopez
  */
 public class Mapper {
-    
-    public static Comentario comentarioMapper(ResultSet rs, Pelicula p,Usuario u) throws SQLException {
+
+    public static Comentario comentarioMapper(ResultSet rs, Pelicula p, Usuario u) throws SQLException {
         Comentario cm = new Comentario();
-        Calendar c = Calendar.getInstance();
+//        Calendar c = Calendar.getInstance();
 //        c.setTime(rs.getDate("fecha"));
-        cm.setFecha(c);
+        cm.setFecha(rs.getDate("fecha"));
         cm.setTitulo(rs.getString("titulo"));
         cm.setTexto(rs.getString("texto"));
         cm.setValoracion(rs.getFloat("valoracion"));
@@ -38,9 +36,7 @@ public class Mapper {
         Pelicula p = new Pelicula();
 
         p.setTitulo(rs.getString(offset + 2));
-        Calendar c = Calendar.getInstance();
-//        c.setTime(rs.getDate(offset + 3));
-        p.setFecha(c);
+        p.setFecha(rs.getDate(offset + 3));
         p.setFoto(rs.getString(offset + 4));
         p.setUrl(rs.getString(offset + 5));
 //        p.setNota(rs.getFloat(offset + 6));
@@ -56,9 +52,7 @@ public class Mapper {
         Director d = new Director();
 
         d.setNombre(rs.getString(offset + 2));
-        Calendar c = Calendar.getInstance();
-//        c.setTime(rs.getDate(offset + 3));
-        d.setFnacimiento(c);
+        d.setFnacimiento(rs.getDate(offset + 3));
         d.setFoto(rs.getString(offset + 4));
         d.setApellidos(rs.getString(offset + 5));
         d.setBiografia(rs.getString(offset + 6));

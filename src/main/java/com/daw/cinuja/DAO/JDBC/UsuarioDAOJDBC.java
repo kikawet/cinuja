@@ -46,7 +46,7 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
                 + "FROM USUARIO AS u "
                 + "LEFT JOIN PELICULA AS p ON p.ID = u.PELICULA_FAV "
                 + "LEFT JOIN DIRECTOR AS d ON d.ID = u.DIRECTOR_FAV "
-                + "WHERE u.nick = '" + nick+"'";
+                + "WHERE u.nick = '" + nick + "'";
 
         Usuario usuario = null;
 
@@ -55,11 +55,10 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
                 Statement st = conn.createStatement();
                 ResultSet rs = st.executeQuery(query);) {
 
-            rs.next();
-
-            Director d = Mapper.directorMapper(rs, 18);
-
-            usuario = Mapper.usuarioMapper(rs, 0, Mapper.peliculaMapper(rs, 8, d), d);
+            if (rs.next()) {
+                Director d = Mapper.directorMapper(rs, 18);
+                usuario = Mapper.usuarioMapper(rs, 0, Mapper.peliculaMapper(rs, 8, d), d);
+            }
 
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, null, ex);
@@ -77,7 +76,7 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
                 Connection conn = ds.getConnection();
                 PreparedStatement st = conn.prepareStatement(query);) {
             st.setString(1, u.getNick());
-            st.setString(2,u.getNombre());
+            st.setString(2, u.getNombre());
             st.setString(3, u.getApellidos());
             st.setString(4, u.getFoto());
             st.setString(5, u.getContrasena());
@@ -86,7 +85,8 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
             st.setString(8, u.getdFavorito().getNombre());
 
             res = st.execute();
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
         }
 
         return res;
@@ -104,7 +104,8 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
 
             res = st.execute();
 
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
         }
 
         return res;

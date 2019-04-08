@@ -26,7 +26,6 @@ import javax.validation.constraints.Size;
  *
  * @author lopez
  */
-@ApplicationScoped
 public class Pelicula {
 
     @NotNull(message = "Todas las peliculas necesitan tener un titulo")
@@ -37,7 +36,7 @@ public class Pelicula {
     private String url;
     //tambien puede ser una pelicula no estrenada
     //@Past(message = "La fecha en la que se estrenó la pelicula tiene que ser anterior a la actual")
-    private Calendar fecha;//estreno
+    private Date fecha;//estreno
     @Pattern(regexp = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "La foto debe ser de una url")
     private String foto;//url 
     @DecimalMin(value = "0", inclusive = true, message = "La nota debe ser mayor de {value}")
@@ -147,11 +146,11 @@ public class Pelicula {
         this.url = url;
     }
 
-    public Calendar getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(Calendar fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 

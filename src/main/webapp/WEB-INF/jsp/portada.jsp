@@ -47,32 +47,36 @@
                     </ul>
                 </nav>
 
-                <button id="boton3" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
-                    ⚙
-                </button>
+                <c:if test="${sesion.usuario.rol eq 'adm'}">
+
+                    <button id="boton3" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+                        ⚙
+                    </button>
 
 
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Editar portada</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <button type="button" class="btn btn-primary">Editar</button>
-                                <button type="button" class="btn btn-success">Añadir</button>
-                                <button type="button" class="btn btn-danger">Borrar</button>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Editar portada</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <button type="button" class="btn btn-primary">Editar</button>
+                                    <button type="button" class="btn btn-success">Añadir</button>
+                                    <button type="button" class="btn btn-danger">Borrar</button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                </c:if>
             </aside>
 
 
@@ -97,7 +101,7 @@
                                     </a>
                                     <p class="card-text">
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">${p.fecha.get(1)}</li>
+                                        <li class="list-group-item">${p.fecha.year + 1900}</li>
                                         <li class="list-group-item">${p.director.nombre}</li>
                                         <li class="list-group-item">${generos[p.genero]}</li>
                                     </ul>

@@ -10,13 +10,10 @@ import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
-import com.daw.cinuja.DAO.models.Usuario;
+import com.daw.cinuja.DAO.models.Sesion;
 import com.daw.cinuja.DAO.qualifiers.DAOJDBC;
-import com.daw.cinuja.DAO.qualifiers.DAOList;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,9 +29,6 @@ import javax.servlet.http.HttpServletResponse;
 public class UsuarioServlet extends HttpServlet {
 
     @Inject
-    private Usuario usuario;
-    
-    @Inject
     @DAOJDBC
     private UsuarioDAO usuarios;
 
@@ -45,6 +39,9 @@ public class UsuarioServlet extends HttpServlet {
     @Inject
     @DAOJDBC
     private ComentarioDAO comentarios;
+
+    @Inject
+    private Sesion sesion;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,6 +55,8 @@ public class UsuarioServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        request.authenticate(response);
 
     }
 
@@ -75,12 +74,7 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
 
-        String user = "pescues";
-        if (usuarios.getUsuario(user) != null) {
-            usuario.setNick(usuarios.getUsuario(user).getNick());
-            usuario.setFoto(usuarios.getUsuario(user).getFoto());
-            usuario.setNombre(usuarios.getUsuario(user).getNombre());
-        }
+        String user = sesion.getUsuario().getNick();
 
         ArrayList<Comentario> total = new ArrayList<>();
 
@@ -88,7 +82,7 @@ public class UsuarioServlet extends HttpServlet {
             if (comentarios.getComentarios(p) != null) {
                 ArrayList<Comentario> c = new ArrayList<>(comentarios.getComentarios(p));
                 for (int i = c.size() - 1; i >= 0; i--) {
-                    if (!c.get(i).getUsuario().equals(user)) {
+                    if (!c.get(i).getUsuario().getNick().equals(user)) {
                         c.remove(i);
                     }
                 }
@@ -98,6 +92,7 @@ public class UsuarioServlet extends HttpServlet {
 
         request.getSession().setAttribute("comentarios", total);
         request.getSession().setAttribute("generos", PeliculaDAO.generos);
+        request.getSession().setAttribute("perfil", usuarios.getUsuario(user));
 
         request.getRequestDispatcher("/WEB-INF/jsp/usuario.jsp").forward(request, response);
     }

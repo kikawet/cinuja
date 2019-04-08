@@ -22,8 +22,8 @@
                 <p class="card-text ">Nombre: ${fn:escapeXml(perfil.nombre)} </p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Director favorito: ${perfil.dFavorito}</li>
-                <li class="list-group-item">Pelicula favorita: ${perfil.pFavorita}</li>
+                <li class="list-group-item">Director favorito: ${perfil.dFavorito.nombre}</li>
+                <li class="list-group-item">Pelicula favorita: ${perfil.pFavorita.titulo}</li>
             </ul>
 
             <div class="card-body col-xs-6">
