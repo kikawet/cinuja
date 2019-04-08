@@ -15,6 +15,7 @@ import com.daw.cinuja.DAO.models.Usuario;
 import com.daw.cinuja.DAO.qualifiers.DAOList;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -49,7 +50,7 @@ public class Init /*implements Serializable*/ {
 
         p.setFoto("http://es.web.img2.acsta.net/medias/nmedia/18/67/70/14/20077949.jpg");
         p.setTitulo("Uno de los nuestros");
-        p.setFecha(new Calendar.Builder().setDate(1990, 1, 1).build());
+        p.setFecha(new Calendar.Builder().setDate(1990, 1, 1).build().getTime());
         p.setUrl("uno-de-los-nuestros");
         d.setNombre("Martin Scorsese");
         d.setFoto("http://d3iln1l77n73l7.cloudfront.net/couch_images/attachments/000/057/537/original/Martin_Scorsese.jpg?2014");
@@ -62,7 +63,7 @@ public class Init /*implements Serializable*/ {
         d = new Director();
         p.setFoto("https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2016/09/pulp-fiction_0.jpg");
         p.setTitulo("Pulp Fiction");
-        p.setFecha(new Calendar.Builder().setDate(1997, 1, 1).build());
+        p.setFecha(new Calendar.Builder().setDate(1997, 1, 1).build().getTime());
         p.setUrl("pulp-fiction");
         d.setNombre("Quentin Tarantino");
         p.setDirector(d);
@@ -73,7 +74,7 @@ public class Init /*implements Serializable*/ {
         d = new Director();
         p.setFoto("https://twistedsifter.files.wordpress.com/2015/10/53-saving-private-ryan.jpg");
         p.setTitulo("Salvar al soldado Ryan");
-        p.setFecha(new Calendar.Builder().setDate(1998, 1, 1).build());
+        p.setFecha(new Calendar.Builder().setDate(1998, 1, 1).build().getTime());
         p.setUrl("salvar-al-soldado-bryan");
         d.setNombre("Steven Spielberg");
         p.setDirector(d);
@@ -84,7 +85,7 @@ public class Init /*implements Serializable*/ {
         d = new Director();
         p.setFoto("https://educayaprende.com/wp-content/uploads/2014/05/ratatouille-cover-caratula-dvd-disney-pixar.jpg");
         p.setTitulo("Ratatouille");
-        p.setFecha(new Calendar.Builder().setDate(2007, 1, 1).build());
+        p.setFecha(new Calendar.Builder().setDate(2007, 1, 1).build().getTime());
         p.setUrl("ratatouille");
         d.setNombre("Pixar");
         p.setDirector(d);
@@ -95,7 +96,7 @@ public class Init /*implements Serializable*/ {
         d = new Director();
         p.setFoto("https://www.heraldo.es/ocio/sites/default/files/bohemian.jpg");
         p.setTitulo("Bohemian Rhapsody");
-        p.setFecha(new Calendar.Builder().setDate(2018, 1, 1).build());
+        p.setFecha(new Calendar.Builder().setDate(2018, 1, 1).build().getTime());
         p.setUrl("bohemian-rhapsody");
         d.setNombre("Bryan Singer");
         p.setDirector(d);
@@ -134,7 +135,7 @@ public class Init /*implements Serializable*/ {
         Comentario c = new Comentario();
         c.setPelicula(peliculas.getPeliculas().get(0));
         c.setUsuario(usuarios.getUsuario("gordito"));
-        c.setFecha(Calendar.getInstance());
+        c.setFecha(new Date());
         c.setTitulo("Maravillosa");
         c.setTexto("La mejor pelicula de mi vida.");
         comentarios.insertar(c);
@@ -142,7 +143,7 @@ public class Init /*implements Serializable*/ {
         c = new Comentario();
         c.setPelicula(peliculas.getPeliculas().get(0));
         c.setUsuario(usuarios.getUsuario("boa"));
-        c.setFecha(Calendar.getInstance());
+        c.setFecha(new Date());
         c.setTitulo("No está mal");
         c.setTexto("Es bastante entretenida pero prefiero ver Salvame.");
         comentarios.insertar(c);
@@ -150,7 +151,7 @@ public class Init /*implements Serializable*/ {
         c = new Comentario();
         c.setPelicula(peliculas.getPeliculas().get(0));
         c.setUsuario(usuarios.getUsuario("weeb"));
-        c.setFecha(Calendar.getInstance());
+        c.setFecha(new Date());
         c.setTitulo("Aburrida");
         c.setTexto("Yo me aburrí. Preferiría morirme en este momento.");
         comentarios.insertar(c);

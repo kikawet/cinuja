@@ -47,7 +47,7 @@ CREATE TABLE Usuario(
 
 CREATE TABLE Comentario(
     id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    fecha DATE NOT NULL UNIQUE,
+    fecha TIMESTAMP NOT NULL UNIQUE,
     titulo VARCHAR(20),
     texto LONG VARCHAR,
     valoracion FLOAT(5),
@@ -65,3 +65,9 @@ CREATE INDEX pel_url ON Pelicula(url);
 -- Se crean con las primary key
 --CREATE INDEX usr_nick ON Usuario(nick);
 --CREATE INDEX com_pel ON Comentario(pelicula);
+
+SELECT * 
+                FROM USUARIO AS u 
+                LEFT JOIN PELICULA AS p ON p.ID = u.PELICULA_FAV 
+                LEFT JOIN DIRECTOR AS d ON d.ID = u.DIRECTOR_FAV 
+                WHERE u.nick = 'pescues';

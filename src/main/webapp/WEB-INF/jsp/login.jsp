@@ -8,10 +8,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <a href="../../../../nb-configuration.xml"></a>
-    <%@include file="../WEB-INF/jspf/links.jspf" %>
-    <meta http-equiv="Content-Type" content="text/html" charset=UTF-8">
-    <title>JSP pelicula</title>
+        <!--<a href="../../../../nb-configuration.xml"></a>-->
+        <%@include file="/WEB-INF/jspf/links.jspf" %>
+        <meta http-equiv="Content-Type" content="text/html" charset=UTF-8">
+        <title>JSP pelicula</title>
 
     <head>
         <meta charset="utf-8">
@@ -54,17 +54,19 @@
         </header>
 
         <div class="wrapper">
-
-            <form class="form-signin">
+            <c:if test="${error}">
+                <p class="invalid-feedback">Los campos son erroneos</p>
+            </c:if>
+            <form class="form-signin" action="j_security_check" method="post">
                 <h2 class="form-signin-heading text-center">CinUJA</h2>
-                <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
-                <input type="password" class="form-control is-invalid" name="password" placeholder="Password" required="" />
+                <input type="text" class="form-control" name="j_username" placeholder="Email Address" required="" autofocus="" />
+                <input type="password" class="form-control is-invalid" name="j_password" placeholder="Password" required="" />
                 <div class="invalid-feedback">La contraseña no puede estar vacia</div>
                 <label class="checkbox">
                     <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe">
                     Recuerdame
                 </label>
-                <button class="btn btn-lg btn-primary btn-block" href="Portada">Entrar</button>
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Entrar"/>
                 <button class="btn btn-lg btn-primary btn-block" href="inicio.jsp" >Registrarse</button>
 
             </form>

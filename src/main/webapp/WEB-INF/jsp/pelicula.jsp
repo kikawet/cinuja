@@ -96,24 +96,26 @@
                             <h2 class="card-title">${pelicula.titulo}</h2>
                             <p class="card-text">${not empty pelicula.descripcion ? pelicula.descripcion += ', en esta' : ''} película de ${pelicula.director.nombre}.</p>
 
-                            <form method="POST">
-                                <p class="clasificacion">
 
-                                    <input id="radio1" type="radio" name="estrellas" value="5"><!--
-                                    --><label for="radio1">★</label><!--
-                                    --><input id="radio2" type="radio" name="estrellas" value="4"><!--
-                                    --><label for="radio2">★</label><!--
-                                    --><input id="radio3" type="radio" name="estrellas" value="3"><!--
-                                    --><label for="radio3">★</label><!--
-                                    --><input id="radio4" type="radio" name="estrellas" value="2"><!--
-                                    --><label for="radio4">★</label><!--
-                                    --><input id="radio5" type="radio" name="estrellas" value="1"><!--
-                                    --><label for="radio5">★</label>
-                                </p>
-                                <button id="boton2" type="submit" class="btn btn-primary" form-control value="estrellas">Valorar</button>
+                            <c:if test="${not empty sesion.usuario}"> 
+                                <form method="POST">
+                                    <p class="clasificacion">
 
-                            </form>
+                                        <input id="radio1" type="radio" name="estrellas" value="5"><!--
+                                        --><label for="radio1">★</label><!--
+                                        --><input id="radio2" type="radio" name="estrellas" value="4"><!--
+                                        --><label for="radio2">★</label><!--
+                                        --><input id="radio3" type="radio" name="estrellas" value="3"><!--
+                                        --><label for="radio3">★</label><!--
+                                        --><input id="radio4" type="radio" name="estrellas" value="2"><!--
+                                        --><label for="radio4">★</label><!--
+                                        --><input id="radio5" type="radio" name="estrellas" value="1"><!--
+                                        --><label for="radio5">★</label>
+                                    </p>
+                                    <button id="boton2" type="submit" class="btn btn-primary" form-control value="estrellas">Valorar</button>
 
+                                </form>
+                            </c:if>
 
                             <div id="carta" class="card" style="width: 12rem;">
                                 <c:if test="${not empty pelicula.director.foto}">
@@ -124,9 +126,6 @@
                                 </div>
 
                             </div>
-
-
-
 
                         </div>
                     </div>
@@ -159,20 +158,27 @@
             </div>
         </c:forEach>
 
-        <aside class="my-md-4 container input-group justify-content-end">
-            <form  method="POST">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">Titulo</span>
+        <aside class="my-md-4 container input-group justify-content-center">                
+
+            <c:if test="${empty sesion.usuario}">
+                <div class="alert alert-danger ">Inicia sesión para comentar</div>
+            </c:if>
+
+            <c:if test="${not empty sesion.usuario}">    
+                <form  method="POST">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon3">Titulo</span>
+                        </div>
+                        <input type="text" class="form-control" id="basic-url" name="titulo" value="${titulo}">
+
                     </div>
-                    <input type="text" class="form-control" id="basic-url" name="titulo" value="${titulo}">
+                    <textarea class="input-group-text form-control text-left" name="comentario" rows="10" cols="120" placeholder="Escribe aquí tus comentario" >${texto}</textarea>
+                    <input class="btn btn-primary form-control" type="submit" value="Comentar">
+                </form>
 
-                </div>
-                <textarea class="input-group-text form-control text-left" name="comentario" rows="10" cols="120" placeholder="Escribe aquí tus comentario" >${texto}</textarea>
-                <input class="btn btn-primary form-control" type="submit" value="Comentar">
-            </form>
+            </c:if>
         </aside>
-
 
     </body>
 </html>

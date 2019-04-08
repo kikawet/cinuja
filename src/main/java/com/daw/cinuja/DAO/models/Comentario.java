@@ -20,7 +20,6 @@ import javax.validation.constraints.Size;
  *
  * @author lopez
  */
-@ApplicationScoped
 public class Comentario {
 
     @NotNull(message = "Un comentario necesita un usuario")
@@ -31,7 +30,7 @@ public class Comentario {
     private Pelicula pelicula;
     @NotNull(message = "Se necesita saber cuando se escribio el comentario")
     @Past(message = "La fecha en el comentario tiene que ser anterior a la actual")
-    private Calendar fecha;
+    private Date fecha;
     @NotNull(message = "Todos los comentarios necesitan un titulo")
     @Size(min = 3, max = 20, message = "El titulo debe de tener un tamaño entre {min} y {max}")
     private String titulo;
@@ -115,11 +114,11 @@ public class Comentario {
         this.titulo = titulo;
     }
 
-    public Calendar getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(Calendar fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 

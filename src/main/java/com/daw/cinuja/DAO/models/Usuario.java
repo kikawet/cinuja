@@ -19,8 +19,6 @@ import javax.validation.constraints.Size;
  *
  * @author lopez
  */
-@Named(value = "perfil")
-@SessionScoped
 public class Usuario implements Serializable {
 
     @NotNull

@@ -20,14 +20,13 @@ import javax.validation.constraints.Size;
  *
  * @author lopez
  */
-@ApplicationScoped
 public class Director {
 
     @NotNull(message = "Un director necesita al menos el nombre")
     @Size(min = 3, max = 20, message = "El nombre del director tiene que estar entre {min} y {max} caracteres")
     private String nombre;
     @Past(message = "La fecha de nacimiento de un director debe ser anterior a la actual")
-    private Calendar fnacimiento;
+    private Date fnacimiento;
     @Pattern(regexp = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "La foto debe ser de una url")
     private String foto;
     @Size(min = 5, max = 30, message = "Los apellidos de un director deben estar entre {min} y {max} caracteres")
@@ -64,11 +63,11 @@ public class Director {
         this.nombre = nombre;
     }
 
-    public Calendar getFnacimiento() {
+    public Date getFnacimiento() {
         return fnacimiento;
     }
 
-    public void setFnacimiento(Calendar fnacimiento) {
+    public void setFnacimiento(Date fnacimiento) {
         this.fnacimiento = fnacimiento;
     }
 

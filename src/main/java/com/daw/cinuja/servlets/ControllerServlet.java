@@ -11,6 +11,7 @@ import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.list.Init;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
+import com.daw.cinuja.DAO.models.Sesion;
 import com.daw.cinuja.DAO.qualifiers.DAOJDBC;
 import com.daw.cinuja.DAO.qualifiers.DAOList;
 import java.io.IOException;
@@ -45,6 +46,9 @@ public class ControllerServlet extends HttpServlet {
     @DAOJDBC
     private ComentarioDAO comentarios;
 
+    @Inject
+    private Sesion sesion;
+
 //    @Inject
 //    private Init datosListas;
     /**
@@ -63,6 +67,8 @@ public class ControllerServlet extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
 
+        //asi permito salir de sesion        
+        sesion.setUsuario(usuarios.getUsuario(request.getRemoteUser()));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -83,8 +89,6 @@ public class ControllerServlet extends HttpServlet {
         List<Pelicula> p = new ArrayList<>(peliculas.getPeliculas());
         String genero = request.getParameter("genero");
 
-        
-        
         if (genero != null) {
             int hashGenero = new Integer(genero);
             for (int i = p.size() - 1; i >= 0; i--) {

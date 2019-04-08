@@ -70,7 +70,7 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
                 Connection conn = ds.getConnection();
                 PreparedStatement st = conn.prepareStatement(query);) {
             st.setString(1, p.getTitulo());
-            st.setDate(2, java.sql.Date.valueOf(p.getFecha().getCalendarType()), p.getFecha());
+            st.setDate(2, new java.sql.Date(p.getFecha().getTime()));
             st.setString(3, p.getFoto());
             st.setString(4, p.getUrl());
             st.setFloat(5, p.getNota());
@@ -79,7 +79,8 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
             st.setString(8, p.getDirector().getNombre());
 
             res = st.execute();
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
         }
 
         return res;
@@ -97,7 +98,8 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
 
             res = st.execute();
 
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
         }
 
         return res;

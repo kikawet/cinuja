@@ -10,14 +10,14 @@
         <a class="navbar-bar nav-link" href="/cinuja/portada">Portada</a>    
 
 
-        <c:if test="${empty pageContext.request.remoteUser}">
+        <c:if test="${empty sesion.usuario}">
             <a class="navbar-bar nav-link" href="/cinuja/perfil">Perfil</a> 
 
         </c:if>
 
-        <c:if test="${not empty pageContext.request.remoteUser}">
-            <a class="navbar-bar nav-link" href="perfil">Usuario</a>    
-            <a class="navbar-bar nav-link" href="logout">LogOut</a> 
+        <c:if test="${not empty sesion.usuario}">
+            <a class="navbar-bar nav-link" href="/cinuja/perfil">Usuario</a>    
+            <a class="navbar-bar nav-link" href="/cinuja/portada">LogOut</a> <%-- esto funciona gracias a que por algún motivo el servidor no te autentifica de manera correcta --%>
         </c:if>
     </nav>
 

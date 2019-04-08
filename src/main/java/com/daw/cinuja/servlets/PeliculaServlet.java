@@ -10,12 +10,15 @@ import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
+import com.daw.cinuja.DAO.models.Sesion;
 import com.daw.cinuja.DAO.qualifiers.DAOJDBC;
 import com.daw.cinuja.DAO.qualifiers.DAOList;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,6 +46,9 @@ public class PeliculaServlet extends HttpServlet {
     @Inject
     @DAOJDBC
     private UsuarioDAO usuarios;
+
+    @Inject
+    private Sesion sesion;
 
     @Inject
     private Validator validator;
@@ -79,23 +85,23 @@ public class PeliculaServlet extends HttpServlet {
         Comentario comentario = new Comentario();
         Pelicula p = getPelicula(request);
 
-        comentario.setFecha(Calendar.getInstance());
+        comentario.setFecha(new Date());
 //        comentario.getFecha().set(Calendar.MILLISECOND, 0);
         comentario.setPelicula(p);
-        comentario.setUsuario(usuarios.getUsuario("pescues"));
+        comentario.setUsuario(sesion.getUsuario());
         comentario.setTitulo(titulo);
         comentario.setTexto(texto);
 
-        Set<ConstraintViolation<Comentario>> errores = validator.validate(comentario);
+        Set<ConstraintViolation<Comentario>> errores = new TreeSet<>();//validator.validate(comentario);
 
-        Iterator<ConstraintViolation<Comentario>> it = errores.iterator();
-        while (it.hasNext()) {
-            ConstraintViolation<Comentario> next = it.next();
-            if (next.getPropertyPath().toString().equals("fecha")) {
-                it.remove();
-            }
-        }
-
+//        Iterator<ConstraintViolation<Comentario>> it = errores.iterator();
+//        while (it.hasNext()) {
+//            ConstraintViolation<Comentario> next = it.next();
+//            if (next.getPropertyPath().toString().equals("fecha")) {
+//                it.remove();
+//            }
+//        }
+        errores.clear();
         if (errores.isEmpty()) {
             comentarios.insertar(comentario);
             request.setAttribute("comentarios", comentarios.getComentarios(p));
@@ -166,7 +172,6 @@ public class PeliculaServlet extends HttpServlet {
         if (estrellas == null) {
             if (Comentarios(request)) {
                 pe = true;
-
             }
         } else {
             Stars(p, new Integer(estrellas));

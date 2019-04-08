@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +39,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
 
     @Resource(lookup = "java:global/jdbc/Cinuja")
     private DataSource ds;
-    
+
     @Inject
     @DAOJDBC
     private UsuarioDAO usuarios;
@@ -48,7 +49,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
 
     @Override
     public List<Comentario> getComentarios(Pelicula p) {
-        String query = "Select * from comentario as c , pelicula as p where c.pelicula = p.id AND p.url = '" + p.getUrl()+"'";
+        String query = "Select * from comentario as c , pelicula as p where c.pelicula = p.id AND p.url = '" + p.getUrl() + "'";
         List<Comentario> comentarios = new ArrayList<>();
         try (
                 Connection conn = ds.getConnection();
@@ -56,7 +57,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
                 ResultSet rs = st.executeQuery(query);) {
 
             while (rs.next()) {
-                comentarios.add(Mapper.comentarioMapper(rs, p,usuarios.getUsuario(rs.getString("usuario"))));
+                comentarios.add(Mapper.comentarioMapper(rs, p, usuarios.getUsuario(rs.getString("usuario"))));
             }
 
         } catch (SQLException ex) {
@@ -68,23 +69,23 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
     @Override
     public boolean insertar(Comentario c) {
         String query = "INSERT INTO COMENTARIO (PELICULA, USUARIO, FECHA, TITULO, TEXTO) VALUES (("
-                + "SELECT id"
-                + "FROM pelicula"
-                + "WHERE pelicula.nombre = ?"
+                + "SELECT id "
+                + "FROM pelicula as p "
+                + "WHERE p.nombre = '" + c.getPelicula().getTitulo() + "'"
                 + "),?,?,?,?)";
 
         boolean res = false;
         try (
                 Connection conn = ds.getConnection();
                 PreparedStatement st = conn.prepareStatement(query);) {
-            st.setString(1, c.getPelicula().getTitulo());
-            st.setString(2, c.getUsuario().getNick());
-            st.setDate(3, java.sql.Date.valueOf(c.getFecha().getCalendarType()), c.getFecha());
-            st.setString(4, c.getTitulo());
-            st.setString(5, c.getTexto());
+            st.setString(1, c.getUsuario().getNick());
+            st.setTimestamp(2, new java.sql.Timestamp(c.getFecha().getTime()));
+            st.setString(3, c.getTitulo());
+            st.setString(4, c.getTexto());
 
             res = st.execute();
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
         }
 
         return res;
@@ -103,7 +104,8 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
 
             res = st.execute();
 
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
         }
 
         return res;
