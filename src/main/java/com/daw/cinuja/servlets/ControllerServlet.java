@@ -66,9 +66,6 @@ public class ControllerServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8"); //Accept UTF-8 parameters
 
         response.setContentType("text/html;charset=UTF-8");
-
-        //asi permito salir de sesion        
-        sesion.setUsuario(usuarios.getUsuario(request.getRemoteUser()));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -84,23 +81,30 @@ public class ControllerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        request.getSession().setAttribute("generos", PeliculaDAO.generos);
 
-        List<Pelicula> p = new ArrayList<>(peliculas.getPeliculas());
-        String genero = request.getParameter("genero");
+        if ("/registro".equals(request.getPathInfo())) {
+            request.getRequestDispatcher("/WEB-INF/jsp/inicio.jsp").forward(request, response);
+        } else {
 
-        if (genero != null) {
-            int hashGenero = new Integer(genero);
-            for (int i = p.size() - 1; i >= 0; i--) {
-                if (PeliculaDAO.generos.get(p.get(i).getGenero()).hashCode() != hashGenero) {
-                    p.remove(i);
+            request.getSession().setAttribute("generos", PeliculaDAO.generos);
+
+            List<Pelicula> p = new ArrayList<>(peliculas.getPeliculas());
+            String genero = request.getParameter("genero");
+
+            if (genero != null) {
+                int hashGenero = new Integer(genero);
+                for (int i = p.size() - 1; i >= 0; i--) {
+                    if (PeliculaDAO.generos.get(p.get(i).getGenero()).hashCode() != hashGenero) {
+                        p.remove(i);
+                    }
                 }
             }
+
+            request.setAttribute("peliculas", p);
+
+            request.getRequestDispatcher("/WEB-INF/jsp/portada.jsp").forward(request, response);
+
         }
-
-        request.setAttribute("peliculas", p);
-
-        request.getRequestDispatcher("/WEB-INF/jsp/portada.jsp").forward(request, response);
     }
 
     /**

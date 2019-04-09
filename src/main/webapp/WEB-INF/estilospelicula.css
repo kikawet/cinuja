@@ -7,74 +7,37 @@ and open the template in the editor.
     Created on : 26-mar-2019, 20:58:34
     Author     : axpos
 */
+
+
+
 body {
+    background: #eee;
+}
 
-    #form {
 
-    }
-    #form {
-        width: 250px;
-        margin: 0 auto;
-        height: 50px;
+.wrapper {
+    margin: 80px;
+}
 
-    }
 
-    #form p {
-        text-align: center;
+.form-signin {
+    max-width: 380px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 15px 40px 50px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+}
 
-    }
 
-    #form label {
+.form-signin .form-signin-heading .checkbox {
+    margin-bottom: 30px;
+}
 
-        font-size: 30px;
-        font-size: 2rem;
-    }
+.form-signin input[type="text"] .form-signin input[type="password"] {
+    margin-bottom: 20px;
+}
 
-    input[type="radio"] {
-        display: none;
-
-    }
-
-    label {
-        color: grey;
-        font-size: 32px;
-        font-size: 2rem;
-    }
-
-    .clasificacion {
-        direction: rtl;
-        unicode-bidi: bidi-override;
-
-    }
-
-    label:hover,
-        label:hover ~ label {
-
-        color: orange;
-    }
-
-    input[type="radio"]:checked ~ label {
-
-        color: orange;
-    }
-    #boton {
-        position:absolute;
-        left: 70%;
-        top: 385px;
-        width: 160px;
-        height: 60px;
-    }
-
-    #boton2 {
-        position:relative;
-        left: 10px;
-        top: 10px;
-        width: 100px;
-        height: 40px;
-    }
-
-    #carta {
-
-        top: 15px;
-    }
+.form-signin .form-control {
+    padding: 10px;
 }

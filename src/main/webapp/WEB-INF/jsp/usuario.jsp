@@ -11,18 +11,27 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <%@include file="/WEB-INF/jspf/links.jspf" %>
         <title>JSP Usuario</title>
     </head>
-    <%@include file="/WEB-INF/jspf/cabecera.jspf" %>
+
+    <header>
+        <%@include file="/WEB-INF/jspf/cabecera.jspf" %>
+    </header>
+
     <body>
         <div class="card">
             <img class="card-img justify-content-center mx-auto mt-5 " style="max-width: 128px" src="${perfil.foto}">
             <div class="card-body mx-auto">
                 <p class="card-text ">Nick: ${fn:escapeXml(perfil.nick)} </p>
                 <p class="card-text ">Nombre: ${fn:escapeXml(perfil.nombre)} </p>
+
+                <a role="button" class="btn btn-danger" href="/cinuja/perfil/salir">Cerrar sesión</a>
+                <a role="button" class="btn btn-success" href="/cinuja/perfil/cc" >Cambiar contraseña</a>
+
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Director favorito: ${perfil.dFavorito.nombre}</li>
+                <li class="list-group-item">Director favorito: ${perfil.dFavorito.nombre} ${pageContext.request.contextPath}</li>
                 <li class="list-group-item">Pelicula favorita: ${perfil.pFavorita.titulo}</li>
             </ul>
 
@@ -48,7 +57,9 @@
                                         <td>${comentario.valoracion}</td>
                                         <td>
                                             <div class="card" style="width: 14rem;">
-                                                <img src="${comentario.pelicula.foto}"  class="card-img-top" alt="...">
+                                                <a href="pelicula/${comentario.pelicula.url}">
+                                                    <img href= pelicula/${comentario.pelicula.url}" src="${comentario.pelicula.foto}"  class="card-img-top" alt="..."> 
+                                                </a>
                                                 <div class="card-body">
                                                     <h5 class="card-title">${comentario.pelicula.titulo} (1990)</h5>
                                                     <p class="card-text">
@@ -64,9 +75,11 @@
                                         <td>
                                             <div class="media-body">
                                                 <h3 class="mt-0 mb-1"> ${fn:escapeXml(comentario.titulo)} </h3>
-                                                ${fn:escapeXml(comentario.texto)}
-                                                <p> <button type="button" class="btn btn-success">Editar</button>
-                                                    <button type="button" class="btn btn-danger">Eliminar</button></p>
+                                                <p>${fn:escapeXml(comentario.texto)}</p>
+                                                <form method="post" action="${pageContext.request.contextPath}/perfil/borrar/comentario?com=${comentario.texto.hashCode()}&pel=${comentario.pelicula.titulo.hashCode()}"> 
+                                                    <input type="submit" class="btn btn-success" value="Editar"/>
+                                                    <input type="submit" class="btn btn-danger" value="Eliminar"/>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>

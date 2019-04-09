@@ -93,7 +93,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
 
     @Override
     public boolean borrar(Comentario c) {
-        String query = "DELETE FROM comentario AS c WHERE c.usuario = ? AND c.pelicula = (SELECT id FROM pelicula WHERE pelciula.nombre = ?)";
+        String query = "DELETE FROM comentario AS c WHERE c.usuario = ? AND c.pelicula = (SELECT id FROM pelicula WHERE pelicula.nombre = ?)";
 
         boolean res = false;
         try (

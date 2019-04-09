@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.inject.Inject;
@@ -56,8 +57,13 @@ public class PeliculaServlet extends HttpServlet {
     protected Pelicula getPelicula(HttpServletRequest request) {
         Pelicula p = null;
         int i = 0;
+        int index = request.getPathInfo().substring(1).indexOf("/");
+        String url = request.getPathInfo().substring(1);
+        if (index != -1) {
+            url = url.substring(0, index);
+        }
         while (i < peliculas.getPeliculas().size() && p == null) {
-            if (request.getPathInfo().substring(1).equals(peliculas.getPeliculas().get(i).getUrl())) {
+            if (url.equals(peliculas.getPeliculas().get(i).getUrl())) {
                 p = peliculas.getPeliculas().get(i);
             }
             i++;
@@ -146,10 +152,25 @@ public class PeliculaServlet extends HttpServlet {
 
         Pelicula p = getPelicula(request);
 
-        request.setAttribute("pelicula", p);
-        request.setAttribute("comentarios", comentarios.getComentarios(p));
+        if (("/" + p.getUrl() + "/borrar").equals(request.getPathInfo())) {
 
-        request.getRequestDispatcher("/WEB-INF/jsp/pelicula.jsp").forward(request, response);
+            List<Comentario> cmtrs = comentarios.getComentarios(p);
+
+            for (Comentario cmtr : cmtrs) {
+                comentarios.borrar(cmtr);
+            }
+
+            peliculas.borrar(p);
+
+            response.sendRedirect(request.getContextPath() + "/portada");
+            return;
+        } else {
+
+            request.setAttribute("pelicula", p);
+            request.setAttribute("comentarios", comentarios.getComentarios(p));
+
+            request.getRequestDispatcher("/WEB-INF/jsp/pelicula.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -178,15 +199,15 @@ public class PeliculaServlet extends HttpServlet {
             request.setAttribute("comentarios", comentarios.getComentarios(p));
             pe = true;
         }
+
         request.setAttribute("pelicula", p);
+
         if (pe) {
             response.sendRedirect("/cinuja/pelicula/" + p.getUrl());
             return;
         }
 
         request.getRequestDispatcher("/WEB-INF/jsp/pelicula.jsp").forward(request, response);
-//        response.sendRedirect("cinuja/pelicula/"+p.getUrl());
-
     }
 
     /**

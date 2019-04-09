@@ -14,6 +14,7 @@ import com.daw.cinuja.DAO.models.Sesion;
 import com.daw.cinuja.DAO.qualifiers.DAOJDBC;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lopez
  */
-@WebServlet(name = "Usuario", urlPatterns = {"/perfil"})
+@WebServlet(name = "Usuario", urlPatterns = {"/perfil/*"})
 public class UsuarioServlet extends HttpServlet {
 
     @Inject
@@ -56,7 +57,8 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        request.authenticate(response);
+//        request.authenticate(response);
+        sesion.setUsuario(usuarios.getUsuario(request.getRemoteUser()));
 
     }
 
@@ -74,27 +76,42 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
 
-        String user = sesion.getUsuario().getNick();
+        if ("/salir".equals(request.getPathInfo())) {
 
-        ArrayList<Comentario> total = new ArrayList<>();
+            request.logout();
+            request.getSession().invalidate();
 
-        for (Pelicula p : peliculas.getPeliculas()) {
-            if (comentarios.getComentarios(p) != null) {
-                ArrayList<Comentario> c = new ArrayList<>(comentarios.getComentarios(p));
-                for (int i = c.size() - 1; i >= 0; i--) {
-                    if (!c.get(i).getUsuario().getNick().equals(user)) {
-                        c.remove(i);
-                    }
-                }
-                total.addAll(c);
-            }
+            response.sendRedirect(request.getContextPath() + "/portada");
+            return;
         }
 
-        request.getSession().setAttribute("comentarios", total);
-        request.getSession().setAttribute("generos", PeliculaDAO.generos);
-        request.getSession().setAttribute("perfil", usuarios.getUsuario(user));
+        if ("/cc".equals(request.getPathInfo())) {
+            request.getRequestDispatcher("/WEB-INF/jsp/contrasena.jsp").forward(request, response);
+        } else {
 
-        request.getRequestDispatcher("/WEB-INF/jsp/usuario.jsp").forward(request, response);
+            String user = sesion.getUsuario().getNick();
+
+            ArrayList<Comentario> total = new ArrayList<>();
+
+            for (Pelicula p : peliculas.getPeliculas()) {
+                if (comentarios.getComentarios(p) != null) {
+                    ArrayList<Comentario> c = new ArrayList<>(comentarios.getComentarios(p));
+                    for (int i = c.size() - 1; i >= 0; i--) {
+                        if (!c.get(i).getUsuario().getNick().equals(user)) {
+                            c.remove(i);
+                        }
+                    }
+                    total.addAll(c);
+                }
+            }
+
+            request.getSession().setAttribute("comentarios", total);
+            request.getSession().setAttribute("generos", PeliculaDAO.generos);
+            request.getSession().setAttribute("perfil", usuarios.getUsuario(user));
+
+            request.getRequestDispatcher("/WEB-INF/jsp/usuario.jsp").forward(request, response);
+        }
+
     }
 
     /**
@@ -109,6 +126,46 @@ public class UsuarioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
+        if (request.getPathInfo().contains("/borrar/comentario")) {
+            int hashComentario = new Integer(request.getParameter("com"));
+            int hashPelicula = new Integer(request.getParameter("pel"));
+            //buscar con has y borrarlo
+
+            //        ArrayList<Comentario> total = new ArrayList<>();
+            Comentario com = null;
+            List<Pelicula> pelis = peliculas.getPeliculas();
+
+            for (Pelicula p : pelis) {
+                List<Comentario> cmtrs = comentarios.getComentarios(p);
+                if (cmtrs != null) {
+//                ArrayList<Comentario> c = new ArrayList<>(comentarios.getComentarios(p));
+//                for (int i = c.size() - 1; i >= 0; i--) {
+//                    if (!c.get(i).getUsuario().getNick().equals(sesion.getUsuario().getNick())) {
+//                        c.remove(i);
+//                    }
+//                }
+                    for (Comentario cmtr : cmtrs) {
+                        if (cmtr.getPelicula().getTitulo().hashCode() == hashPelicula && cmtr.getTexto().hashCode() == hashComentario) {
+                            com = cmtr;
+                            break;
+                        }
+                    }
+
+                }
+
+                if (com != null) {
+                    break;
+                }
+
+            }
+
+            comentarios.borrar(com);
+
+            response.sendRedirect(request.getContextPath() + "/perfil");
+            return;
+        }
+
     }
 
     /**

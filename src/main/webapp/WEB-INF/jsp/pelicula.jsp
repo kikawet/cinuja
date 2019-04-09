@@ -1,4 +1,5 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -7,6 +8,9 @@
         <%@include file="/WEB-INF/jspf/links.jspf" %>
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
         <title>JSP pelicula</title>
+
+<!-- link href="<c:url value='/estilopelicula.css'/>" -->
+
 
         <style>
 
@@ -130,7 +134,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
+
+            <c:if test="${sesion.usuario.rol eq 'adm'}">
+                <a role="button" class="btn btn-primary" href="/cinuja/perfil/salir">Editar</a>
+                <a role="button" class="btn btn-danger" href="/cinuja/pelicula/${pelicula.url}/borrar">Borrar</a>
+            </c:if>
 
         </main>
 
