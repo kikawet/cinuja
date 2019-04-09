@@ -66,6 +66,9 @@ public class ControllerServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8"); //Accept UTF-8 parameters
 
         response.setContentType("text/html;charset=UTF-8");
+
+        //asi permito salir de sesion        
+        sesion.setUsuario(usuarios.getUsuario(request.getRemoteUser()));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
