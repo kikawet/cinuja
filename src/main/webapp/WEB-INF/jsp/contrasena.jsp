@@ -32,14 +32,14 @@
 
                     <div class="form-row ">
                         <div class="col-md-3 mb-3 ml-auto">
-                            <label for="validationServer04">Contraseña</label>
-                            <input type="text" class="form-control " id="validationServer04" placeholder="Contraseña" required>
+                            <p class="text-md-center" for="validationServer04">Contraseña</p>
+                            <input type="text" class="form-control " id="validationServer04" placeholder="Contraseña" required name="contrase">
                             <div class=""></div>
                         </div>
 
                         <div class="col-md-3 mb-3 mr-auto">
-                            <label for="validationServer05">Repetir Contraseña</label>
-                            <input type="text" class="form-control" id="validationServer05" placeholder="Contraseña" required>
+                            <p class="text-md-center" for="validationServer05">Repetir Contraseña</p>
+                            <input type="text" class="form-control" id="validationServer05" placeholder="Contraseña" required >
                             <div class=""></div>
                         </div>
 
@@ -48,9 +48,16 @@
                     <div class="text-center">
                         <input  class="btn btn-primary" type="submit" value="Aceptar">
                         <a  class="btn btn-danger" role="button" href="/cinuja/perfil">Volver</a>
+                    </div>
+
+                    <c:forEach items="${errores}" var="error">
+                        <div class="alert alert-danger">
+                            ${error.message}
+                        </div>
+                    </c:forEach>
+
                 </form>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>

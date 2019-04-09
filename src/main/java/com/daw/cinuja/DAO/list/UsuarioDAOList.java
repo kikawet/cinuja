@@ -49,4 +49,10 @@ public class UsuarioDAOList implements UsuarioDAO {
         return usuarios.remove(u);
     }
 
+    @Override
+    public boolean modificar(Usuario antiguo, Usuario nuevo) {
+        usuarios.get(usuarios.indexOf(antiguo)).clone(nuevo);
+        return true;
+    }
+
 }

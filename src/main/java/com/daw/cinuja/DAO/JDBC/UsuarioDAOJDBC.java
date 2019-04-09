@@ -111,4 +111,24 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
         return res;
     }
 
+    @Override
+    public boolean modificar(Usuario antiguo, Usuario nuevo) {
+        String query = "UPDATE USUARIO SET CONTRASENA = ? WHERE NICK = ?";
+
+        boolean res = false;
+        try (
+                Connection conn = ds.getConnection();
+                PreparedStatement st = conn.prepareStatement(query);) {
+            st.setString(1, nuevo.getContrasena());
+            st.setString(2, antiguo.getNick());
+
+            res = st.execute();
+
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
+
+        return res;
+    }
+
 }

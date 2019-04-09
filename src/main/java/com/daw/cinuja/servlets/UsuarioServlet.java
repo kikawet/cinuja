@@ -11,6 +11,7 @@ import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Sesion;
+import com.daw.cinuja.DAO.models.Usuario;
 import com.daw.cinuja.DAO.qualifiers.DAOJDBC;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -86,7 +87,24 @@ public class UsuarioServlet extends HttpServlet {
         }
 
         if ("/cc".equals(request.getPathInfo())) {
+
+            String contr = request.getParameter("contrase");
+
+            if (contr != null) {
+                Usuario u = usuarios.getUsuario(sesion.getUsuario().getNick());
+                u.setContrasena(contr);
+
+                usuarios.modificar(usuarios.getUsuario(sesion.getUsuario().getNick()), u);
+
+                request.logout();
+                request.getSession().invalidate();
+
+                response.sendRedirect(request.getContextPath() + "/portada");
+                return;
+            }
+
             request.getRequestDispatcher("/WEB-INF/jsp/contrasena.jsp").forward(request, response);
+
         } else {
 
             String user = sesion.getUsuario().getNick();

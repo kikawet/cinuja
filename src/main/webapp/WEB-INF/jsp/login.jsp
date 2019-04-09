@@ -56,14 +56,14 @@
 
 
         <div id="cuadro" class="wrapper">
-            <c:if test="${error}">
-                <p class="invalid-feedback">Los campos son erroneos</p>
-            </c:if>
-            <form class="form-signin" action="j_security_check" method="post">
+            <form class="form-signin" action="j_security_check" method="post">               
+
                 <h1 class="form-signin-heading text-center"><b>🍿 CinUJA 🍿</b></h1>
-                <input type="text" class="form-control" name="j_username" placeholder="Email Address"  autofocus="" />
-                <input type="password" class="form-control" name="j_password" placeholder="Password"  />
-                <div class="invalid-feedback">La contraseña no puede estar vacia</div>
+                <input type="text" class="form-control" name="j_username" placeholder="Nick"  autofocus="" />
+                <input type="password" class="form-control" name="j_password" placeholder="Contraseña"  />
+                <c:if test="${param.error}">
+                    <div class="invalid-feedback">Los campos son erroneos</div>
+                </c:if>
                 <label class="checkbox">
                     <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe">
                     Recuerdame

@@ -18,5 +18,7 @@ public interface UsuarioDAO {
 
     boolean insertar(Usuario u);
 
+    boolean modificar(Usuario antiguo, Usuario nuevo);
+
     boolean borrar(Usuario u);
 }

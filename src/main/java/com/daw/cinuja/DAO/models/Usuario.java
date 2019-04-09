@@ -41,6 +41,21 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
+    public void clone(Usuario otro) {
+
+        if (!this.equals(otro)) {
+            this.setNick(otro.getNick());
+            this.setNombre(otro.getNombre());
+            this.setApellidos(otro.getApellidos());
+            this.setFoto(otro.getFoto());
+            this.setContrasena(otro.getContrasena());
+            this.setRol(otro.getRol());
+            this.setpFavorita(otro.getpFavorita());
+            this.setdFavorito(otro.getdFavorito());
+        }
+
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
