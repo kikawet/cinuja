@@ -5,10 +5,7 @@
  */
 package com.daw.cinuja.DAO.models;
 
-import java.io.Serializable;
 import java.util.Objects;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -19,7 +16,7 @@ import javax.validation.constraints.Size;
  *
  * @author lopez
  */
-public class Usuario implements Serializable {
+public class Usuario {
 
     @NotNull
     @Size(min = 1, max = 20, message = "El nick de un usuario debe estar entre {min} y {max}")
@@ -41,7 +38,7 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public void clone(Usuario otro) {
+    public void copy(Usuario otro) {
 
         if (!this.equals(otro)) {
             this.setNick(otro.getNick());

@@ -6,7 +6,6 @@
 package com.daw.cinuja.DAO.interfaces;
 
 import com.daw.cinuja.DAO.models.Usuario;
-import java.util.List;
 
 /**
  *

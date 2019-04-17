@@ -5,12 +5,8 @@
  */
 package com.daw.cinuja.DAO.models;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;

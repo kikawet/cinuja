@@ -24,7 +24,7 @@
         <%@include file="/WEB-INF/jspf/cabecera.jspf" %>
         <div style="height: 700px; ">
             <div class="bg-white m-auto mh-700" style="height: 700px">
-                <form >
+                <form method="POST">
                     <div class="form-row">
 
 
@@ -47,7 +47,7 @@
 
                     <div class="text-center">
                         <input  class="btn btn-primary" type="submit" value="Aceptar">
-                        <a  class="btn btn-danger" role="button" href="/cinuja/perfil">Volver</a>
+                        <a  class="btn btn-danger" role="button" href="${pageContext.request.contextPath}/perfil">Volver</a>
                     </div>
 
                     <c:forEach items="${errores}" var="error">

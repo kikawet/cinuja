@@ -13,33 +13,6 @@ DELETE FROM USUARIO;
 DELETE FROM PELICULA;
 DELETE FROM DIRECTOR;
 
--- INSERT INTO DIRECTOR (nombre,f_nac) VALUES ('super director',CURRENT_DATE);
--- 
--- INSERT INTO PELICULA (nombre,fecha,foto,url,VALORACION,genero,DESCRIPCION,RESTRICCION,director) VALUES ('PEL68CLI4','2.4.2019','foto','url',0,6,'desc',false,1);
--- INSERT INTO USUARIO (nick,rol) VALUES ('tomass','nn');
--- 
--- INSERT INTO COMENTARIO (PELICULA, USUARIO, FECHA, TITULO, TEXTO) VALUES ((
--- SELECT id
--- FROM pelicula
--- WHERE pelicula.nombre = 'PELICULITA'
--- ),'tomas',CURRENT_DATE,'yo k se','jk');
--- 
--- Select c.TITULO from comentario as c , pelicula as p where c.pelicula = p.id AND p.url = 'url';
--- 
--- SELECT *
--- FROM PELICULA as p,
--- director as d
--- where p.DIRECTOR = d.ID
--- ;
--- 
--- SELECT * 
--- FROM USUARIO AS u
--- LEFT JOIN PELICULA AS p ON p.ID = u.PELICULA_FAV
--- LEFT JOIN DIRECTOR AS d ON d.ID = u.DIRECTOR_FAV
--- WHERE  u.NICK = 'tomas' ;
--- 
--- INSERT INTO USUARIO VALUES ('nick','a','a','a','a','non',2,1);
-
 INSERT INTO USUARIO (NICK,CONTRASENA,NOMBRE,ROL,FOTO) VALUES ('pescues','flo','flo','adm','https://ct.yimg.com/cy/4571/37462755413_c2dae6_128sq.jpg');
 INSERT INTO USUARIO (NICK,CONTRASENA,NOMBRE,ROL,FOTO) VALUES ('gordito','donuts','José Tomas','non','https://ct.yimg.com/cy/1904/44016886825_e02d29_128sq.jpg');
 INSERT INTO USUARIO (NICK,CONTRASENA,NOMBRE,ROL,FOTO) VALUES ('boa','ponme_un_10_balsas','Pescues','non','https://66.media.tumblr.com/avatar_ea54a1bd0195_128.pnj');
@@ -68,3 +41,9 @@ INSERT INTO COMENTARIO (TITULO,TEXTO,FECHA,PELICULA,USUARIO) VALUES ('No está m
                                                                                 (SELECT ID FROM PELICULA AS p WHERE p.URL = 'uno-de-los-nuestros'),'boa');
 INSERT INTO COMENTARIO (TITULO,TEXTO,FECHA,PELICULA,USUARIO) VALUES ('Aburrida','Yo me aburrí. Preferiría morirme en este momento.',CURRENT_TIMESTAMP,
                                                                                 (SELECT ID FROM PELICULA AS p WHERE p.URL = 'uno-de-los-nuestros'),'web');
+
+Select * 
+from comentario as c ,
+ usuario as u ,
+pelicula as p 
+where c.pelicula = p.id AND c.usuario = u.nick AND u.nick = 'web';

@@ -137,8 +137,8 @@
             </div> 
 
             <c:if test="${sesion.usuario.rol eq 'adm'}">
-                <a role="button" class="btn btn-primary" href="/cinuja/perfil/salir">Editar</a>
-                <a role="button" class="btn btn-danger" href="/cinuja/pelicula/${pelicula.url}/borrar">Borrar</a>
+                <a role="button" class="btn btn-primary" href="${pageContext.request.contextPath}/perfil/salir">Editar</a>
+                <a role="button" class="btn btn-danger" href="${pelicula.url}/borrar">Borrar</a>
             </c:if>
 
         </main>

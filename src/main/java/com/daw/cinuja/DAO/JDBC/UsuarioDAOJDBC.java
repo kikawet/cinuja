@@ -7,33 +7,33 @@ package com.daw.cinuja.DAO.JDBC;
 
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Director;
-import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Usuario;
-import com.daw.cinuja.DAO.qualifiers.DAOJDBC;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.Resource;
-import javax.enterprise.context.RequestScoped;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author lopez
  */
-@RequestScoped
-@DAOJDBC
+//@RequestScoped
+//@DAOJDBC
+@Repository(UsuarioDAOJDBC.qualifier)
 public class UsuarioDAOJDBC implements UsuarioDAO {
 
     private Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
 
-    @Resource(lookup = "java:global/jdbc/Cinuja")
+    final static public String qualifier = "UsuarioDAOJDBC";
+
+//    @Resource(lookup = "java:global/jdbc/Cinuja")
+    @Autowired(required = false)
     private DataSource ds;
 
     public UsuarioDAOJDBC() {
@@ -56,8 +56,8 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
                 ResultSet rs = st.executeQuery(query);) {
 
             if (rs.next()) {
-                Director d = Mapper.directorMapper(rs, 18);
-                usuario = Mapper.usuarioMapper(rs, 0, Mapper.peliculaMapper(rs, 8, d), d);
+                Director d = Utils.directorMapper(rs, 18);
+                usuario = Utils.usuarioMapper(rs, 0, Utils.peliculaMapper(rs, 8, d), d);
             }
 
         } catch (SQLException ex) {

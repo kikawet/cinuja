@@ -26,12 +26,12 @@
                 <p class="card-text ">Nick: ${fn:escapeXml(perfil.nick)} </p>
                 <p class="card-text ">Nombre: ${fn:escapeXml(perfil.nombre)} </p>
 
-                <a role="button" class="btn btn-danger" href="/cinuja/perfil/salir">Cerrar sesión</a>
-                <a role="button" class="btn btn-success" href="/cinuja/perfil/cc" >Cambiar contraseña</a>
+                <a role="button" class="btn btn-danger" href="perfil/salir">Cerrar sesión</a>
+                <a role="button" class="btn btn-success" href="perfil/cc" >Cambiar contraseña</a>
 
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Director favorito: ${perfil.dFavorito.nombre} ${pageContext.request.contextPath}</li>
+                <li class="list-group-item">Director favorito: ${perfil.dFavorito.nombre}</li>
                 <li class="list-group-item">Pelicula favorita: ${perfil.pFavorita.titulo}</li>
             </ul>
 
@@ -76,7 +76,7 @@
                                             <div class="media-body">
                                                 <h3 class="mt-0 mb-1"> ${fn:escapeXml(comentario.titulo)} </h3>
                                                 <p>${fn:escapeXml(comentario.texto)}</p>
-                                                <form method="post" action="${pageContext.request.contextPath}/perfil/borrar/comentario?com=${comentario.texto.hashCode()}&pel=${comentario.pelicula.titulo.hashCode()}"> 
+                                                <form method="post" action="perfil/borrar/comentario?com=${comentario.texto.hashCode()}&pel=${comentario.pelicula.titulo.hashCode()}"> 
                                                     <input type="submit" class="btn btn-success" value="Editar"/>
                                                     <input type="submit" class="btn btn-danger" value="Eliminar"/>
                                                 </form>

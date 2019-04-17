@@ -7,7 +7,6 @@ package com.daw.cinuja.DAO.JDBC;
 
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.models.Pelicula;
-import com.daw.cinuja.DAO.qualifiers.DAOJDBC;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,21 +16,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.Resource;
-import javax.enterprise.context.RequestScoped;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author lopez
  */
-@RequestScoped
-@DAOJDBC
+//@RequestScoped
+//@DAOJDBC
+@Repository(PeliculaDAOJDBC.qualifier)
 public class PeliculaDAOJDBC implements PeliculaDAO {
 
     private Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
 
-    @Resource(lookup = "java:global/jdbc/Cinuja")
+    final static public String qualifier = "PeliculaDAOJDBC";
+
+//    @Resource(lookup = "java:global/jdbc/Cinuja")
+    @Autowired(required = false)
     private DataSource ds;
 
     public PeliculaDAOJDBC() {
@@ -51,7 +54,7 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
                 ResultSet rs = st.executeQuery(query);) {
 
             while (rs.next()) {
-                peliculas.add(Mapper.peliculaMapper(rs, 0, Mapper.directorMapper(rs, 10)));
+                peliculas.add(Utils.peliculaMapper(rs, 0, Utils.directorMapper(rs, 10)));
             }
 
         } catch (SQLException ex) {
@@ -103,6 +106,56 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
         }
 
         return res;
+    }
+
+    @Override
+    public Pelicula getPelicula(String url) {
+        String query = "SELECT * "
+                + "FROM PELICULA AS p "
+                + "LEFT JOIN DIRECTOR AS d "
+                + "ON p.DIRECTOR = d.ID "
+                + "WHERE URL = '" + url + "'";
+
+        Pelicula pelicula = null;
+
+        try (
+                Connection conn = ds.getConnection();
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(query);) {
+
+            if (rs.next()) {
+                pelicula = Utils.peliculaMapper(rs, 0, Utils.directorMapper(rs, 10));
+            }
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
+
+        return pelicula;
+    }
+
+    @Override
+    public List<Pelicula> getPeliculas(int genero) {
+        String query = "SELECT * "
+                + "FROM PELICULA as p "
+                + "LEFT JOIN director as d "
+                + "ON p.DIRECTOR = d.ID F"
+                + "WHERE GENERO = " + genero;
+        List<Pelicula> peliculas = new ArrayList<>();
+
+        try (
+                Connection conn = ds.getConnection();
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(query);) {
+
+            while (rs.next()) {
+                peliculas.add(Utils.peliculaMapper(rs, 0, Utils.directorMapper(rs, 10)));
+            }
+
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
+
+        return peliculas;
     }
 
 }
