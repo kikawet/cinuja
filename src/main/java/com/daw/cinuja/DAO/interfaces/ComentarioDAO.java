@@ -7,6 +7,7 @@ package com.daw.cinuja.DAO.interfaces;
 
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
+import com.daw.cinuja.DAO.models.Usuario;
 import java.util.List;
 
 /**
@@ -16,6 +17,8 @@ import java.util.List;
 public interface ComentarioDAO {
 
     List<Comentario> getComentarios(Pelicula p);
+
+    List<Comentario> getComentarios(Usuario u);
 
     boolean insertar(Comentario c);
 

@@ -5,24 +5,34 @@
  */
 package com.daw.cinuja.DAO.JDBC;
 
+import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Director;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 /**
  *
  * @author lopez
  */
-public class Mapper {
+public class Utils {
+
+    public static int indiceGenero(int hashGenero) {
+        int i = 0;
+        boolean encontrado = false;
+
+        while (!encontrado && i < PeliculaDAO.generos.size()) {
+            encontrado = PeliculaDAO.generos.get(i).hashCode() == hashGenero;
+            i++;
+        }
+
+        return (encontrado) ? (i - 1) : (-1);
+    }
 
     public static Comentario comentarioMapper(ResultSet rs, Pelicula p, Usuario u) throws SQLException {
         Comentario cm = new Comentario();
-//        Calendar c = Calendar.getInstance();
-//        c.setTime(rs.getDate("fecha"));
         cm.setFecha(rs.getDate("fecha"));
         cm.setTitulo(rs.getString("titulo"));
         cm.setTexto(rs.getString("texto"));

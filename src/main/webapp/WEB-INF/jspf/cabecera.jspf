@@ -5,16 +5,16 @@
 <a  class="d-block text-center font-weight-bolder text-reset" style="background-color: #f96805;min-height: 120px; font-size: 400%;">CinUJA</a>   
 
 <nav class="navbar navbar-expand-lg bg-light  navbar-light justify-content-center">
-    <a class="navbar-bar nav-link" href="/cinuja/portada">Portada</a>    
+
+    <a class="navbar-bar nav-link" href="${pageContext.request.contextPath}/portada">Portada</a>    
 
 
     <c:if test="${empty sesion.usuario}">
-        <a class="navbar-bar nav-link" href="/cinuja/perfil">Perfil</a> 
+        <a class="navbar-bar nav-link" href="${pageContext.request.contextPath}/perfil">Iniciar Sesión</a> 
 
     </c:if>
 
     <c:if test="${not empty sesion.usuario}">
-        <a class="navbar-bar nav-link" href="/cinuja/perfil">Usuario</a>    
-        <a class="navbar-bar nav-link" href="/cinuja/perfil/salir">LogOut</a>
+        <a class="navbar-bar nav-link" href="${pageContext.request.contextPath}/perfil">Usuario</a>
     </c:if>
 </nav>
