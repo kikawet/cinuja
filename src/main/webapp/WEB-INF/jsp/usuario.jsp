@@ -26,7 +26,7 @@
                 <p class="card-text ">Nick: ${fn:escapeXml(perfil.nick)} </p>
                 <p class="card-text ">Nombre: ${fn:escapeXml(perfil.nombre)} </p>
 
-                <a role="button" class="btn btn-danger" href="perfil/salir">Cerrar sesión</a>
+               
                 <a role="button" class="btn btn-success" href="perfil/cc" >Cambiar contraseña</a>
 
             </div>
