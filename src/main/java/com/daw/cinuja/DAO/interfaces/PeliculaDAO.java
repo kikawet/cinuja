@@ -31,4 +31,6 @@ public interface PeliculaDAO {
     boolean insertar(Pelicula p);
 
     boolean borrar(Pelicula p);
+
+    boolean modificar(Pelicula antiguo, Pelicula nueva);
 }

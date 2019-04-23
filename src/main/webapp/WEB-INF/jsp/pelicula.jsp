@@ -1,4 +1,5 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,9 +9,6 @@
         <%@include file="/WEB-INF/jspf/links.jspf" %>
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
         <title>JSP pelicula</title>
-
-<!-- link href="<c:url value='/estilopelicula.css'/>" -->
-
 
         <style>
 
@@ -100,9 +98,10 @@
                             <h2 class="card-title">${pelicula.titulo}</h2>
                             <p class="card-text">${not empty pelicula.descripcion ? pelicula.descripcion += ', en esta' : ''} película de ${pelicula.director.nombre}.</p>
 
+                            <div><h2 style="display: inline"><b><fmt:formatNumber type="number" maxFractionDigits="1" value="${pelicula.nota}"/></b></h2><h5 style="color: gray; display: inline">/5</h5> de ${pelicula.nVotos} votos</div>
+                                        <c:if test="${not empty sesion.usuario}"> 
 
-                            <c:if test="${not empty sesion.usuario}"> 
-                                <form method="POST">
+                                <form action="${pelicula.url}" method="POST">
                                     <p class="clasificacion">
 
                                         <input id="radio1" type="radio" name="estrellas" value="5"><!--
@@ -113,11 +112,10 @@
                                         --><label for="radio3">★</label><!--
                                         --><input id="radio4" type="radio" name="estrellas" value="2"><!--
                                         --><label for="radio4">★</label><!--
-                                        --><input id="radio5" type="radio" name="estrellas" value="1"><!--
+                                        --><input id="radio5" type="radio" name="estrellas" value="1" checked><!--
                                         --><label for="radio5">★</label>
                                     </p>
                                     <button id="boton2" type="submit" class="btn btn-primary" form-control value="estrellas">Valorar</button>
-
                                 </form>
                             </c:if>
 

@@ -64,10 +64,10 @@
                 <c:if test="${param.error}">
                     <div class="invalid-feedback">Los campos son erroneos</div>
                 </c:if>
-                <label class="checkbox">
+                <!--label class="checkbox">
                     <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe">
                     Recuerdame
-                </label>
+                </label-->
                 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Entrar"/>
                 <a class="btn btn-lg btn-primary btn-block" role="button" href="portada/registro" >Registrarse</a>
                 <a class="btn btn-danger btn-block my-2 py-2 " role="button" aria-pressed="true" href="portada" ><h5>Cancelar</h5></a>

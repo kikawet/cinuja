@@ -11,23 +11,6 @@
         <%@include file="/WEB-INF/jspf/links.jspf" %>
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
         <title>JSP portada</title>
-        <style>
-
-            #boton{
-                position:relative;
-                left:25px;
-            }
-
-            #boton3 {
-
-                position:relative;
-                right: -70px;
-                top: 100px;
-                width: 120px;
-                height: 60px;
-            }
-
-        </style>
 
     </head>
     <body>
@@ -48,7 +31,7 @@
                 </nav>
 
                 <c:if test="${sesion.usuario.rol eq 'adm'}">
-                    <button type="button" class="btn btn-success" id="boton3">Añadir</button>
+                    <button type="button" class="btn btn-success ml-xl-5 my-lg-5 px-4" id="boton3">Añadir</button>
                 </c:if>
             </aside>
 
@@ -70,7 +53,7 @@
                                 </a>
                                 <div class="card-body">
                                     <a href="pelicula/${p.url}">
-                                        <h5 class="card-title"><i>${p.titulo} </i></h5><%-- Calendar.YEAR = 1 --%>
+                                        <h6 class="card-title"><i>${p.titulo} </i></h6><%-- Calendar.YEAR = 1 --%>
                                     </a>
                                     <p class="card-text">
                                     <ul class="list-group list-group-flush">

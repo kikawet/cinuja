@@ -13,6 +13,7 @@ import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Sesion;
+import com.daw.cinuja.DAO.models.Usuario;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -160,6 +162,14 @@ public class UsuarioController {
     @GetMapping("/cc")
     public String visuzalizaCambiaContrasena() {
         return "contrasena";
+    }
+
+    @PostMapping("/cc")
+    public String cambiaContrasena(@RequestParam(value = "contrase", required = true) String contra) {
+        Usuario u = sesion.getUsuario();
+        u.setContrasena(contra);
+        usuarios.modificar(sesion.getUsuario(), u);
+        return "redirect:salir";
     }
 
     @PostMapping("/borrar/comentario")

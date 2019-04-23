@@ -49,10 +49,11 @@ public class Utils {
         p.setFecha(rs.getDate(offset + 3));
         p.setFoto(rs.getString(offset + 4));
         p.setUrl(rs.getString(offset + 5));
-//        p.setNota(rs.getFloat(offset + 6));
-        p.setGenero(rs.getInt(offset + 7));
-        p.setDescripcion(rs.getString(offset + 8));
-        p.setRestriccionEdad(rs.getBoolean(offset + 9));
+        p.setSumaVotos(rs.getLong(offset + 6));
+        p.setnVotos(rs.getLong(offset + 7));
+        p.setGenero(rs.getInt(offset + 8));
+        p.setDescripcion(rs.getString(offset + 9));
+        p.setRestriccionEdad(rs.getBoolean(offset + 10));
         p.setDirector(d);
 
         return p;

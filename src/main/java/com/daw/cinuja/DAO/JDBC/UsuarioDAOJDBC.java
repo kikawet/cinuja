@@ -56,7 +56,7 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
                 ResultSet rs = st.executeQuery(query);) {
 
             if (rs.next()) {
-                Director d = Utils.directorMapper(rs, 18);
+                Director d = Utils.directorMapper(rs, 19);
                 usuario = Utils.usuarioMapper(rs, 0, Utils.peliculaMapper(rs, 8, d), d);
             }
 
@@ -69,7 +69,7 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
 
     @Override
     public boolean insertar(Usuario u) {
-        String query = "INSERT INTO usuario VALUES (?,?,?,?,?,?,(SELECT id FROM pelicula AS p WHERE p.nombre = ?),(SELECT id FROM director AS d WHERE d.nombre = ?))";
+        String query = "INSERT INTO usuario VALUES (?,?,?,?,?,?,(SELECT id FROM pelicula AS p WHERE p.url = ?),(SELECT id FROM director AS d WHERE d.nombre = ?))";
 
         boolean res = false;
         try (
@@ -81,7 +81,7 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
             st.setString(4, u.getFoto());
             st.setString(5, u.getContrasena());
             st.setString(6, u.getRol());
-            st.setString(7, u.getpFavorita().getTitulo());
+            st.setString(7, u.getpFavorita().getUrl());
             st.setString(8, u.getdFavorito().getNombre());
 
             res = st.execute();
@@ -113,14 +113,18 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
 
     @Override
     public boolean modificar(Usuario antiguo, Usuario nuevo) {
-        String query = "UPDATE USUARIO SET CONTRASENA = ? WHERE NICK = ?";
+        String query = "UPDATE USUARIO SET NICK = ?, NOMBRE = ?, APELLIDOS = ?, FOTO = ?, CONTRASENA = ? WHERE NICK = ?";
 
         boolean res = false;
         try (
                 Connection conn = ds.getConnection();
                 PreparedStatement st = conn.prepareStatement(query);) {
-            st.setString(1, nuevo.getContrasena());
-            st.setString(2, antiguo.getNick());
+            st.setString(1, nuevo.getNick());
+            st.setString(2, nuevo.getNombre());
+            st.setString(3, nuevo.getApellidos());
+            st.setString(4, nuevo.getFoto());
+            st.setString(5, nuevo.getContrasena());
+            st.setString(6, antiguo.getNick());
 
             res = st.execute();
 

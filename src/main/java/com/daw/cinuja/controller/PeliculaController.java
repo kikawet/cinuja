@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -131,10 +132,10 @@ public class PeliculaController {
      * @throws IOException if an I/O error occurs
      */
     @ModelAttribute
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response, ModelMap model)
             throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
+//        request.setCharacterEncoding("UTF-8");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -211,8 +212,16 @@ public class PeliculaController {
         return "pelicula";
     }
 
-//    public String estrellas()
-    @PostMapping("/{url_peli}")
+    @PostMapping(value = "/{url_peli}", params = "estrellas")
+    public String estrellas(@PathVariable String url_peli, @RequestParam(value = "estrellas", defaultValue = "0", required = true) int estrellas) {
+        Pelicula p = peliculas.getPelicula(url_peli);
+        p.setSumaVotos(p.getSumaVotos() + estrellas);
+        p.setnVotos(p.getnVotos() + 1);
+        peliculas.modificar(p, p);
+        return "redirect:/pelicula/" + url_peli;
+    }
+
+    @PostMapping(value = "/{url_peli}", params = "titulo")
     public String comentario(ModelMap model, @PathVariable String url_peli, @ModelAttribute("Comentario") Comentario c) {
         String url = "redirect:pelicula/" + url_peli;
 

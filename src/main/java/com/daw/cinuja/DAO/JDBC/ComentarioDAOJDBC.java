@@ -76,7 +76,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
         String query = "INSERT INTO COMENTARIO (PELICULA, USUARIO, FECHA, TITULO, TEXTO) VALUES (("
                 + "SELECT id "
                 + "FROM pelicula as p "
-                + "WHERE p.nombre = '" + c.getPelicula().getTitulo() + "'"
+                + "WHERE p.url = '" + c.getPelicula().getUrl() + "'"
                 + "),?,?,?,?)";
 
         boolean res = false;
@@ -98,14 +98,14 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
 
     @Override
     public boolean borrar(Comentario c) {
-        String query = "DELETE FROM comentario AS c WHERE c.usuario = ? AND c.pelicula = (SELECT id FROM pelicula WHERE pelicula.nombre = ?)";
+        String query = "DELETE FROM comentario AS c WHERE c.usuario = ? AND c.pelicula = (SELECT id FROM pelicula WHERE pelicula.url = ?)";
 
         boolean res = false;
         try (
                 Connection conn = ds.getConnection();
                 PreparedStatement st = conn.prepareStatement(query);) {
             st.setString(1, c.getUsuario().getNick());
-            st.setString(2, c.getPelicula().getTitulo());
+            st.setString(2, c.getPelicula().getUrl());
 
             res = st.execute();
 

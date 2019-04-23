@@ -7,7 +7,9 @@ package com.daw.cinuja.controller;
 
 import com.daw.cinuja.DAO.JDBC.*;
 import com.daw.cinuja.DAO.interfaces.*;
+import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Sesion;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -55,9 +57,10 @@ public class CinujaController {
     }
 
     @GetMapping(value = "", params = "genero")
-    public String visualizaGenero(@RequestParam(value = "genero") int genero, ModelMap model) {
+    public String visualizaGenero(@RequestParam(value = "genero", required = true) int genero, ModelMap model) {
 
-        model.addAttribute("peliculas", peliculas.getPeliculas(Utils.indiceGenero(genero)));
+        List<Pelicula> p = peliculas.getPeliculas(Utils.indiceGenero(genero));
+        model.addAttribute("peliculas", p);
         model.addAttribute("generos", PeliculaDAO.generos);
 
         return "portada";

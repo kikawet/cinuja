@@ -63,4 +63,9 @@ public class PeliculaDAOList implements PeliculaDAO {
         return pelis;
     }
 
+    @Override
+    public boolean modificar(Pelicula antiguo, Pelicula nueva) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

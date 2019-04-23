@@ -33,9 +33,13 @@ public class Pelicula {
     private Date fecha;//estreno
     @Pattern(regexp = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "La foto debe ser de una url")
     private String foto;//url 
-    @DecimalMin(value = "0", inclusive = true, message = "La nota debe ser mayor de {value}")
-    @DecimalMax(value = "5", inclusive = true, message = "La nota debe ser menor de {value}")
-    private float nota;
+//    @DecimalMin(value = "0", inclusive = true, message = "La nota debe ser mayor de {value}")
+//    @DecimalMax(value = "5", inclusive = true, message = "La nota debe ser menor de {value}")
+//    private float nota;
+    @Min(value = 0, message = "La suma de los votos no puede ser menor que 0")
+    private long sumaVotos;
+    @Min(value = 1, message = "El numero de votos no puede ser menor que {value}")
+    private long nVotos;
     //@Size(min = 0/*,max = PeliculaDAO.generos.size()*/, message = "El genero debe de ser un indice de la lista de generos")
     @Min(value = 0, message = "El genero debe de ser un indice de la lista de generos")
     //@Max(value = PeliculaDAO.generos.size())
@@ -93,11 +97,7 @@ public class Pelicula {
     }
 
     public float getNota() {
-        return nota;
-    }
-
-    public void setNota(float nota) {
-        this.nota = nota;
+        return ((float) this.getSumaVotos()) / ((float) this.getnVotos());
     }
 
     public int getGenero() {
@@ -146,6 +146,22 @@ public class Pelicula {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public long getSumaVotos() {
+        return sumaVotos;
+    }
+
+    public void setSumaVotos(long sumaVotos) {
+        this.sumaVotos = sumaVotos;
+    }
+
+    public long getnVotos() {
+        return nVotos;
+    }
+
+    public void setnVotos(long nVotos) {
+        this.nVotos = nVotos;
     }
 
 }

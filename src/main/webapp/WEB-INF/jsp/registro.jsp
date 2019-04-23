@@ -16,23 +16,23 @@
 
     <body class="">
         <%@include file="/WEB-INF/jspf/cabecera.jspf" %>
-        <div style="height: 700px; ">
+        <div class="my-xl-5 mx-lg-5">
             <div class="bg-white m-auto mh-700" style="height: 700px">
                 <form >
                     <div class="form-row">
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-5 mb-3">
                             <label for="validationServer01">Nombre</label>
                             <input type="text" class="form-control " id="validationServer01" placeholder="Nombre" value="${us.nombre}" required>
                             <div class=""></div>
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-5 mb-3">
                             <label for="validationServer02">Apellidos</label>
                             <input type="text" class="form-control " id="validationServer02" placeholder="Apellidos" value="${us.apellido}" required>
                             <div class=""></div>                            
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="validationServerUsername">Nick</label>      
                             <input type="text" class="form-control input-group " id="validationServerUsername" placeholder="Nick" aria-describedby="inputGroupPrepend3" required>
                             <!--                            <div class="">
@@ -43,13 +43,13 @@
                     </div>
 
                     <div class="form-row ">
-                        <div class="col-md-3 mb-3 ml-auto">
+                        <div class="col-md-4 mb-3 ml-auto">
                             <label for="validationServer04">Contraseña</label>
                             <input type="text" class="form-control " id="validationServer04" placeholder="Contraseña" required>
                             <div class=""></div>
                         </div>
 
-                        <div class="col-md-3 mb-3 mr-auto">
+                        <div class="col-md-4 mb-3 mr-auto">
                             <label for="validationServer05">Repetir Contraseña</label>
                             <input type="text" class="form-control " id="validationServer05" placeholder="Contraseña" required>
                             <div class=""></div>
