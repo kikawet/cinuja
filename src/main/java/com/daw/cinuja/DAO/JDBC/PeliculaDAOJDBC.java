@@ -92,21 +92,25 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
 
     @Override
     public boolean borrar(Pelicula p) {
-        String query = "DELETE FROM pelicula AS p WHERE p.nombre = ?";
-
-        boolean res = false;
+        //Derby no tiene borrar en cascada :/        
+        String query1 = "DELETE from comentario as c where c.pelicula = (select id from pelicula as p where p.url = ?)";
+        String query2 = "DELETE FROM pelicula AS p WHERE p.url = ?";
+        boolean res1 = false, res2 = false;
         try (
                 Connection conn = ds.getConnection();
-                PreparedStatement st = conn.prepareStatement(query);) {
-            st.setString(1, p.getTitulo());
+                PreparedStatement borrarComentarios = conn.prepareStatement(query1);
+                PreparedStatement borrarPelicula = conn.prepareStatement(query2);) {
+            borrarComentarios.setString(1, p.getUrl());
+            borrarPelicula.setString(1, p.getUrl());
 
-            res = st.execute();
+            res1 = borrarComentarios.execute();
+            res2 = borrarPelicula.execute();
 
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, null, ex);
         }
 
-        return res;
+        return res1 && res2;
     }
 
     @Override

@@ -10,6 +10,7 @@ import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Director;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Usuario;
+import com.daw.cinuja.DTO.ComentarioDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -33,7 +34,7 @@ public class Utils {
 
     public static Comentario comentarioMapper(ResultSet rs, Pelicula p, Usuario u) throws SQLException {
         Comentario cm = new Comentario();
-        cm.setFecha(rs.getDate("fecha"));
+        cm.setFecha(rs.getTimestamp("fecha"));
         cm.setTitulo(rs.getString("titulo"));
         cm.setTexto(rs.getString("texto"));
         cm.setValoracion(rs.getFloat("valoracion"));
@@ -85,5 +86,4 @@ public class Utils {
 
         return u;
     }
-
 }

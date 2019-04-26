@@ -9,6 +9,7 @@ import com.daw.cinuja.DAO.interfaces.ComentarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Usuario;
+import com.daw.cinuja.DTO.ComentarioDTO;
 import java.util.List;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;

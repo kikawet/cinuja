@@ -172,9 +172,11 @@ public class UsuarioController {
         return "redirect:salir";
     }
 
-    @PostMapping("/borrar/comentario")
-    public String borrarComentario(@ModelAttribute("comentario") Comentario c) {
-        return "redirect:perfil";
+    @GetMapping("/borrar/comentario")
+    public String borrarComentario(@RequestParam(value = "id", defaultValue = "0") Integer id, ModelMap model) {
+        comentarios.borrar(comentarios.getComentarios(sesion.getUsuario()).get(id));
+//        model.clear();
+        return "redirect:/perfil";
     }
 
     /**

@@ -1,6 +1,7 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -159,11 +160,11 @@
             </c:forEach>
         </ul>
 
-        <c:forEach items="${errores}" var="error">
+        <!--c:forEach items="${errores}" var="error">
             <div class="alert alert-danger">
-                ${error.message}
-            </div>
-        </c:forEach>
+        ${error.message}
+    </div>
+        <!--/c:forEach-->
 
         <aside class="my-md-4 container input-group justify-content-center">                
 
@@ -172,17 +173,21 @@
             </c:if>
 
             <c:if test="${not empty sesion.usuario}">    
-                <form  method="POST">
+
+                <form:errors path="comentarioDTO.*" cssClass="alert alert-danger" element="div"/>
+
+                <form:form  method="POST" modelAttribute="comentarioDTO" >
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon3">Titulo</span>
                         </div>
-                        <input type="text" class="form-control" id="basic-url" name="titulo" value="${titulo}">
-
+                        <!--<input type="text" class="form-control" id="basic-url" name="titulo" value="${titulo}">-->
+                        <form:input path="titulo" cssClass="form-control" id="basic-url"/>
                     </div>
-                    <textarea class="input-group-text form-control text-left" name="comentario" rows="10" cols="120" placeholder="Escribe aquí tus comentario" >${texto}</textarea>
+                    <!--<textarea class="input-group-text form-control text-left" name="comentario" rows="10" cols="120" placeholder="Escribe aquí tus comentario" >${texto}</textarea>-->
+                    <form:textarea path="texto" cssClass="input-group-text form-control text-left" rows="10" cols="120" placeholder="Escribe aquí tu comentario"/>
                     <input class="btn btn-primary form-control" type="submit" value="Comentar">
-                </form>
+                </form:form>
 
             </c:if>
         </aside>

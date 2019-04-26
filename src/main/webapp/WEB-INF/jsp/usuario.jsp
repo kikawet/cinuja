@@ -52,6 +52,7 @@
                                     <th>Comentario</th>                               
 
                                 </tr>
+                                <c:set var="pos" value="0"/>
                                 <c:forEach items="${comentarios}" var="comentario">
                                     <tr>
                                         <td>${comentario.valoracion}</td>
@@ -76,13 +77,14 @@
                                             <div class="media-body">
                                                 <h3 class="mt-0 mb-1"> ${fn:escapeXml(comentario.titulo)} </h3>
                                                 <p>${fn:escapeXml(comentario.texto)}</p>
-                                                <form method="post" action="perfil/borrar/comentario?com=${comentario.texto.hashCode()}&pel=${comentario.pelicula.titulo.hashCode()}"> 
-                                                    <input type="submit" class="btn btn-success" value="Editar"/>
-                                                    <input type="submit" class="btn btn-danger" value="Eliminar"/>
-                                                </form>
+                                                <!--<form method="post" action="perfil/borrar/comentario?id=${pos}">--> 
+                                                <input type="submit" class="btn btn-success" value="Editar"/>
+                                                <a role="button" class="btn btn-danger" href="perfil/borrar/comentario?id=${pos}">Eliminar</a>
+                                                <!--</form>-->
                                             </div>
                                         </td>
                                     </tr>
+                                    <c:set var="pos" value="${pos + 1}"/>
                                 </c:forEach>
                             </table>
                         </c:if>
