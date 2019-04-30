@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -49,7 +50,7 @@
                         <nav class="col-md my-md-3">
                             <div class="card" style="width: 15rem;">
                                 <a href="pelicula/${p.url}">
-                                    <img href= pelicula/${p.url}" src="${p.foto}"  class="card-img-top" alt="..."> 
+                                    <img href= pelicula/${p.url}" src="${p.foto}" class="card-img-top" style="max-height: 800px; min-height: 400px;" alt="..."> 
                                 </a>
                                 <div class="card-body">
                                     <a href="pelicula/${p.url}">
@@ -60,6 +61,7 @@
                                         <li class="list-group-item">${p.fecha.year + 1900}</li>
                                         <li class="list-group-item">${p.director.nombre}</li>
                                         <li class="list-group-item">${generos[p.genero]}</li>
+                                        <li class="list-group-item"><b><fmt:formatNumber type="number" maxFractionDigits="1" value="${p.nota}"/></b>/5</li>
                                     </ul>
 
                                 </div>
