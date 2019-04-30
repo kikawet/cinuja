@@ -5,10 +5,8 @@
  */
 package com.daw.cinuja.DAO.models;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
-import javax.enterprise.context.ApplicationScoped;
 import javax.validation.Valid;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;

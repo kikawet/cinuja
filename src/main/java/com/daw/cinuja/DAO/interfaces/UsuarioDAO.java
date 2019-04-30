@@ -6,7 +6,6 @@
 package com.daw.cinuja.DAO.interfaces;
 
 import com.daw.cinuja.DAO.models.Usuario;
-import java.util.List;
 
 /**
  *
@@ -17,6 +16,8 @@ public interface UsuarioDAO {
     Usuario getUsuario(String nick);
 
     boolean insertar(Usuario u);
+
+    boolean modificar(Usuario antiguo, Usuario nuevo);
 
     boolean borrar(Usuario u);
 }

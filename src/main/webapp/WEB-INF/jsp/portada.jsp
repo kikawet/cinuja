@@ -5,29 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
         <%@include file="/WEB-INF/jspf/links.jspf" %>
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
         <title>JSP portada</title>
-        <style>
-
-            #boton{
-                position:relative;
-                left:25px;
-            }
-
-            #boton3 {
-
-                position:relative;
-                right: -70px;
-                top: 100px;
-                width: 120px;
-                height: 60px;
-            }
-
-        </style>
 
     </head>
     <body>
@@ -48,34 +32,7 @@
                 </nav>
 
                 <c:if test="${sesion.usuario.rol eq 'adm'}">
-
-                    <button id="boton3" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
-                        ⚙
-                    </button>
-
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Editar portada</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <button type="button" class="btn btn-primary">Editar</button>
-                                    <button type="button" class="btn btn-success">Añadir</button>
-                                    <button type="button" class="btn btn-danger">Borrar</button>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <button type="button" class="btn btn-success ml-xl-5 my-lg-5 px-4" id="boton3">Añadir</button>
                 </c:if>
             </aside>
 
@@ -93,17 +50,18 @@
                         <nav class="col-md my-md-3">
                             <div class="card" style="width: 15rem;">
                                 <a href="pelicula/${p.url}">
-                                    <img href= pelicula/${p.url}" src="${p.foto}"  class="card-img-top" alt="..."  > 
+                                    <img href= pelicula/${p.url}" src="${p.foto}" class="card-img-top" style="max-height: 800px; min-height: 400px;" alt="..."> 
                                 </a>
                                 <div class="card-body">
                                     <a href="pelicula/${p.url}">
-                                        <h5 class="card-title"><i>${p.titulo} </i></h5><%-- Calendar.YEAR = 1 --%>
+                                        <h6 class="card-title"><i>${p.titulo} </i></h6><%-- Calendar.YEAR = 1 --%>
                                     </a>
                                     <p class="card-text">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">${p.fecha.year + 1900}</li>
                                         <li class="list-group-item">${p.director.nombre}</li>
                                         <li class="list-group-item">${generos[p.genero]}</li>
+                                        <li class="list-group-item"><b><fmt:formatNumber type="number" maxFractionDigits="1" value="${p.nota}"/></b>/5</li>
                                     </ul>
 
                                 </div>

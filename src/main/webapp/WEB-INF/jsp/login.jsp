@@ -8,23 +8,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!--<a href="../../../../nb-configuration.xml"></a>-->
         <%@include file="/WEB-INF/jspf/links.jspf" %>
         <meta http-equiv="Content-Type" content="text/html" charset=UTF-8">
         <title>JSP pelicula</title>
-
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--        <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">-->
         <title>HTML and CSS Form with Bootstrap 4</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <!--        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
         <style type="text/css">
-            body {
-                background: #eee;
-            }
             .wrapper {
                 margin: 80px;
             }
@@ -45,30 +39,38 @@
             .form-signin .form-control {
                 padding: 10px;
             }
+
+            #cuadro{
+
+                position:relative;
+                top: 60px;
+            }
         </style>
     </head>
 
-    <body>
-        <header class="cabecera">
-            <%@include file="/WEB-INF/jspf/cabecera.jspf" %>
-        </header>
+    <body background="https://s2.best-wallpaper.net/wallpaper/1920x1200/1711/Warm-light-circles-glare_1920x1200.jpg">
+        <!--        <header class="cabecera">
+        <%--<%@include file="/WEB-INF/jspf/cabecera.jspf" %>--%>
+    </header>-->
 
-        <div class="wrapper">
-            <c:if test="${error}">
-                <p class="invalid-feedback">Los campos son erroneos</p>
-            </c:if>
-            <form class="form-signin" action="j_security_check" method="post">
-                <h2 class="form-signin-heading text-center">CinUJA</h2>
-                <input type="text" class="form-control" name="j_username" placeholder="Email Address" required="" autofocus="" />
-                <input type="password" class="form-control is-invalid" name="j_password" placeholder="Password" required="" />
-                <div class="invalid-feedback">La contraseña no puede estar vacia</div>
-                <label class="checkbox">
+
+
+        <div id="cuadro" class="wrapper">
+            <form class="form-signin" action="j_security_check" method="post">               
+
+                <h1 class="form-signin-heading text-center"><b>🍿 CinUJA 🍿</b></h1>
+                <input type="text" class="form-control" name="j_username" placeholder="Nick"  autofocus="" />
+                <input type="password" class="form-control" name="j_password" placeholder="Contraseña"  />
+                <c:if test="${param.error}">
+                    <div class="invalid-feedback">Los campos son erroneos</div>
+                </c:if>
+                <!--label class="checkbox">
                     <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe">
                     Recuerdame
-                </label>
+                </label-->
                 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Entrar"/>
-                <button class="btn btn-lg btn-primary btn-block" href="inicio.jsp" >Registrarse</button>
-
+                <a class="btn btn-lg btn-primary btn-block" role="button" href="portada/registro" >Registrarse</a>
+                <a class="btn btn-danger btn-block my-2 py-2 " role="button" aria-pressed="true" href="portada" ><h5>Cancelar</h5></a>
             </form>
 
         </div>

@@ -13,33 +13,6 @@ DELETE FROM USUARIO;
 DELETE FROM PELICULA;
 DELETE FROM DIRECTOR;
 
--- INSERT INTO DIRECTOR (nombre,f_nac) VALUES ('super director',CURRENT_DATE);
--- 
--- INSERT INTO PELICULA (nombre,fecha,foto,url,VALORACION,genero,DESCRIPCION,RESTRICCION,director) VALUES ('PEL68CLI4','2.4.2019','foto','url',0,6,'desc',false,1);
--- INSERT INTO USUARIO (nick,rol) VALUES ('tomass','nn');
--- 
--- INSERT INTO COMENTARIO (PELICULA, USUARIO, FECHA, TITULO, TEXTO) VALUES ((
--- SELECT id
--- FROM pelicula
--- WHERE pelicula.nombre = 'PELICULITA'
--- ),'tomas',CURRENT_DATE,'yo k se','jk');
--- 
--- Select c.TITULO from comentario as c , pelicula as p where c.pelicula = p.id AND p.url = 'url';
--- 
--- SELECT *
--- FROM PELICULA as p,
--- director as d
--- where p.DIRECTOR = d.ID
--- ;
--- 
--- SELECT * 
--- FROM USUARIO AS u
--- LEFT JOIN PELICULA AS p ON p.ID = u.PELICULA_FAV
--- LEFT JOIN DIRECTOR AS d ON d.ID = u.DIRECTOR_FAV
--- WHERE  u.NICK = 'tomas' ;
--- 
--- INSERT INTO USUARIO VALUES ('nick','a','a','a','a','non',2,1);
-
 INSERT INTO USUARIO (NICK,CONTRASENA,NOMBRE,ROL,FOTO) VALUES ('pescues','flo','flo','adm','https://ct.yimg.com/cy/4571/37462755413_c2dae6_128sq.jpg');
 INSERT INTO USUARIO (NICK,CONTRASENA,NOMBRE,ROL,FOTO) VALUES ('gordito','donuts','José Tomas','non','https://ct.yimg.com/cy/1904/44016886825_e02d29_128sq.jpg');
 INSERT INTO USUARIO (NICK,CONTRASENA,NOMBRE,ROL,FOTO) VALUES ('boa','ponme_un_10_balsas','Pescues','non','https://66.media.tumblr.com/avatar_ea54a1bd0195_128.pnj');
@@ -50,17 +23,27 @@ INSERT INTO DIRECTOR (NOMBRE,F_NAC) VALUES ('Quentin Tarantino','15.02.2017');
 INSERT INTO DIRECTOR (NOMBRE,F_NAC) VALUES ('Steven Spielberg','14.02.2017');
 INSERT INTO DIRECTOR (NOMBRE,F_NAC) VALUES ('Pixar','06.10.2000');
 INSERT INTO DIRECTOR (NOMBRE,F_NAC) VALUES ('Bryan Singer','16.10.2000');
+INSERT INTO DIRECTOR (NOMBRE,F_NAC) VALUES ('Christopher Nollan','17.10.2001');
+INSERT INTO DIRECTOR (NOMBRE,F_NAC) VALUES ('Steve McQueen','12.2.1997');
+INSERT INTO DIRECTOR (NOMBRE,F_NAC) VALUES ('Taika Waititi','7.8.2017');
 
-INSERT INTO PELICULA (NOMBRE,FECHA,URL,DESCRIPCION,GENERO,FOTO,DIRECTOR) VALUES ('Uno de los nuestros','01.01.1990','uno-de-los-nuestros','Un hombre de Brooklyn busca la fama y la fortuna en el crimen organizado',10,'http://es.web.img2.acsta.net/medias/nmedia/18/67/70/14/20077949.jpg',
+
+INSERT INTO PELICULA (NOMBRE,FECHA,URL,DESCRIPCION,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Uno de los nuestros','01.01.1990','uno-de-los-nuestros','Un hombre de Brooklyn busca la fama y la fortuna en el crimen organizado',4.7,1,10,'http://es.web.img2.acsta.net/medias/nmedia/18/67/70/14/20077949.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Martin Scorsese'));
-INSERT INTO PELICULA (NOMBRE,FECHA,URL,GENERO,FOTO,DIRECTOR) VALUES ('Pulp Fiction','01.01.1997','pulp-fiction',10,'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2016/09/pulp-fiction_0.jpg',
+INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Pulp Fiction','01.01.1997','pulp-fiction',46,10,10,'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2016/09/pulp-fiction_0.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Quentin Tarantino'));
-INSERT INTO PELICULA (NOMBRE,FECHA,URL,GENERO,FOTO,DIRECTOR) VALUES ('Salvar al soldado Ryan','01.01.1998','salvar-al-soldado-bryan',2,'https://twistedsifter.files.wordpress.com/2015/10/53-saving-private-ryan.jpg',
+INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Salvar al soldado Ryan','01.01.1998','salvar-al-soldado-bryan',0,1,2,'https://twistedsifter.files.wordpress.com/2015/10/53-saving-private-ryan.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Steven Spielberg'));
-INSERT INTO PELICULA (NOMBRE,FECHA,URL,GENERO,FOTO,DIRECTOR) VALUES ('Ratatouille','01.01.2007','ratatouille',6,'https://educayaprende.com/wp-content/uploads/2014/05/ratatouille-cover-caratula-dvd-disney-pixar.jpg',
+INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Ratatouille','01.01.2007','ratatouille',43,10,6,'https://educayaprende.com/wp-content/uploads/2014/05/ratatouille-cover-caratula-dvd-disney-pixar.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Pixar'));
-INSERT INTO PELICULA (NOMBRE,FECHA,URL,GENERO,FOTO,DIRECTOR) VALUES ('Bohemian Rhapsody','01.01.2018','bohemian-rhapsody',11,'https://www.heraldo.es/ocio/sites/default/files/bohemian.jpg',
+INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Bohemian Rhapsody','01.01.2018','bohemian-rhapsody',43,10,11,'https://www.heraldo.es/ocio/sites/default/files/bohemian.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Bryan Singer'));
+INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Batman: The Dark Knight','17.10.2001','batman',45,10,0,'http://4.bp.blogspot.com/-nKSHSdwKeKc/UA2G4zIPHfI/AAAAAAAAOQI/8C-iUweMezE/s1600/elcaballerooscuroleyendarenace.jpg',
+                                                                                (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Christopher Nollan'));
+INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('12 años de esclavitud','12.2.1997','12-anos',44,10,8,'https://images-na.ssl-images-amazon.com/images/I/61QFAKXbb5L._SY679_.jpg',
+                                                                                (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Steve McQueen'));
+INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Thor: Ragnarok','7.8.2017','thor',42,10,0,'http://www.cineycine.com/archivos/2017/10/thor-ragnarok-poster.jpg',
+                                                                                (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Taika Waititi'));
 
 INSERT INTO COMENTARIO (TITULO,TEXTO,FECHA,PELICULA,USUARIO) VALUES ('Maravillosa','La mejor pelicula de mi vida.',CURRENT_TIMESTAMP,
                                                                                 (SELECT ID FROM PELICULA AS p WHERE p.URL = 'uno-de-los-nuestros'),'gordito');
@@ -68,3 +51,4 @@ INSERT INTO COMENTARIO (TITULO,TEXTO,FECHA,PELICULA,USUARIO) VALUES ('No está m
                                                                                 (SELECT ID FROM PELICULA AS p WHERE p.URL = 'uno-de-los-nuestros'),'boa');
 INSERT INTO COMENTARIO (TITULO,TEXTO,FECHA,PELICULA,USUARIO) VALUES ('Aburrida','Yo me aburrí. Preferiría morirme en este momento.',CURRENT_TIMESTAMP,
                                                                                 (SELECT ID FROM PELICULA AS p WHERE p.URL = 'uno-de-los-nuestros'),'web');
+

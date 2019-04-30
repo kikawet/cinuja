@@ -8,21 +8,25 @@ package com.daw.cinuja.DAO.list;
 import com.daw.cinuja.DAO.interfaces.ComentarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
-import com.daw.cinuja.DAO.qualifiers.DAOList;
+import com.daw.cinuja.DAO.models.Usuario;
+import com.daw.cinuja.DTO.ComentarioDTO;
 import java.util.List;
-import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author lopez
  */
-@ApplicationScoped
-@DAOList
+//@ApplicationScoped
+//@DAOList
+@Repository(ComentarioDAOList.qualifier)
 public class ComentarioDAOList implements ComentarioDAO {
 
     private MultivaluedMap<Pelicula, Comentario> comentarios;
+
+    final static public String qualifier = "ComentarioDAOList";
 
     public ComentarioDAOList() {
         comentarios = new MultivaluedHashMap<>();
@@ -45,6 +49,11 @@ public class ComentarioDAOList implements ComentarioDAO {
     @Override
     public boolean borrar(Comentario c) {
         return comentarios.remove(c.getPelicula(), c);
+    }
+
+    @Override
+    public List<Comentario> getComentarios(Usuario u) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

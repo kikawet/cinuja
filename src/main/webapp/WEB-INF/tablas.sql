@@ -25,7 +25,8 @@ CREATE TABLE Pelicula(
     fecha DATE NOT NULL UNIQUE,
     foto VARCHAR(300),-- una url no se
     url VARCHAR(30),
-    valoracion REAL,
+    sumaVotos BIGINT,
+    nVotos BIGINT,
     genero INTEGER,
     descripcion LONG VARCHAR,
     restriccion BOOLEAN,
@@ -65,9 +66,3 @@ CREATE INDEX pel_url ON Pelicula(url);
 -- Se crean con las primary key
 --CREATE INDEX usr_nick ON Usuario(nick);
 --CREATE INDEX com_pel ON Comentario(pelicula);
-
-SELECT * 
-                FROM USUARIO AS u 
-                LEFT JOIN PELICULA AS p ON p.ID = u.PELICULA_FAV 
-                LEFT JOIN DIRECTOR AS d ON d.ID = u.DIRECTOR_FAV 
-                WHERE u.nick = 'pescues';

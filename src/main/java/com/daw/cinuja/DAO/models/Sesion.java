@@ -6,16 +6,16 @@
 package com.daw.cinuja.DAO.models;
 
 import java.io.Serializable;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
 /**
  *
  * @author lopez
  */
-@Named(value = "sesion")
-@ApplicationScoped
+//@Named(value = "sesion")
+@Component
+@SessionScope
 public class Sesion implements Serializable {
 
     //@Valid

@@ -24,7 +24,13 @@ public interface PeliculaDAO {
 
     List<Pelicula> getPeliculas();
 
+    List<Pelicula> getPeliculas(int genero);
+
+    Pelicula getPelicula(String url);
+
     boolean insertar(Pelicula p);
 
     boolean borrar(Pelicula p);
+
+    boolean modificar(Pelicula antiguo, Pelicula nueva);
 }

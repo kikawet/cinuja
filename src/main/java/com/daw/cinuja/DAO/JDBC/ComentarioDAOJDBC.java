@@ -6,43 +6,49 @@
 package com.daw.cinuja.DAO.JDBC;
 
 import com.daw.cinuja.DAO.interfaces.ComentarioDAO;
+import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Usuario;
-import com.daw.cinuja.DAO.qualifiers.DAOJDBC;
+import com.daw.cinuja.DTO.ComentarioDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.Resource;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author lopez
  */
-@RequestScoped
-@DAOJDBC
+//@RequestScoped
+//@DAOJDBC
+@Repository(ComentarioDAOJDBC.qualifier)
 public class ComentarioDAOJDBC implements ComentarioDAO {
 
+    final static public String qualifier = "ComentarioDAOJDBC";
     private Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
 
-    @Resource(lookup = "java:global/jdbc/Cinuja")
+//    @Resource(lookup = "java:global/jdbc/Cinuja")
+    @Autowired(required = false)
     private DataSource ds;
 
-    @Inject
-    @DAOJDBC
+    @Autowired
+    @Qualifier(UsuarioDAOJDBC.qualifier)
     private UsuarioDAO usuarios;
+
+    @Autowired
+    @Qualifier(PeliculaDAOJDBC.qualifier)
+    private PeliculaDAO peliculas;
 
     public ComentarioDAOJDBC() {
     }
@@ -57,7 +63,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
                 ResultSet rs = st.executeQuery(query);) {
 
             while (rs.next()) {
-                comentarios.add(Mapper.comentarioMapper(rs, p, usuarios.getUsuario(rs.getString("usuario"))));
+                comentarios.add(Utils.comentarioMapper(rs, p, usuarios.getUsuario(rs.getString("usuario"))));
             }
 
         } catch (SQLException ex) {
@@ -71,7 +77,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
         String query = "INSERT INTO COMENTARIO (PELICULA, USUARIO, FECHA, TITULO, TEXTO) VALUES (("
                 + "SELECT id "
                 + "FROM pelicula as p "
-                + "WHERE p.nombre = '" + c.getPelicula().getTitulo() + "'"
+                + "WHERE p.url = '" + c.getPelicula().getUrl() + "'"
                 + "),?,?,?,?)";
 
         boolean res = false;
@@ -93,14 +99,14 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
 
     @Override
     public boolean borrar(Comentario c) {
-        String query = "DELETE FROM comentario AS c WHERE c.usuario = ? AND c.pelicula = (SELECT id FROM pelicula WHERE pelciula.nombre = ?)";
+        String query = "DELETE FROM comentario AS c WHERE c.usuario = ? AND c.pelicula = (SELECT id FROM pelicula WHERE pelicula.url = ?)";
 
         boolean res = false;
         try (
                 Connection conn = ds.getConnection();
                 PreparedStatement st = conn.prepareStatement(query);) {
             st.setString(1, c.getUsuario().getNick());
-            st.setString(2, c.getPelicula().getTitulo());
+            st.setString(2, c.getPelicula().getUrl());
 
             res = st.execute();
 
@@ -109,6 +115,34 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
         }
 
         return res;
+    }
+
+    @Override
+    public List<Comentario> getComentarios(Usuario u) {
+        String query = "Select * "
+                + "from comentario as c , "
+                + "usuario as u , "
+                + "pelicula as p "
+                + "where c.pelicula = p.id AND c.usuario = u.nick AND u.nick = '" + u.getNick() + "'";
+
+        List<Comentario> comentarios = new ArrayList<>();
+
+        try (
+                Connection conn = ds.getConnection();
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(query);) {
+
+            Pelicula p;
+
+            while (rs.next()) {
+                p = peliculas.getPelicula(rs.getString(20));
+                comentarios.add(Utils.comentarioMapper(rs, p, usuarios.getUsuario(rs.getString("usuario"))));
+            }
+
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
+        return comentarios;
     }
 
 }

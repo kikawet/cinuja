@@ -6,24 +6,23 @@
 package com.daw.cinuja.DAO.list;
 
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
-import com.daw.cinuja.DAO.models.Director;
 import com.daw.cinuja.DAO.models.Pelicula;
-import com.daw.cinuja.DAO.qualifiers.DAOList;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import javax.enterprise.context.ApplicationScoped;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author lopez
  */
-@ApplicationScoped
-@DAOList
+//@ApplicationScoped
+//@DAOList
+@Repository(PeliculaDAOList.qualifier)
 public class PeliculaDAOList implements PeliculaDAO {
 
     private List<Pelicula> peliculas;
+
+    final static public String qualifier = "PeliculaDAOList";
 
     public PeliculaDAOList() {
 
@@ -43,6 +42,30 @@ public class PeliculaDAOList implements PeliculaDAO {
     @Override
     public boolean borrar(Pelicula p) {
         return peliculas.remove(p);
+    }
+
+    @Override
+    public Pelicula getPelicula(String url) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Pelicula> getPeliculas(int genero) {
+
+        List<Pelicula> pelis = new ArrayList<>(peliculas);
+
+        for (int i = pelis.size() - 1; i >= 0; i--) {
+            if (PeliculaDAO.generos.get(pelis.get(i).getGenero()).hashCode() != genero) {
+                pelis.remove(i);
+            }
+        }
+
+        return pelis;
+    }
+
+    @Override
+    public boolean modificar(Pelicula antiguo, Pelicula nueva) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
