@@ -153,15 +153,14 @@ public class UsuarioController {
             u.setFoto("");
             usuarios.insertar(u);
             model.clear();
-        }else{
+        } else {
             List<String> errs = new ArrayList<String>();
-            for(FieldError e :  errores.getFieldErrors())
+            for (FieldError e : errores.getFieldErrors()) {
                 errs.add(e.getField());
+            }
             model.addAttribute("errors", errs);
         }
 
-        
-        
         //si hay errores no hacer redirect
         return url;
     }

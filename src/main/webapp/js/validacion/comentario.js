@@ -33,15 +33,15 @@ class ValidaCtrl {
         let titulo = $(this.config.idtitulo).val().trim();
         let texto = $(this.config.idtexto).val().trim();
         let errores = "";
-        
+
         if (!this.config.ERtitulo.test(titulo)) {
             errores += "<" + this.config.element + ">" + "El titulo no tiene una longitud entre 3 y 20" + "</" + this.config.element + ">";
         }
-        
+
         if (!this.config.ERtexto.test(texto)) {
             errores += "<" + this.config.element + ">" + "El titulo no tiene una longitud entre 3 y 256" + "</" + this.config.element + ">";
         }
-        
+
         $(this.config.errores).addClass('alert alert-danger').html(errores);
 
         return errores === "";

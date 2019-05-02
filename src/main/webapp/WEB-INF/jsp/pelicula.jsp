@@ -92,7 +92,7 @@
             <div class="card mb-3" style="max-width: 1000px; max-height: 1200px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <img src="${pelicula.foto}" class="card-img" alt="...">
+                        <img src="${pelicula.foto}" class="card-img" style="max-height: 556px; min-height: 560px;" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -122,7 +122,7 @@
 
                             <div id="carta" class="card" style="width: 12rem;">
                                 <c:if test="${not empty pelicula.director.foto}">
-                                    <img src="${pelicula.director.foto}" class="card-img-top" alt="...">
+                                    <img src="${pelicula.director.foto}" class="card-img-top" style="max-height: 190px; min-height: 190px;" alt="...">
                                 </c:if>
                                 <div class="card-body">
                                     <p class="card-text">${pelicula.director.nombre}</p>
@@ -174,10 +174,32 @@
 
             <c:if test="${not empty sesion.usuario}">    
 
-                <form:errors path="comentarioDTO.*" cssClass="alert alert-danger" element="div"/>
 
-                <div id="errores"></div>
-                
+
+
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Comentario no válido</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form:errors path="comentarioDTO.*" cssClass="alert alert-danger" element="div"/>
+                                <div id="errores"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <form:form id="frmcmt" method="POST" modelAttribute="comentarioDTO">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -186,7 +208,7 @@
                         <form:input path="titulo" cssClass="form-control" id="tittle"/>
                     </div>
                     <form:textarea path="texto" cssClass="input-group-text form-control text-left" id="texto" rows="10" cols="120" placeholder="Escribe aquí tu comentario"/>
-                    <input class="btn btn-primary form-control" type="submit" value="Comentar" >
+                    <input class="btn btn-primary form-control" type="submit" data-toggle="modal" data-target="#exampleModal" value="Comentar" >
                 </form:form>
 
             </c:if>
