@@ -16,6 +16,8 @@ import com.daw.cinuja.DAO.models.Sesion;
 import com.daw.cinuja.DAO.models.Usuario;
 import com.daw.cinuja.DTO.UsuarioDTO;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,6 +27,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -149,8 +153,15 @@ public class UsuarioController {
             u.setFoto("");
             usuarios.insertar(u);
             model.clear();
+        }else{
+            List<String> errs = new ArrayList<String>();
+            for(FieldError e :  errores.getFieldErrors())
+                errs.add(e.getField());
+            model.addAttribute("errors", errs);
         }
 
+        
+        
         //si hay errores no hacer redirect
         return url;
     }
