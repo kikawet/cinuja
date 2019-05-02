@@ -14,6 +14,7 @@ import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Sesion;
 import com.daw.cinuja.DAO.models.Usuario;
+import com.daw.cinuja.DTO.UsuarioDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -71,7 +72,7 @@ public class UsuarioController {
             throws ServletException, IOException {
 //        response.setContentType("text/html; charset=UTF-8");
 //        request.setCharacterEncoding("UTF-8");
-        model.addAttribute("usuario", new Usuario());
+        model.addAttribute("usuarioDTO", new UsuarioDTO());
     }
 
     @GetMapping("")
@@ -117,11 +118,35 @@ public class UsuarioController {
     }
 
     @PostMapping(value = "/registro")
-    public String comentario(ModelMap model, @ModelAttribute("comentarioDTO") @Valid Usuario u, BindingResult errores) {
-        String url = "";
+    public String comentario(ModelMap model,
+            @ModelAttribute("usuarioDTO") @Valid UsuarioDTO uDTO, BindingResult errores,
+            @RequestParam(value = "contrasena2", defaultValue = "") String contrasena) {
+        String url = "registro";
+
+        if (!uDTO.isTerminos()) {
+            errores.rejectValue("terminos", "error.cliente.terminos", "Debes de aceptar los terminos de usuario");
+        }
+
+        if (!uDTO.getContrasena().equals(contrasena)) {
+            errores.rejectValue("contrasena", "error.cliente.contrasena", "Las contraseñas no son iguales");
+        } else {
+            model.addAttribute("contrasena2", contrasena);
+        }
+
+        if (usuarios.getUsuario(uDTO.getNick()) != null) {
+            errores.rejectValue("nick", "error.cliente.nick", "Ya hay otro usuario con ese nick");
+        }
 
         if (!errores.hasErrors()) {
             url = "redirect:/perfil";
+            System.out.println("usuario insertado");
+            Usuario u = new Usuario();
+            u.setNick(uDTO.getNick());
+            u.setNombre(uDTO.getNombre());
+            u.setApellidos(uDTO.getApellidos());
+            u.setContrasena(uDTO.getContrasena());
+            u.setRol("non");
+            u.setFoto("");
             usuarios.insertar(u);
             model.clear();
         }

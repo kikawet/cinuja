@@ -72,7 +72,7 @@ public class Utils {
         return d;
     }
 
-    public static Usuario usuarioMapper(ResultSet rs, int offset, Pelicula p, Director d) throws SQLException {
+    public static Usuario usuarioMapper(ResultSet rs, int offset) throws SQLException {
         Usuario u = new Usuario();
 
         u.setNick(rs.getString(offset + 1));
@@ -81,8 +81,6 @@ public class Utils {
         u.setFoto(rs.getString(offset + 4));
         //5 contraseña
         u.setRol(rs.getString(offset + 6));
-        u.setpFavorita(p);
-        u.setdFavorito(d);
 
         return u;
     }

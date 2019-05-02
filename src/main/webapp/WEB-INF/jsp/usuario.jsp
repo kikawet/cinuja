@@ -30,10 +30,6 @@
                 <a role="button" class="btn btn-success" href="perfil/cc" >Cambiar contraseña</a>
 
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Director favorito: ${perfil.dFavorito.nombre}</li>
-                <li class="list-group-item">Pelicula favorita: ${perfil.pFavorita.titulo}</li>
-            </ul>
 
             <div class="card-body col-xs-6">
                 <div class=" d-block">
@@ -62,7 +58,7 @@
                                                     <img href= pelicula/${comentario.pelicula.url}" src="${comentario.pelicula.foto}"  class="card-img-top" alt="..."> 
                                                 </a>
                                                 <div class="card-body">
-                                                    <h5 class="card-title">${comentario.pelicula.titulo} (1990)</h5>
+                                                    <h5 class="card-title">${comentario.pelicula.titulo}</h5>
                                                     <p class="card-text">
                                                     <ul class="list-group list-group-flush">
                                                         <li class="list-group-item">${comentario.pelicula.director.nombre}</li>

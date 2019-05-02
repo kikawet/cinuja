@@ -121,10 +121,11 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
     @Override
     public List<Comentario> getComentarios(Usuario u) {
         String query = "Select * "
-                + "from comentario as c , "
-                + "usuario as u , "
-                + "pelicula as p "
-                + "where c.pelicula = p.id AND c.usuario = u.nick AND u.nick = '" + u.getNick() + "'";
+                + "from comentario as c  "
+                + "LEFT JOIN pelicula as p "
+                + "on p.id = c.pelicula, "
+                + "usuario as u "
+                + "where c.usuario = u.nick AND u.nick = '" + u.getNick() + "'";
 
         List<Comentario> comentarios = new ArrayList<>();
 
@@ -136,7 +137,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
             Pelicula p;
 
             while (rs.next()) {
-                p = peliculas.getPelicula(rs.getString(20));
+                p = peliculas.getPelicula(rs.getString(12));
                 comentarios.add(Utils.comentarioMapper(rs, p, usuarios.getUsuario(rs.getString("usuario"))));
             }
 

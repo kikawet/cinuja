@@ -41,8 +41,6 @@ CREATE TABLE Usuario(
     foto VARCHAR(300),
     contrasena VARCHAR(20),
     rol VARCHAR(3) CHECK( rol IN ('non','adm')) NOT NULL,
-    pelicula_fav INTEGER REFERENCES Pelicula(id), 
-    director_fav INTEGER REFERENCES Director(id),
     PRIMARY KEY(nick)
 );
 

@@ -44,8 +44,6 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
 
         String query = "SELECT * "
                 + "FROM USUARIO AS u "
-                + "LEFT JOIN PELICULA AS p ON p.ID = u.PELICULA_FAV "
-                + "LEFT JOIN DIRECTOR AS d ON d.ID = u.DIRECTOR_FAV "
                 + "WHERE u.nick = '" + nick + "'";
 
         Usuario usuario = null;
@@ -56,8 +54,7 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
                 ResultSet rs = st.executeQuery(query);) {
 
             if (rs.next()) {
-                Director d = Utils.directorMapper(rs, 19);
-                usuario = Utils.usuarioMapper(rs, 0, Utils.peliculaMapper(rs, 8, d), d);
+                usuario = Utils.usuarioMapper(rs, 0);
             }
 
         } catch (SQLException ex) {
@@ -69,7 +66,7 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
 
     @Override
     public boolean insertar(Usuario u) {
-        String query = "INSERT INTO usuario VALUES (?,?,?,?,?,?,(SELECT id FROM pelicula AS p WHERE p.url = ?),(SELECT id FROM director AS d WHERE d.nombre = ?))";
+        String query = "INSERT INTO usuario VALUES (?,?,?,?,?,?)";
 
         boolean res = false;
         try (
@@ -81,8 +78,8 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
             st.setString(4, u.getFoto());
             st.setString(5, u.getContrasena());
             st.setString(6, u.getRol());
-            st.setString(7, u.getpFavorita().getUrl());
-            st.setString(8, u.getdFavorito().getNombre());
+//                        st.setString(7, u.getpFavorita().getUrl());
+//            st.setString(8, u.getdFavorito().getNombre());
 
             res = st.execute();
         } catch (SQLException ex) {

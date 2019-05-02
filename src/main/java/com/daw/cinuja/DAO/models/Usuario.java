@@ -30,10 +30,6 @@ public class Usuario {
     @Size(min = 6, message = "La contraseña debe de tener un minimo de {min} caracteres")
     private String contrasena;// solo se usa para registrar
     private String rol;//cambiar roles como los generos
-    @Valid
-    private Pelicula pFavorita;
-    @Valid
-    private Director dFavorito;
 
     public Usuario() {
         this.setNick("");
@@ -51,8 +47,8 @@ public class Usuario {
             this.setFoto(otro.getFoto());
             this.setContrasena(otro.getContrasena());
             this.setRol(otro.getRol());
-            this.setpFavorita(otro.getpFavorita());
-            this.setdFavorito(otro.getdFavorito());
+//            this.setpFavorita(otro.getpFavorita());
+//            this.setdFavorito(otro.getdFavorito());
         }
 
     }
@@ -122,22 +118,21 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public Pelicula getpFavorita() {
-        return pFavorita;
-    }
-
-    public void setpFavorita(Pelicula pFavorita) {
-        this.pFavorita = pFavorita;
-    }
-
-    public Director getdFavorito() {
-        return dFavorito;
-    }
-
-    public void setdFavorito(Director dFavorito) {
-        this.dFavorito = dFavorito;
-    }
-
+//    public Pelicula getpFavorita() {
+//        return pFavorita;
+//    }
+//
+//    public void setpFavorita(Pelicula pFavorita) {
+//        this.pFavorita = pFavorita;
+//    }
+//
+//    public Director getdFavorito() {
+//        return dFavorito;
+//    }
+//
+//    public void setdFavorito(Director dFavorito) {
+//        this.dFavorito = dFavorito;
+//    }
     public String getContrasena() {
         return contrasena;
     }
