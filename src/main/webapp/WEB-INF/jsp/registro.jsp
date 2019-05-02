@@ -30,7 +30,6 @@
                             </c:if>
                             <label for="validationServer01">Nombre</label>
                             <form:input  cssClass="form-control ${err}" id="idNombre" placeholder="Nombre" path="nombre" />
-
                         </div>
 
                         <div class="col-md-5 mb-3">
@@ -62,13 +61,13 @@
                                 <c:set var="err" value="is-invalid"/>
                             </c:if>
                             <label for="validationServer04">Contraseña</label>
-                            <form:input cssClass="form-control ${err}" id="idCtrs1" placeholder="Contraseña" path="contrasena" />
+                            <form:password cssClass="form-control ${err}"  id="idCtrs1" placeholder="Contraseña" path="contrasena" />
 
                         </div>
 
                         <div class="col-md-4 mb-3 mr-auto">
                             <label for="validationServer05">Repetir Contraseña</label>
-                            <input type="text" class="form-control ${err}" id="idCtrs2" name="contrasena2" placeholder="Contraseña" value="${contrasena2}" >
+                            <input type="password" class="form-control ${err}" id="idCtrs2" name="contrasena2" placeholder="Contraseña" value="${contrasena2}" >
 
                         </div>
 

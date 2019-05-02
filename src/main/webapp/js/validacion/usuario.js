@@ -32,9 +32,9 @@ class ValidaCtrl {
     }
     init() {
         $(this.config.frm).on('submit', event => {
-//            if (!this.validaFormulario()) {
-//                event.preventDefault();
-//            }
+            if (!this.validaFormulario()) {
+                event.preventDefault();
+            }
         });
     }
 
@@ -52,8 +52,8 @@ class ValidaCtrl {
             $(this.config.nombre).addClass(this.config.invalidClass);
             $(this.config.nombre).removeClass(this.config.validClass);
         } else {
-            $(this.config.nombre).addClass(this.config.validClass);
             $(this.config.nombre).removeClass(this.config.invalidClass);
+            $(this.config.nombre).addClass(this.config.validClass);
         }
 
         if (!this.config.ERApellidos.test(apellidos)) {
@@ -74,19 +74,6 @@ class ValidaCtrl {
             $(this.config.nick).removeClass(this.config.invalidClass);
         }
 
-        if (ctrs1 !== ctrs2) {
-            errores += this.addElement("Las contraseñas deben ser la mista");
-            $(this.config.ctrs1).addClass(this.config.invalidClass);
-            $(this.config.ctrs1).removeClass(this.config.validClass);
-            $(this.config.ctrs2).addClass(this.config.invalidClass);
-            $(this.config.ctrs2).removeClass(this.config.validClass);
-        } else {
-            $(this.config.ctrs1).addClass(this.config.validClass);
-            $(this.config.ctrs1).removeClass(this.config.invalidClass);
-            $(this.config.ctrs2).addClass(this.config.validClass);
-            $(this.config.ctrs2).removeClass(this.config.invalidClass);
-        }
-
         if (!this.config.ERCtrs.test(ctrs1)) {
             errores += this.addElement("La contraseña debe de tener al menos 6 caracteres");
             $(this.config.ctrs1).addClass(this.config.invalidClass);
@@ -100,13 +87,22 @@ class ValidaCtrl {
             $(this.config.ctrs2).removeClass(this.config.invalidClass);
         }
 
+        if (ctrs1 !== ctrs2) {
+            errores += this.addElement("Las contraseñas deben ser la mista");
+            $(this.config.ctrs2).addClass(this.config.invalidClass);
+            $(this.config.ctrs2).removeClass(this.config.validClass);
+        } else {
+            $(this.config.ctrs2).addClass(this.config.validClass);
+            $(this.config.ctrs2).removeClass(this.config.invalidClass);
+        }
+
         if (!terminos) {
             errores += this.addElement("Debes aceptar los terminos y condiciones");
-            $(this.config.nombre).addClass(this.config.invalidClass);
-            $(this.config.nombre).removeClass(this.config.validClass);
+            $(this.config.terminos).addClass(this.config.invalidClass);
+            $(this.config.terminos).removeClass(this.config.validClass);
         } else {
-            $(this.config.nombre).addClass(this.config.validClass);
-            $(this.config.nombre).removeClass(this.config.invalidClass);
+            $(this.config.terminos).addClass(this.config.validClass);
+            $(this.config.terminos).removeClass(this.config.invalidClass);
         }
 
         $(this.config.errores).addClass('alert alert-danger').html(errores);
