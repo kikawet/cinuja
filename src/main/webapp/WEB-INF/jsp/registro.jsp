@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : inicio
     Created on : 25-feb-2019, 16:10:00
     Author     : lopez
@@ -30,11 +30,11 @@
                         <div class="col-md-5 mb-3">
                             <label for="validationServer02">Apellidos</label>
                             <form:input cssClass="form-control " id="validationServer02" placeholder="Apellidos" path="apellidos" />
-                            <div class=""></div>                            
+                            <div class=""></div>
                         </div>
 
                         <div class="col-md-2 mb-3">
-                            <label for="validationServerUsername">Nick</label>      
+                            <label for="validationServerUsername">Nick</label>
                             <form:input cssClass="form-control input-group " id="validationServerUsername" placeholder="Nick" path="nick"/>
                             <!--                            <div class="">
                                                             Escoja un link que no esté usando otro usuario
@@ -61,21 +61,61 @@
                         <div class="form-check">
                             <form:checkbox cssClass="form-check-input " path="terminos" id="invalidCheck3" />
                             <label class="form-check-label" for="invalidCheck3">
-                                Acepto los terminos de condición
+                                <a href="#" data-toggle="modal" data-target="#exampleModal">
+                                    Acepto los terminos de condición
+                                </a>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="exampleModalLabel"><b>Términos y condiciones</b></h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <br><b>LICENCIA</b><br>
+
+                                                  <br>Cinuja  a través de su sitio web concede una licencia para que los usuarios utilicen  los productos que son vendidos en este sitio web de acuerdo a los Términos y Condiciones que se describen en este documento.<br>
+
+                                                <br><b>USO NO AUTORIZADO</b><br>
+
+                                                <br> En caso de que aplique (para venta de software, templetes, u otro producto de diseño y programación) usted no puede colocar uno de nuestros productos, modificado o sin modificar, en un CD, sitio web o ningún otro medio y ofrecerlos para la redistribución o la reventa de ningún tipo.<br>
+
+                                                <br><b>PROPIEDAD</b><br>
+
+
+                                                 <br> <br>Usted no puede declarar propiedad intelectual o exclusiva a ninguno de nuestros productos, modificado o sin modificar. Todos los productos son propiedad  de los proveedores del contenido. En caso de que no se especifique lo contrario, nuestros productos se proporcionan  sin ningún tipo de garantía, expresa o implícita. En ningún esta compañía será  responsables de ningún daño incluyendo, pero no limitado a, daños directos, indirectos, especiales, fortuitos o consecuentes u otras pérdidas resultantes del uso o de la imposibilidad de utilizar nuestros productos.<br>
+
+
+
+                                                 <br>Cinuja reserva los derechos de cambiar o de modificar estos términos sin previo aviso.<br>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </label>
-                            <!--                            <div class="invalid-feedback">
-                                                            Debes aceptar los terminos antes de registrarte
-                                                        </div>-->
+
                         </div>
                     </div>
 
 
-                    <div class="text-center col-md-1 d-flex f-center m-4">
+                    <div class="text-center">
                         <button class="btn btn-primary" type="submit">Regístrame</button>
-                        <a class="btn btn-danger btn-block" role="button" href="${pageContext.request.contextPath}/portada" ><h5>Cancelar</h5></a>
+                        <a class="btn btn-danger" role="button" href="${pageContext.request.contextPath}/portada" >Cancelar</a>
                     </div>
                 </form:form>
+                <br>
                 <form:errors path="usuarioDTO.*" cssClass="alert alert-danger" element="div"/>
             </div>
     </body>
 </html>
+
+
+
+
+
