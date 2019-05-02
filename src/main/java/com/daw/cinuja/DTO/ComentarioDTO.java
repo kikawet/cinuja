@@ -15,7 +15,6 @@ import javax.validation.constraints.Size;
  */
 public class ComentarioDTO {
 
-    private int id;    //id de la base de datos
     @NotNull(message = "Todos los comentarios necesitan un titulo")
     @Size(min = 3, max = 20, message = "El titulo debe de tener un tamaño entre {min} y {max} caracteres")
     private String titulo;
@@ -24,17 +23,8 @@ public class ComentarioDTO {
     private String texto;
 
     public ComentarioDTO() {
-        this.id = 0;
         this.titulo = "";
         this.texto = "";
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitulo() {

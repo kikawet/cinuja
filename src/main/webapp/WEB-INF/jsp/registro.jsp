@@ -3,7 +3,7 @@
     Created on : 25-feb-2019, 16:10:00
     Author     : lopez
 --%>
-
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,23 +18,24 @@
         <%@include file="/WEB-INF/jspf/cabecera.jspf" %>
         <div class="my-xl-5 mx-lg-5">
             <div class="bg-white m-auto mh-700" style="height: 700px">
-                <form >
+
+                <form:form method="POST" modelAttribute="usuario">
                     <div class="form-row">
                         <div class="col-md-5 mb-3">
                             <label for="validationServer01">Nombre</label>
-                            <input type="text" class="form-control " id="validationServer01" placeholder="Nombre" value="${us.nombre}" required>
+                            <form:input  cssClass="form-control " id="validationServer01" placeholder="Nombre" path="nombre" />
                             <div class=""></div>
                         </div>
 
                         <div class="col-md-5 mb-3">
                             <label for="validationServer02">Apellidos</label>
-                            <input type="text" class="form-control " id="validationServer02" placeholder="Apellidos" value="${us.apellido}" required>
+                            <form:input cssClass="form-control " id="validationServer02" placeholder="Apellidos" path="apellidos" />
                             <div class=""></div>                            
                         </div>
 
                         <div class="col-md-2 mb-3">
                             <label for="validationServerUsername">Nick</label>      
-                            <input type="text" class="form-control input-group " id="validationServerUsername" placeholder="Nick" aria-describedby="inputGroupPrepend3" required>
+                            <form:input cssClass="form-control input-group " id="validationServerUsername" placeholder="Nick" path="nick"/>
                             <!--                            <div class="">
                                                             Escoja un link que no esté usando otro usuario
                                                         </div>-->
@@ -67,11 +68,12 @@
                                                         </div>-->
                         </div>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center col-md-1 d-flex f-center m-4">
                         <button class="btn btn-primary" type="submit">Regístrame</button>
-                </form>
+                        <a class="btn btn-danger btn-block" role="button" href="${pageContext.request.contextPath}/portada" ><h5>Cancelar</h5></a>
+                    </div>
+                </form:form>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>

@@ -99,7 +99,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
 
     @Override
     public boolean borrar(Comentario c) {
-        String query = "DELETE FROM comentario AS c WHERE c.usuario = ? AND c.pelicula = (SELECT id FROM pelicula WHERE pelicula.url = ?)";
+        String query = "DELETE FROM comentario AS c WHERE c.usuario = ? AND c.pelicula = (SELECT id FROM pelicula WHERE pelicula.url = ?) AND c.fecha = ?";
 
         boolean res = false;
         try (
@@ -107,6 +107,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
                 PreparedStatement st = conn.prepareStatement(query);) {
             st.setString(1, c.getUsuario().getNick());
             st.setString(2, c.getPelicula().getUrl());
+            st.setTimestamp(3, new java.sql.Timestamp(c.getFecha().getTime()));
 
             res = st.execute();
 

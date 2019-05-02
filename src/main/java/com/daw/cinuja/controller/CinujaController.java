@@ -32,14 +32,6 @@ public class CinujaController {
     private PeliculaDAO peliculas;
 
     @Autowired
-    @Qualifier(UsuarioDAOJDBC.qualifier)
-    private UsuarioDAO usuarios;
-
-    @Autowired
-    @Qualifier(ComentarioDAOJDBC.qualifier)
-    private ComentarioDAO comentarios;
-
-    @Autowired
     private Sesion sesion;
 
     @ModelAttribute("sesion")
@@ -64,11 +56,6 @@ public class CinujaController {
         model.addAttribute("generos", PeliculaDAO.generos);
 
         return "portada";
-    }
-
-    @GetMapping("/registro")
-    public String registro() {
-        return "registro";
     }
 
 }

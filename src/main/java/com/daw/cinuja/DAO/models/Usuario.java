@@ -36,6 +36,10 @@ public class Usuario {
     private Director dFavorito;
 
     public Usuario() {
+        this.setNick("");
+        this.setNombre("");
+        this.setApellidos("");
+        this.setFoto("");
     }
 
     public void copy(Usuario otro) {

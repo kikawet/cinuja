@@ -69,7 +69,7 @@
                     Recuerdame
                 </label-->
                 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Entrar"/>
-                <a class="btn btn-lg btn-primary btn-block" role="button" href="portada/registro" >Registrarse</a>
+                <a class="btn btn-lg btn-primary btn-block" role="button" href="${pageContext.request.contextPath}/perfil/registro" >Registrarse</a>
                 <a class="btn btn-danger btn-block my-2 py-2 " role="button" aria-pressed="true" href="portada" ><h5>Cancelar</h5></a>
             </form>
 
