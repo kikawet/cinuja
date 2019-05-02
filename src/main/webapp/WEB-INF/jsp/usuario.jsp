@@ -30,62 +30,62 @@
                 <a role="button" class="btn btn-success" href="perfil/cc" >Cambiar contraseña</a>
 
             </div>
+        </div>
+        <div class="card-body col-xs-6">
+            <div class=" d-block">
+                <h2 class="sub-header col-xs-6">Comentarios (prototipo) </h2>
+                <div class="table-responsive col-xs-6">
 
-            <div class="card-body col-xs-6">
-                <div class=" d-block">
-                    <h2 class="sub-header col-xs-6">Comentarios (prototipo) </h2>
-                    <div class="table-responsive col-xs-6">
+                    <c:if test="${empty comentarios}">
+                        <p>Todavia no has escrito ningun comentario</p>
+                    </c:if>
 
-                        <c:if test="${empty comentarios}">
-                            <p>Todavia no has escrito ningun comentario</p>
-                        </c:if>
+                    <c:if test="${not empty comentarios}">
+                        <table class="table table-striped col-xs-6">
+                            <tr> 
+                                <th>Calificación</th>
+                                <th>Película</th>
+                                <th>Comentario</th>                               
 
-                        <c:if test="${not empty comentarios}">
-                            <table class="table table-striped col-xs-6">
-                                <tr> 
-                                    <th>Calificación</th>
-                                    <th>Película</th>
-                                    <th>Comentario</th>                               
-
-                                </tr>
-                                <c:set var="pos" value="0"/>
-                                <c:forEach items="${comentarios}" var="comentario">
-                                    <tr>
-                                        <td>${comentario.valoracion}</td>
-                                        <td>
-                                            <div class="card" style="width: 14rem;">
-                                                <a href="pelicula/${comentario.pelicula.url}">
-                                                    <img href= pelicula/${comentario.pelicula.url}" src="${comentario.pelicula.foto}"  class="card-img-top" alt="..."> 
-                                                </a>
+                            </tr>
+                            <c:set var="pos" value="0"/>
+                            <c:forEach items="${comentarios}" var="comentario">
+                                <tr>
+                                    <td>${comentario.valoracion}</td>
+                                    <td>
+                                        <div class="card" style="width: 14rem;">
+                                            <a href="pelicula/${comentario.pelicula.url}">
+                                                <img href= pelicula/${comentario.pelicula.url}" src="${comentario.pelicula.foto}"  class="card-img-top" alt="..."> 
+                                            </a>
+                                            <div class="card-body">
+                                                <h5 class="card-title">${comentario.pelicula.titulo}</h5>
+                                                <p class="card-text">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">${comentario.pelicula.director.nombre}</li>
+                                                    <li class="list-group-item">${generos[comentario.pelicula.genero]}</li>
+                                                </ul>
                                                 <div class="card-body">
-                                                    <h5 class="card-title">${comentario.pelicula.titulo}</h5>
-                                                    <p class="card-text">
-                                                    <ul class="list-group list-group-flush">
-                                                        <li class="list-group-item">${comentario.pelicula.director.nombre}</li>
-                                                        <li class="list-group-item">${generos[comentario.pelicula.genero]}</li>
-                                                    </ul>
-                                                    <div class="card-body">
-                                                        <a href="pelicula/${comentario.pelicula.url}" class="card-link">Ver/hacer criticas</a>
-                                                    </div>
+                                                    <a href="pelicula/${comentario.pelicula.url}" class="card-link">Ver/hacer criticas</a>
                                                 </div>
-                                        </td>
-                                        <td>
-                                            <div class="media-body">
-                                                <h3 class="mt-0 mb-1"> ${fn:escapeXml(comentario.titulo)} </h3>
-                                                <p>${fn:escapeXml(comentario.texto)}</p>
-                                                <!--<form method="post" action="perfil/borrar/comentario?id=${pos}">--> 
-                                                <input type="submit" class="btn btn-success" value="Editar"/>
-                                                <a role="button" class="btn btn-danger" href="perfil/borrar/comentario?id=${pos}">Eliminar</a>
-                                                <!--</form>-->
                                             </div>
-                                        </td>
-                                    </tr>
-                                    <c:set var="pos" value="${pos + 1}"/>
-                                </c:forEach>
-                            </table>
-                        </c:if>
-                    </div>
-                </div>               
-            </div>
+                                    </td>
+                                    <td>
+                                        <div class="media-body">
+                                            <h3 class="mt-0 mb-1"> ${fn:escapeXml(comentario.titulo)} </h3>
+                                            <p>${fn:escapeXml(comentario.texto)}</p>
+                                            <!--<form method="post" action="perfil/borrar/comentario?id=${pos}">--> 
+                                            <input type="submit" class="btn btn-success" value="Editar"/>
+                                            <a role="button" class="btn btn-danger" href="perfil/borrar/comentario?id=${pos}">Eliminar</a>
+                                            <!--</form>-->
+                                        </div>
+                                    </td>
+                                </tr>
+                                <c:set var="pos" value="${pos + 1}"/>
+                            </c:forEach>
+                        </table>
+                    </c:if>
+                </div>
+            </div>               
+        </div>
     </body>
 </html>

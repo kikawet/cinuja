@@ -10,7 +10,7 @@
         <%@include file="/WEB-INF/jspf/links.jspf" %>
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
         <title>JSP pelicula</title>
-
+        <script src="${pageContext.request.contextPath}/js/validacion/comentario.js"></script>
         <style>
 
 
@@ -176,17 +176,17 @@
 
                 <form:errors path="comentarioDTO.*" cssClass="alert alert-danger" element="div"/>
 
-                <form:form  method="POST" modelAttribute="comentarioDTO" >
+                <div id="errores"></div>
+                
+                <form:form id="frmcmt" method="POST" modelAttribute="comentarioDTO">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon3">Titulo</span>
                         </div>
-                        <!--<input type="text" class="form-control" id="basic-url" name="titulo" value="${titulo}">-->
-                        <form:input path="titulo" cssClass="form-control" id="basic-url"/>
+                        <form:input path="titulo" cssClass="form-control" id="tittle"/>
                     </div>
-                    <!--<textarea class="input-group-text form-control text-left" name="comentario" rows="10" cols="120" placeholder="Escribe aquí tus comentario" >${texto}</textarea>-->
-                    <form:textarea path="texto" cssClass="input-group-text form-control text-left" rows="10" cols="120" placeholder="Escribe aquí tu comentario"/>
-                    <input class="btn btn-primary form-control" type="submit" value="Comentar">
+                    <form:textarea path="texto" cssClass="input-group-text form-control text-left" id="texto" rows="10" cols="120" placeholder="Escribe aquí tu comentario"/>
+                    <input class="btn btn-primary form-control" type="submit" value="Comentar" >
                 </form:form>
 
             </c:if>

@@ -76,7 +76,7 @@ public class PeliculaController {
     @ModelAttribute
     protected void processRequest(@PathVariable String url_peli, HttpServletRequest request, HttpServletResponse response, ModelMap model)
             throws ServletException, IOException {
-//        response.setContentType("text/html; charset=UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
 //        request.setCharacterEncoding("UTF-8");
         Pelicula p = peliculas.getPelicula(url_peli);
         model.addAttribute("pelicula", p);
