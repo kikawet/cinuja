@@ -73,13 +73,14 @@ public class Comentario {
         return true;
     }
 
-//    public Usuario getUsuario() {
-//        return usuario;
-//    }
-//
-//    public void setUsuario(Usuario usuario) {
-//        this.usuario = usuario;
-//    }
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
     public Pelicula getPelicula() {
         return pelicula;
     }
@@ -118,14 +119,6 @@ public class Comentario {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
 }

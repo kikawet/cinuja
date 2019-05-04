@@ -81,19 +81,20 @@ class ValidaCtrl {
             $(this.config.ctrs2).addClass(this.config.invalidClass);
             $(this.config.ctrs2).removeClass(this.config.validClass);
         } else {
+
             $(this.config.ctrs1).addClass(this.config.validClass);
             $(this.config.ctrs1).removeClass(this.config.invalidClass);
             $(this.config.ctrs2).addClass(this.config.validClass);
             $(this.config.ctrs2).removeClass(this.config.invalidClass);
-        }
 
-        if (ctrs1 !== ctrs2) {
-            errores += this.addElement("Las contraseñas deben ser la mista");
-            $(this.config.ctrs2).addClass(this.config.invalidClass);
-            $(this.config.ctrs2).removeClass(this.config.validClass);
-        } else {
-            $(this.config.ctrs2).addClass(this.config.validClass);
-            $(this.config.ctrs2).removeClass(this.config.invalidClass);
+            if (ctrs1 !== ctrs2) {
+                errores += this.addElement("Las contraseñas deben ser la misma");
+                $(this.config.ctrs2).addClass(this.config.invalidClass);
+                $(this.config.ctrs2).removeClass(this.config.validClass);
+            } else {
+                $(this.config.ctrs2).addClass(this.config.validClass);
+                $(this.config.ctrs2).removeClass(this.config.invalidClass);
+            }
         }
 
         if (!terminos) {

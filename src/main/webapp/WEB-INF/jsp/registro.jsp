@@ -61,13 +61,13 @@
                                 <c:set var="err" value="is-invalid"/>
                             </c:if>
                             <label for="validationServer04">Contraseña</label>
-                            <form:password cssClass="form-control ${err}"  id="idCtrs1" placeholder="Contraseña" path="contrasena" />
+                            <form:input cssClass="form-control ${err}"  id="idCtrs1" placeholder="Contraseña" path="contrasena" />
 
                         </div>
 
                         <div class="col-md-4 mb-3 mr-auto">
                             <label for="validationServer05">Repetir Contraseña</label>
-                            <input type="password" class="form-control ${err}" id="idCtrs2" name="contrasena2" placeholder="Contraseña" value="${contrasena2}" >
+                            <input type="text" class="form-control ${err}" id="idCtrs2" name="contrasena2" placeholder="Contraseña" value="${contrasena2}" >
 
                         </div>
 
