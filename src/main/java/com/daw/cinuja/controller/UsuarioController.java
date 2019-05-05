@@ -18,6 +18,8 @@ import com.daw.cinuja.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -131,8 +133,9 @@ public class UsuarioController {
             errores.rejectValue("terminos", "error.cliente.terminos", "Debes de aceptar los terminos de usuario");
         }
 
-        if (!uDTO.getContrasena().equals(contrasena)) {
-            errores.rejectValue("contrasena", "error.cliente.contrasena", "Las contraseñas no son iguales");
+        if (!uDTO.getContrasena().equals(contrasena) || contrasena.isEmpty()) {
+//            errores.rejectValue("contrasena", "error.cliente.contrasena", "Las contraseñas no son iguales");
+            errores.addError(new FieldError("contrasena2", "contrasena2", "Las contraseñas no son iguales"));
         } else {
             model.addAttribute("contrasena2", contrasena);
         }
@@ -143,7 +146,6 @@ public class UsuarioController {
 
         if (!errores.hasErrors()) {
             url = "redirect:/perfil";
-            System.out.println("usuario insertado");
             Usuario u = new Usuario();
             u.setNick(uDTO.getNick());
             u.setNombre(uDTO.getNombre());
@@ -154,9 +156,19 @@ public class UsuarioController {
             usuarios.insertar(u);
             model.clear();
         } else {
-            List<String> errs = new ArrayList<String>();
+            List<Object> errs = new ArrayList<>();
+//            Jsonb jsonb = JsonbBuilder.create();//te odio java 7
+
             for (FieldError e : errores.getFieldErrors()) {
-                errs.add(e.getField());
+                final String name = e.getField();
+                final String msg = e.getDefaultMessage();
+                String m = "{\"name\":\"" + name + "\",\"msg\":\"" + msg + "\"}";
+//                Object m = new Object(){
+//                  public String name = nam;
+//                  public String msg = ms;
+//                };
+
+                errs.add(m);
             }
             model.addAttribute("errors", errs);
         }
