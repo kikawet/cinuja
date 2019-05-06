@@ -157,7 +157,7 @@ public class UsuarioController {
             model.clear();
         } else {
             List<Object> errs = new ArrayList<>();
-//            Jsonb jsonb = JsonbBuilder.create();//te odio java 7
+//           Jsonb jsonb = JsonbBuilder.create();//te odio java 7
 
             for (FieldError e : errores.getFieldErrors()) {
                 final String name = e.getField();

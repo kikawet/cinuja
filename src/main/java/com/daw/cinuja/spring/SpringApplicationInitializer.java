@@ -16,7 +16,7 @@ public class SpringApplicationInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext container) {
-
+        container.setInitParameter("contextConfigLocation", "<NONE>");  
         //Launch and configure SpringMVC
         // Create the 'root' Spring application context
         AnnotationConfigWebApplicationContext rootContext

@@ -44,7 +44,7 @@ class ValidaCtrl {
         if (errores.length !== 0)
             this.marcarErrores(JSON.parse(errores));
 
-        $(this.config.idForm).on('submit', event => {            
+        $(this.config.idForm).on('submit', event => {
             if (!this.validaFormulario()) {
                 event.preventDefault();
             }
@@ -106,13 +106,14 @@ class ValidaCtrl {
     }
 
     marcarErrores(errores) {
-        
+
         this.addTodos(this.config.validClass);
-        
-        for(let val of errores){
-            this.setInvalid('[name='+val['name']+']');
-        };
-        
+
+        for (let val of errores) {
+            this.setInvalid('[name=' + val['name'] + ']');
+        }
+        ;
+
     }
 
 }
