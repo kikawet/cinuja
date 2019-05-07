@@ -20,24 +20,23 @@ import org.springframework.beans.factory.annotation.Qualifier;
  *
  * @author axpos
  */
-
 @Path("/pelicula")
 @Produces(MediaType.APPLICATION_JSON)
 
 public class PeliculaRESTService {
-    
+
     @Context
     private UriInfo context;
 
     @Autowired     //Utilizamos anotaciones de inyección Spring
     @Qualifier(PeliculaDAOJDBC.qualifier)
     PeliculaDAO peliculas;
-    
+
     @GET
-    public String getstring(){
-        
-       return "Viva ortega cano"; 
-        
+    public String getstring() {
+
+        return "Viva ortega cano";
+
     }
-    
+
 }

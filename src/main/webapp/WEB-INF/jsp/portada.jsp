@@ -19,7 +19,10 @@
         <header class="cabecera">
             <%@include file="/WEB-INF/jspf/cabecera.jspf" %>
         </header>
-
+        <form class="form-inline ml-4 my-2">
+            <input class="form-control mr-sm-2" type="text" placeholder="Buscar película" aria-label="Search">
+            <button class="btn btn-outline-primary btn-rounded btn-sm my-0" type="submit">Buscar</button>
+        </form>
         <main class="row">
             <aside class="col-md-2">
                 <nav class="ml-md-auto">
@@ -32,7 +35,58 @@
                 </nav>
 
                 <c:if test="${sesion.usuario.rol eq 'adm'}">
-                    <button type="button" class="btn btn-success ml-xl-5 my-lg-5 px-4" id="boton3">Añadir</button>
+
+                    <button type="button" class="btn btn-success my-lg-5 px-4" style="margin-left:80px;" data-toggle="modal" data-target="#exampleModal" id="boton3">Añadir</button>
+
+
+
+
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Añadir película</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Nombre de la película</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Título">
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Año</label>
+                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Año de la película">
+                                                   </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Director</label>
+                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Nombre director">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Género</label>
+                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Ej: Acción, Drama...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Imagen portada</label>
+                                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="URL de la imagen">
+                                        </div>
+                                        
+
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-success">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </c:if>
             </aside>
 

@@ -15,8 +15,8 @@ import org.glassfish.jersey.server.ResourceConfig;
 @ApplicationPath("webservice")
 
 public class CinujaJAXRSConfig extends ResourceConfig {
-    
-       public CinujaJAXRSConfig() {
+
+    public CinujaJAXRSConfig() {
         //Location of REST resource classes
         packages("com.daw.cinuja.restapi");
     }
