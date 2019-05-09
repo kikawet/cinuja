@@ -16,7 +16,6 @@ public class SpringApplicationInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext container) {
-        container.setInitParameter("contextConfigLocation", "<NONE>");
         //Launch and configure SpringMVC
         // Create the 'root' Spring application context
         AnnotationConfigWebApplicationContext rootContext
@@ -34,5 +33,6 @@ public class SpringApplicationInitializer implements WebApplicationInitializer {
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/"); //Map all urls to SpringMVC FrontDispatcher
 
+        container.setInitParameter("contextConfigLocation", "<NONE>");
     }
 }

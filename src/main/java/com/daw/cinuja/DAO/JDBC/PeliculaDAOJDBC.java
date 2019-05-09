@@ -66,7 +66,7 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
 
     @Override
     public boolean insertar(Pelicula p) {
-        String query = "INSERT INTO PELICULA (nombre,fecha,foto,url,sumaVotos,nVotos,genero,DESCRIPCION,RESTRICCION,director) VALUES (?,?,?,?,?,?,?,?,(SELECT id FROM director AS d WHERE d.nombre = ?))";
+        String query = "INSERT INTO PELICULA (nombre,fecha,foto,url,sumaVotos,nVotos,genero,DESCRIPCION,RESTRICCION,director) VALUES (?,?,?,?,?,?,?,?,?,(SELECT id FROM director AS d WHERE d.nombre = ?))";
 
         boolean res = false;
         try (
@@ -79,8 +79,9 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
             st.setLong(5, p.getSumaVotos());
             st.setLong(6, p.getnVotos());
             st.setInt(7, p.getGenero());
-            st.setBoolean(8, p.isRestriccionEdad());
-            st.setString(9, p.getDirector().getNombre());
+            st.setString(8, p.getDescripcion());
+            st.setBoolean(9, p.isRestriccionEdad());
+            st.setString(10, p.getDirector().getNombre());
 
             res = st.execute();
         } catch (SQLException ex) {

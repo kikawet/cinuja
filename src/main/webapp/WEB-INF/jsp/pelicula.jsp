@@ -99,7 +99,7 @@
                             <h2 class="card-title">${pelicula.titulo}</h2>
                             <p class="card-text">${not empty pelicula.descripcion ? pelicula.descripcion += ', en esta' : ''} película de ${pelicula.director.nombre}.</p>
 
-                            <div><h2 style="display: inline"><b><fmt:formatNumber type="number" maxFractionDigits="1" value="${pelicula.nota}"/></b></h2><h5 style="color: gray; display: inline">/5</h5> de ${pelicula.nVotos-1} votos</div>
+                            <div><h2 style="display: inline"><b><fmt:formatNumber type="number" maxFractionDigits="1" value="${pelicula.nota}"/></b></h2><h5 style="color: gray; display: inline">/5</h5> de ${pelicula.nVotos} votos</div>
                                         <c:if test="${not empty sesion.usuario}"> 
 
                                 <form action="${pelicula.url}" method="POST">

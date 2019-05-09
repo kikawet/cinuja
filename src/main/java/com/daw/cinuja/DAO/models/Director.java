@@ -31,6 +31,9 @@ public class Director {
     private String biografia;
 
     public Director() {
+        this.nombre = "Martin Scorsese";
+        this.fnacimiento = new Date(0, 0, 0);
+        this.foto = "";
     }
 
     @Override

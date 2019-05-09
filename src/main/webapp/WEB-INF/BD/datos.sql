@@ -51,3 +51,5 @@ INSERT INTO COMENTARIO (TITULO,TEXTO,FECHA,PELICULA,USUARIO) VALUES ('No está m
                                                                                 (SELECT ID FROM PELICULA AS p WHERE p.URL = 'uno-de-los-nuestros'),'boa');
 INSERT INTO COMENTARIO (TITULO,TEXTO,FECHA,PELICULA,USUARIO) VALUES ('Aburrida','Yo me aburrí. Preferiría morirme en este momento.',CURRENT_TIMESTAMP,
                                                                                 (SELECT ID FROM PELICULA AS p WHERE p.URL = 'uno-de-los-nuestros'),'web');
+
+SELECT * FROM USUARIO;

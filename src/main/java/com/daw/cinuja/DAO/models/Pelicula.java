@@ -38,7 +38,7 @@ public class Pelicula {
 //    private float nota;
     @Min(value = 0, message = "La suma de los votos no puede ser menor que 0")
     private long sumaVotos;
-    @Min(value = 1, message = "El numero de votos no puede ser menor que {value}")
+    @Min(value = 0, message = "El numero de votos no puede ser menor que {value}")
     private long nVotos;
     //@Size(min = 0/*,max = PeliculaDAO.generos.size()*/, message = "El genero debe de ser un indice de la lista de generos")
     @Min(value = 0, message = "El genero debe de ser un indice de la lista de generos")
@@ -50,6 +50,19 @@ public class Pelicula {
     private boolean restriccionEdad;//restricción de edad
     @Valid
     private Director director;
+
+    public Pelicula() {
+        this.titulo = "";
+        this.url = "";
+        this.fecha = new Date(0, 0, 0);
+        this.foto = "";
+        this.sumaVotos = 0;
+        this.nVotos = 0;
+        this.genero = 0;
+        this.descripcion = "";
+        this.restriccionEdad = false;
+        this.director = new Director();
+    }
 
     @Override
     public int hashCode() {
@@ -97,7 +110,11 @@ public class Pelicula {
     }
 
     public float getNota() {
-        return ((float) this.getSumaVotos()) / ((float) this.getnVotos());
+        if (this.getnVotos() <= 0) {
+            return 0;
+        } else {
+            return ((float) this.getSumaVotos()) / ((float) this.getnVotos());
+        }
     }
 
     public int getGenero() {

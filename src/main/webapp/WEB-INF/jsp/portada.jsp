@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
@@ -53,37 +54,43 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    <form>
+                                    <form:form method="POST" action="pelicula/crear" modelAttribute="peliculaDTO">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Nombre de la película</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Título">
-                                            
+                                            <form:input cssClass="form-control" path="titulo" placeholder="Título"/>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">URL de la película</label>
+                                            <form:input cssClass="form-control" path="url" placeholder="URL"/>
+
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Año</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Año de la película">
-                                                   </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Director</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Nombre director">
+                                            <label for="exampleInputPassword1">Fecha de estreno</label>
+                                            <form:input type="date" path="fecha" class="form-control" placeholder="Año de la película"/>
                                         </div>
+                                        <!--                                        <div class="form-group">
+                                                                                    <label for="exampleInputPassword1">Director</label>
+                                        <form:select class="form-control" path="" placeholder="Nombre director"/>
+                                    </div>-->
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Género</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Ej: Acción, Drama...">
+                                            <form:select cssClass="form-control" path="genero" items="${mapGeneros}"/>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlInput1">Imagen portada</label>
-                                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="URL de la imagen">
+                                            <form:input  class="form-control" path="foto" placeholder="URL de la imagen"/>
                                         </div>
-                                        
 
-                                    </form>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            <input type="submit" class="btn btn-success" value="Añadir">
+                                        </div>
+                                    </form:form>
 
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-success">Añadir</button>
-                                </div>
+
                             </div>
                         </div>
                     </div>

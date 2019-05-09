@@ -13,6 +13,10 @@ import com.daw.cinuja.DAO.models.Usuario;
  */
 public interface UsuarioDAO {
 
+    public final static String ROL_ADMIN = "adm";
+
+    public final static String ROL_NONE = "non";
+
     Usuario getUsuario(String nick);
 
     boolean insertar(Usuario u);

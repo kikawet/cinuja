@@ -32,10 +32,12 @@ public class Usuario {
     private String rol;//cambiar roles como los generos
 
     public Usuario() {
-        this.setNick("");
-        this.setNombre("");
-        this.setApellidos("");
-        this.setFoto("");
+        this.nick = "";
+        this.nombre = "";
+        this.apellidos = "";
+        this.foto = "";
+        this.contrasena = "";
+        this.rol = "non";
     }
 
     public void copy(Usuario otro) {
@@ -47,8 +49,6 @@ public class Usuario {
             this.setFoto(otro.getFoto());
             this.setContrasena(otro.getContrasena());
             this.setRol(otro.getRol());
-//            this.setpFavorita(otro.getpFavorita());
-//            this.setdFavorito(otro.getdFavorito());
         }
 
     }

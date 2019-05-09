@@ -151,8 +151,7 @@ public class UsuarioController {
             u.setNombre(uDTO.getNombre());
             u.setApellidos(uDTO.getApellidos());
             u.setContrasena(uDTO.getContrasena());
-            u.setRol("non");
-            u.setFoto("");
+            u.setFoto("http://scapp.ie20deenero.edu.co/assets/img/defaultcon.png");
             usuarios.insertar(u);
             model.clear();
         } else {

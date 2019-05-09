@@ -15,8 +15,15 @@ import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Sesion;
 import com.daw.cinuja.DTO.ComentarioDTO;
+import com.daw.cinuja.DTO.PeliculaDTO;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +33,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -74,13 +83,13 @@ public class PeliculaController {
      * @throws IOException if an I/O error occurs
      */
     @ModelAttribute
-    protected void processRequest(@PathVariable String url_peli, HttpServletRequest request, HttpServletResponse response, ModelMap model)
+    protected void processRequest(@PathVariable(required = false) String url_peli, HttpServletRequest request, HttpServletResponse response, ModelMap model)
             throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
 //        request.setCharacterEncoding("UTF-8");
-        Pelicula p = peliculas.getPelicula(url_peli);
-        model.addAttribute("pelicula", p);
-        model.addAttribute("comentarios", comentarios.getComentarios(p));
+//        Pelicula p = peliculas.getPelicula(url_peli);
+//        model.addAttribute("pelicula", p);
+//        model.addAttribute("comentarios", comentarios.getComentarios(p));
     }
 
     @GetMapping("/{url_peli}")
@@ -89,6 +98,10 @@ public class PeliculaController {
         if (sesion.getUsuario() != null) {
             model.addAttribute("comentarioDTO", new ComentarioDTO());
         }
+
+        Pelicula p = peliculas.getPelicula(url_peli);
+        model.addAttribute("pelicula", p);
+        model.addAttribute("comentarios", comentarios.getComentarios(p));
 
         return "pelicula";
     }
@@ -127,6 +140,29 @@ public class PeliculaController {
         }
 
         //si hay errores no hacer redirect
+        return url;
+    }
+
+    @PostMapping("/crear")
+    public String crear(ModelMap model, @ModelAttribute("peliculaDTO") @Valid PeliculaDTO pDTO, BindingResult errores) {
+        String url = "redirect:/portada";
+
+        if (!errores.hasErrors()) {
+            try {
+                url = "redirect:/pelicula/" + pDTO.getUrl();
+
+                Pelicula p = new Pelicula();
+                p.setTitulo(pDTO.getTitulo());
+                p.setUrl(pDTO.getUrl());
+                p.setFecha(new SimpleDateFormat("yyyy-MM-dd").parse(pDTO.getFecha()));
+                p.setFoto(pDTO.getFoto());
+                p.setGenero(pDTO.getGenero());
+                peliculas.insertar(p);
+            } catch (ParseException ex) {
+                Logger.getLogger(PeliculaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
         return url;
     }
 
