@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<!--To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.-->
+
+<div class="form-inline ml-4 my-2">
+    <input class="form-control mr-sm-2" type="text" placeholder="Buscar película" aria-label="Search" ng-model="filtro.titulo">
+</div>
+
+<main class="row">
+    <aside class="col-md-2">
+        <nav class="ml-md-auto">
+            <h1 class="text-truncate text-md-center">Géneros</h1>                    
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-truncate text-md-center" ng-repeat="genero in $ctrl.generos">
+                    <a class="navbar-bar nav-link" href="" ng-click="$ctrl.getPeliculas($index)" >{{genero}}</a> 
+                </li>                
+            </ul>
+        </nav>
+
+        <div ng-show="$ctrl.usuario.rol === 'adm'">
+
+            <button type="button" class="btn btn-success my-lg-5 px-4" style="margin-left:80px;" data-toggle="modal" data-target="#exampleModal" id="boton3">Añadir</button>
+
+        </div>
+    </aside>
+
+
+
+    <section class="my-md-3 container d-flex justify-content-start">
+        <div class="my-md-3 row d-flex justify-content-start">   
+
+            <div ng-show="$ctrl.peliculas.length === 0">
+                <p>No hay películas de ese género</p>
+            </div>
+
+            <div ng-repeat="pelicula in $ctrl.peliculas | orderBy:'-nota' | filter:filtro">
+
+                <nav class="col-md my-md-3">
+                    <div class="card" style="width: 15rem;">
+                        <a href="pelicula/{{pelicula.url}}">
+                            <img src="{{pelicula.foto}}" class="card-img-top" style="max-height: 800px; min-height: 400px;" alt=""> 
+                        </a>
+                        <div class="card-body">
+                            <a href="pelicula/{{pelicula.url}}">
+                                <h6 class="card-title"><i>{{pelicula.titulo}} </i></h6>
+                            </a>
+                            <p class="card-text">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{ pelicula.fecha | fecha:'yyyy'}}</li>
+                                <li class="list-group-item">{{pelicula.director.nombre}}</li>
+                                <li class="list-group-item">{{$ctrl.generos[pelicula.genero]}}</li>
+                                <li class="list-group-item"><b>{{pelicula.nota| number:1}}</b>/5</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </nav>
+
+            </div>
+
+        </div>
+    </section>
+</main>

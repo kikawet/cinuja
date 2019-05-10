@@ -54,7 +54,7 @@ public class Pelicula {
     public Pelicula() {
         this.titulo = "";
         this.url = "";
-        this.fecha = new Date(0, 0, 0);
+        this.fecha = new Date();
         this.foto = "";
         this.sumaVotos = 0;
         this.nVotos = 0;

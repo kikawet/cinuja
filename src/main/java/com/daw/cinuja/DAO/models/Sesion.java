@@ -6,6 +6,7 @@
 package com.daw.cinuja.DAO.models;
 
 import java.io.Serializable;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -15,11 +16,11 @@ import org.springframework.web.context.annotation.SessionScope;
  */
 //@Named(value = "sesion")
 @Component
-@SessionScope
+@SessionScope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Sesion implements Serializable {
 
     //@Valid
-    private Usuario usuario = null;
+    private Usuario usuario;
 
     public Sesion() {
     }

@@ -8,7 +8,10 @@ package com.daw.cinuja.restapi;
 import com.daw.cinuja.DAO.JDBC.PeliculaDAOJDBC;
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.models.Pelicula;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -45,6 +48,12 @@ public class PeliculaRESTService {
     }
 
     @GET
+    @Path("/generos")
+    public List<String> getGeneros() {
+        return PeliculaDAO.generos;
+    }
+
+    @GET
     @Path("/gen/{gen}")
     public List<Pelicula> getGenero(@PathParam("gen") int genero) {
         return peliculas.getPeliculas(genero);
@@ -52,8 +61,21 @@ public class PeliculaRESTService {
 
     @GET
     @Path("/url/{url}")
-    public Pelicula getPelicula(@PathParam("url") String url) {
-        return peliculas.getPelicula(url);
+    public Response getPelicula(@PathParam("url") String url) {
+        Pelicula p = peliculas.getPelicula(url);
+        Response r;
+
+        if (p != null) {
+            r = Response.ok(p).build();
+        } else {
+            List<Map<String, Object>> errores = new ArrayList<>();
+            Map<String, Object> err = new HashMap<>();
+            err.put("message", "La pelicula no existe");
+            errores.add(err);
+            r = Response.status(Response.Status.BAD_REQUEST)
+                    .entity(errores).build();
+        }
+        return r;
     }
 
     @POST

@@ -13,42 +13,35 @@ class ValidaCtrl {
     constructor() {
         this.serviceURL = 'webservice';
         this.config = {
-            idForm: '#frmreg',
+            idForm: '#frmPeli',
             form: [
                 {
-                    id: '#idNick',
-                    regex: /^(\S{1,10})$/
+                    id: '#titulo',
+                    regex: /^.{2,30}$/i,
+                    error: '#errorTitulo',
+                    msg: 'El titulo debe tener entre 2 y 30 caracteres'
                 },
                 {
-                    id: '#idNombre',
-                    regex: /^.{3,20}$/i
+                    id: '#url',
+                    regex: /^[a-z]+(-[a-z]+)*/,
+                    error: '#errorUrl',
+                    msg: 'La URL debe estar en minusculas y separadas por -'
                 },
                 {
-                    id: '#idApellidos',
-                    regex: /^.{4,20}$/i
-                },
-                {
-                    id: '#idCtrs1',
-                    regex: /^.{6,}$/i
+                    id: '#foto',
+                    regex: /^(https?|ftp|file):[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]/,
+                    error: '#errorFoto',
+                    msg: 'La url debe ser válida'
                 }
             ],
-            ctrs1: '#idCtrs1',
-            ctrs2: '#idCtrs2',
-            terminos: '#idTrm',
-            element: 'p',
             validClass: 'is-valid',
             invalidClass: 'is-invalid'
         };
     }
     init() {
-
-        let errores = $('#idErrors').html().trim();
-        if (errores.length !== 0)
-            this.marcarErrores(JSON.parse(errores));
-
+        this.limpiarTodos();
 
         $(this.config.idForm).on('submit', event => {
-
             if (!this.validaFormulario()) {
                 event.preventDefault();
             }
@@ -56,9 +49,9 @@ class ValidaCtrl {
     }
 
     validaFormulario() {
-        let ctrs1 = $(this.config.ctrs1).val().trim();
-        let ctrs2 = $(this.config.ctrs2).val().trim();
-        let terminos = $(this.config.terminos).is(':checked');
+
+        this.addTodos(this.config.validClass);
+
         let errores = false;
 
         this.config.form.forEach((val) => {
@@ -67,36 +60,25 @@ class ValidaCtrl {
             else {
                 errores = true;
                 this.setInvalid(val['id']);
+                $(val['error']).text(val['msg']);
             }
         });
 
-        if (ctrs1 !== ctrs2 || ctrs2.length === 0) {
-            errores = true;
-            this.setInvalid(this.config.ctrs2);
-        } else {
-            this.setValid(this.config.ctrs2)
-        }
 
-        if (!terminos) {
-            errores = true;
-            $(this.config.terminos).addClass(this.config.invalidClass);
-        } else {
-            $(this.config.terminos).removeClass(this.config.invalidClass);
-        }
 
         return !errores;
     }
 
-    checkNick(nick) {
-        let estado;
-        fetch(this.serviceURL + '/usuario/' + nick)
+    compruebaURL(url) {
+        //nada funciona
+        this.estado;
+        return fetch(this.serviceURL + '/pelicula/url/' + url)
                 .then((response) => {
-                    estado = response.ok;
-//            console.log(estado);
+                    return response.ok;
                 }
                 );
-//        console.log(estado);
-        return estado;
+        console.log(this.estado);
+        return this.estado;
     }
 
     setValid(id) {
@@ -109,16 +91,16 @@ class ValidaCtrl {
         $(id).removeClass(this.config.validClass);
     }
 
-    addElement(txt) {
-        return '<' + this.config.element + '>' + txt + '</' + this.config.element + '>';
-    }
-
     addTodos(cssClass) {
         this.config.form.forEach((val) => {
             $(val['id']).addClass(cssClass);
         });
+    }
 
-        $(this.config.ctrs2).addClass(cssClass);
+    limpiarTodos() {
+        this.config.form.forEach((val) => {
+            $(val['id']).removeClass(this.config.validClass + ' ' + this.config.invalidClass);
+        });
     }
 
     marcarErrores(errores) {

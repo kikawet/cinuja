@@ -47,7 +47,7 @@ public class Utils {
         Pelicula p = new Pelicula();
 
         p.setTitulo(rs.getString(offset + 2));
-        p.setFecha(rs.getDate(offset + 3));
+        p.setFecha(new java.util.Date(rs.getDate(offset + 3).getTime()));
         p.setFoto(rs.getString(offset + 4));
         p.setUrl(rs.getString(offset + 5));
         p.setSumaVotos(rs.getLong(offset + 6));

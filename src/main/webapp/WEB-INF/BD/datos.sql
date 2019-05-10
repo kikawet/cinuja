@@ -39,7 +39,7 @@ INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VA
 INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Bohemian Rhapsody','01.01.2018','bohemian-rhapsody',43,10,11,'https://www.heraldo.es/ocio/sites/default/files/bohemian.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Bryan Singer'));
 INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Batman: The Dark Knight','17.10.2001','batman',45,10,0,'http://4.bp.blogspot.com/-nKSHSdwKeKc/UA2G4zIPHfI/AAAAAAAAOQI/8C-iUweMezE/s1600/elcaballerooscuroleyendarenace.jpg',
-                                                                                (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Christopher Nollan'));
+                                                                                (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Christopher Nolan'));
 INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('12 años de esclavitud','12.2.1997','12-anos',44,10,8,'https://images-na.ssl-images-amazon.com/images/I/61QFAKXbb5L._SY679_.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Steve McQueen'));
 INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Thor: Ragnarok','7.8.2017','thor',42,10,0,'http://www.cineycine.com/archivos/2017/10/thor-ragnarok-poster.jpg',
@@ -51,5 +51,3 @@ INSERT INTO COMENTARIO (TITULO,TEXTO,FECHA,PELICULA,USUARIO) VALUES ('No está m
                                                                                 (SELECT ID FROM PELICULA AS p WHERE p.URL = 'uno-de-los-nuestros'),'boa');
 INSERT INTO COMENTARIO (TITULO,TEXTO,FECHA,PELICULA,USUARIO) VALUES ('Aburrida','Yo me aburrí. Preferiría morirme en este momento.',CURRENT_TIMESTAMP,
                                                                                 (SELECT ID FROM PELICULA AS p WHERE p.URL = 'uno-de-los-nuestros'),'web');
-
-SELECT * FROM USUARIO;
