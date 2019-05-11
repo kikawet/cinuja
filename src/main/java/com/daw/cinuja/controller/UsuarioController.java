@@ -14,14 +14,14 @@ import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Sesion;
 import com.daw.cinuja.DAO.models.Usuario;
+import com.daw.cinuja.DTO.ComentarioDTO;
 import com.daw.cinuja.DTO.UsuarioDTO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,6 +59,11 @@ public class UsuarioController {
     @Autowired
     private Sesion sesion;
 
+    @ModelAttribute("comentario")
+    public ComentarioDTO getComentario() {
+        return new ComentarioDTO();
+    }
+
     @ModelAttribute("sesion")
     public Sesion getSesion() {
         return sesion;
@@ -74,10 +78,10 @@ public class UsuarioController {
 //
 //    }
     @ModelAttribute
-    protected void processRequest(ModelMap model)
+    protected void processRequest(ModelMap model,HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        response.setContentType("text/html; charset=UTF-8");
-//        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         model.addAttribute("usuarioDTO", new UsuarioDTO());
     }
 
@@ -118,6 +122,37 @@ public class UsuarioController {
         return "redirect:/perfil";
     }
 
+    @PostMapping("/modifica/comentario")
+    public String modificarComentario(
+            @ModelAttribute("comentario") @Valid ComentarioDTO cDTO, BindingResult errores,
+            @RequestParam(value = "id", defaultValue = "0") Integer id, ModelMap model) {
+        String url = "usuario";
+
+        Comentario c = comentarios.getComentarios(sesion.getUsuario()).get(id);
+        ComentarioDTO CDTO = new ComentarioDTO();
+        CDTO.setTitulo(c.getTitulo());
+        CDTO.setTexto(c.getTexto());
+        
+        if (cDTO.equals(CDTO)) {
+            errores.rejectValue("titulo", "error.comentario.titulo", "No se ha modificado el titulo");
+            errores.rejectValue("texto", "error.comentario.texto", "No se ha modificado el texto");
+        }
+            
+        if (!errores.hasErrors()) {
+            url = "redirect:/perfil";
+            System.out.println("redirect");
+            c.setTitulo(cDTO.getTitulo());
+            c.setTexto(cDTO.getTexto());
+            comentarios.modificar(c, c);            
+        } else {
+            model.addAttribute("comentarios", comentarios.getComentarios(sesion.getUsuario()));
+            model.addAttribute("generos", PeliculaDAO.generos);
+            model.addAttribute("perfil", sesion.getUsuario());
+        }
+
+        return url;
+    }
+
     @GetMapping("/registro")
     public String registro() {
         return "registro";
@@ -126,7 +161,8 @@ public class UsuarioController {
     @PostMapping(value = "/registro")
     public String comentario(ModelMap model,
             @ModelAttribute("usuarioDTO") @Valid UsuarioDTO uDTO, BindingResult errores,
-            @RequestParam(value = "contrasena2", defaultValue = "") String contrasena) {
+             @RequestParam(value = "contrasena2", defaultValue = "") String contrasena
+    ) {
         String url = "registro";
 
         if (!uDTO.isTerminos()) {

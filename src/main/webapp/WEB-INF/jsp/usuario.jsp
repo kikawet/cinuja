@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
         <%@include file="/WEB-INF/jspf/links.jspf" %>
         <title>JSP Usuario</title>
+        <script src="${pageContext.request.contextPath}/js/modules/usuario/editar.js"></script>
     </head>
 
     <header>
@@ -70,12 +72,21 @@
                                     </td>
                                     <td>
                                         <div class="media-body">
-                                            <h3 class="mt-0 mb-1"> ${fn:escapeXml(comentario.titulo)} </h3>
-                                            <p>${fn:escapeXml(comentario.texto)}</p>
-                                            <!--<form method="post" action="perfil/borrar/comentario?id=${pos}">--> 
-                                            <input type="submit" class="btn btn-success" value="Editar"/>
-                                            <a role="button" class="btn btn-danger" href="perfil/borrar/comentario?id=${pos}">Eliminar</a>
-                                            <!--</form>-->
+                                            <div id="comentario${pos}">
+                                                <h3 class="mt-0 mb-1"> ${fn:escapeXml(comentario.titulo)}</h3>
+                                                <p>${fn:escapeXml(comentario.texto)}</p>
+                                                <button name="show" id="${pos}" class="btn btn-success">Editar</button>
+                                                <a role="button" class="btn btn-danger" href="perfil/borrar/comentario?id=${pos}">Eliminar</a>
+                                            </div>
+
+                                            <form:form id="form${pos}" style="display: none" method="POST" modelAttribute="comentario" action="perfil/modifica/comentario?id=${pos}">
+                                                <form:input path="titulo" value="${comentario.titulo}"/>
+                                                <form:errors path="titulo" />
+                                                <form:input path="texto" value="${comentario.texto}"/>
+                                                <form:errors path="texto" />                                                
+                                                <input type="submit" class="btn btn-success" value="Aceptar"/>
+                                                <div role="button"  name="show" id="${pos}" class="btn btn-danger">Cancelar</div>
+                                            </form:form>
                                         </div>
                                     </td>
                                 </tr>

@@ -24,4 +24,6 @@ public interface ComentarioDAO {
     boolean insertar(Comentario c);
 
     boolean borrar(Comentario c);
+    
+    boolean modificar(Comentario antiguo, Comentario nuevo);
 }

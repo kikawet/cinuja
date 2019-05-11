@@ -6,6 +6,7 @@
 package com.daw.cinuja.DTO;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -21,6 +22,24 @@ public class ComentarioDTO {
     @NotNull(message = "El texto de un comentario es necesario")
     @Size(min = 3, max = 256, message = "El texto no tiene un tamaño entre {min} y {max} caracteres")
     private String texto;
+
+   
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ComentarioDTO other = (ComentarioDTO) obj;
+        if (!Objects.equals(this.titulo, other.titulo)) {
+            return false;
+        }
+        if (!Objects.equals(this.texto, other.texto)) {
+            return false;
+        }
+        return true;
+    }
 
     public ComentarioDTO() {
         this.titulo = "";

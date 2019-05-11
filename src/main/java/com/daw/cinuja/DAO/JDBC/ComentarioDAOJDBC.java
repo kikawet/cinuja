@@ -147,4 +147,29 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
         return comentarios;
     }
 
+    @Override
+    public boolean modificar(Comentario antiguo, Comentario nuevo) {
+        String query = "UPDATE comentario SET titulo = ?, texto = ? "
+                + " WHERE fecha = ? AND usuario = ? AND pelicula = (select id from pelicula where pelicula.url = ?)";
+
+        boolean res = false;
+        try (
+                Connection conn = ds.getConnection();
+                PreparedStatement st = conn.prepareStatement(query);) {
+
+            st.setString(1, nuevo.getTitulo());
+            st.setString(2, nuevo.getTexto());
+            st.setTimestamp(3, new java.sql.Timestamp(antiguo.getFecha().getTime()));
+            st.setString(4, antiguo.getUsuario().getNick());
+            st.setString(5, antiguo.getPelicula().getUrl());
+
+            res = st.execute();
+
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
+
+        return res;
+    }
+
 }

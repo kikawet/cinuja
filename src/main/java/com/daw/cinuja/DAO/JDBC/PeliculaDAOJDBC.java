@@ -172,6 +172,7 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
         try (
                 Connection conn = ds.getConnection();
                 PreparedStatement st = conn.prepareStatement(query);) {
+            
             st.setString(1, nueva.getTitulo());
             st.setDate(2, new java.sql.Date(nueva.getFecha().getTime()));
             st.setString(3, nueva.getFoto());
