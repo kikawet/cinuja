@@ -38,6 +38,23 @@
             <role-name>adm</role-name>
         </auth-constraint>
     </security-constraint>
+    <security-constraint>
+        <display-name>peliculas</display-name>
+        <web-resource-collection>
+            <web-resource-name>borrar</web-resource-name>
+            <description>borrar peliculas</description>
+            <url-pattern>/pelicula/*/borrar</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>crear</web-resource-name>
+            <description>crear peliculas</description>
+            <url-pattern>/pelicula/crear</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>adm</role-name>
+        </auth-constraint>
+    </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>cinuja</realm-name>

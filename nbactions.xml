@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-create uber</actionName>
+            <displayName>create uber</displayName>
+            <goals>
+                <goal>package</goal>
+                <goal>payara-micro:bundle</goal>
+            </goals>
+        </action>
+    </actions>
