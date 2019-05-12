@@ -16,7 +16,6 @@ import org.springframework.stereotype.Repository;
  *
  * @author lopez
  */
-//@ApplicationScoped
 @Repository(UsuarioDAO.QUALIFIER_ + DAOConfig._DAOLIST)
 public class UsuarioDAOList implements UsuarioDAO {
 
@@ -54,5 +53,4 @@ public class UsuarioDAOList implements UsuarioDAO {
         usuarios.get(usuarios.indexOf(antiguo)).copy(nuevo);
         return true;
     }
-
 }

@@ -6,7 +6,7 @@
 
 $(() => {
     let ctrl = new ValidaCtrl();
-    ctrl.init(); //attach view-event handlers    
+    ctrl.init();
 });
 
 class ValidaCtrl {
@@ -64,8 +64,6 @@ class ValidaCtrl {
             }
         });
 
-
-
         return !errores;
     }
 
@@ -104,14 +102,11 @@ class ValidaCtrl {
     }
 
     marcarErrores(errores) {
-
         this.addTodos(this.config.validClass);
 
         for (let val of errores) {
             this.setInvalid('[name=' + val['name'] + ']');
         }
         ;
-
     }
-
 }

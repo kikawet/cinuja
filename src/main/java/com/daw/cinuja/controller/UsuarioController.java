@@ -5,9 +5,6 @@
  */
 package com.daw.cinuja.controller;
 
-import com.daw.cinuja.DAO.JDBC.ComentarioDAOJDBC;
-import com.daw.cinuja.DAO.JDBC.PeliculaDAOJDBC;
-import com.daw.cinuja.DAO.JDBC.UsuarioDAOJDBC;
 import com.daw.cinuja.DAO.interfaces.ComentarioDAO;
 import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
@@ -50,10 +47,6 @@ public class UsuarioController {
     private UsuarioDAO usuarios;
 
     @Autowired
-    @Qualifier(DAOConfig.peliculaQualifier)
-    private PeliculaDAO peliculas;
-
-    @Autowired
     @Qualifier(DAOConfig.comentarioQualifier)
     private ComentarioDAO comentarios;
 
@@ -70,14 +63,6 @@ public class UsuarioController {
         return sesion;
     }
 
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//
-////        request.authenticate(response);
-//        sesion.setUsuario(usuarios.getUsuario(request.getRemoteUser()));
-//
-//    }
     @ModelAttribute
     protected void processRequest(ModelMap model, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -119,7 +104,6 @@ public class UsuarioController {
     @GetMapping("/borrar/comentario")
     public String borrarComentario(@RequestParam(value = "id", defaultValue = "0") Integer id, ModelMap model) {
         comentarios.borrar(comentarios.getComentarios(sesion.getUsuario()).get(id));
-//        model.clear();
         return "redirect:/perfil";
     }
 
@@ -170,7 +154,6 @@ public class UsuarioController {
         }
 
         if (!uDTO.getContrasena().equals(contrasena) || contrasena.isEmpty()) {
-//            errores.rejectValue("contrasena", "error.cliente.contrasena", "Las contraseñas no son iguales");
             errores.addError(new FieldError("contrasena2", "contrasena2", "Las contraseñas no son iguales"));
         } else {
             model.addAttribute("contrasena2", contrasena);
@@ -192,17 +175,11 @@ public class UsuarioController {
             model.clear();
         } else {
             List<Object> errs = new ArrayList<>();
-//           Jsonb jsonb = JsonbBuilder.create();//te odio java 7
 
             for (FieldError e : errores.getFieldErrors()) {
                 final String name = e.getField();
                 final String msg = e.getDefaultMessage();
                 String m = "{\"name\":\"" + name + "\",\"msg\":\"" + msg + "\"}";
-//                Object m = new Object(){
-//                  public String name = nam;
-//                  public String msg = ms;
-//                };
-
                 errs.add(m);
             }
             model.addAttribute("errors", errs);

@@ -10,7 +10,6 @@ import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Director;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Usuario;
-import com.daw.cinuja.DTO.ComentarioDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -79,7 +78,6 @@ public class Utils {
         u.setNombre(rs.getString(offset + 2));
         u.setApellidos(rs.getString(offset + 3));
         u.setFoto(rs.getString(offset + 4));
-        //5 contraseña
         u.setRol(rs.getString(offset + 6));
 
         return u;

@@ -6,13 +6,12 @@
 package com.daw.cinuja.DAO.models;
 
 import java.util.Objects;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
- * Para almacenar las preferencias y los datos de un usuario
+ *
  *
  * @author lopez
  */
@@ -50,7 +49,6 @@ public class Usuario {
             this.setContrasena(otro.getContrasena());
             this.setRol(otro.getRol());
         }
-
     }
 
     @Override
@@ -69,10 +67,7 @@ public class Usuario {
             return false;
         }
         final Usuario other = (Usuario) obj;
-        if (!Objects.equals(this.nick, other.nick)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.nick, other.nick);
     }
 
     public String getNick() {
@@ -115,21 +110,6 @@ public class Usuario {
         this.rol = rol;
     }
 
-//    public Pelicula getpFavorita() {
-//        return pFavorita;
-//    }
-//
-//    public void setpFavorita(Pelicula pFavorita) {
-//        this.pFavorita = pFavorita;
-//    }
-//
-//    public Director getdFavorito() {
-//        return dFavorito;
-//    }
-//
-//    public void setdFavorito(Director dFavorito) {
-//        this.dFavorito = dFavorito;
-//    }
     public String getContrasena() {
         return contrasena;
     }
@@ -137,5 +117,4 @@ public class Usuario {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-
 }

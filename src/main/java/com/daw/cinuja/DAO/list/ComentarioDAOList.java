@@ -10,7 +10,6 @@ import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Usuario;
-import com.daw.cinuja.DTO.ComentarioDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.core.MultivaluedHashMap;
@@ -30,7 +29,6 @@ public class ComentarioDAOList implements ComentarioDAO {
 
     public ComentarioDAOList() {
         comentarios = new MultivaluedHashMap<>();
-        //post construct en 2 a
     }
 
     @Override
@@ -40,9 +38,7 @@ public class ComentarioDAOList implements ComentarioDAO {
 
     @Override
     public boolean insertar(Comentario c) {
-//        if (comentarios.isEmpty() || comentarios.get(c.getPelicula()).isEmpty() || !comentarios.get(c.getPelicula()).contains(c)) {
         comentarios.add(c.getPelicula(), c);
-//        }
         return comentarios.get(c.getPelicula()).contains(c);
     }
 

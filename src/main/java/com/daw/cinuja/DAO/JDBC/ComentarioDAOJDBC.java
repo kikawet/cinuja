@@ -12,7 +12,6 @@ import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Usuario;
-import com.daw.cinuja.DTO.ComentarioDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,14 +30,11 @@ import org.springframework.stereotype.Repository;
  *
  * @author lopez
  */
-//@RequestScoped
-//@DAOJDBC
 @Repository(ComentarioDAO.QUALIFIER_ + DAOConfig._DAOJDBC)
 public class ComentarioDAOJDBC implements ComentarioDAO {
 
-    private Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
+    private static final Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
 
-//    @Resource(lookup = "java:global/jdbc/Cinuja")
     @Autowired(required = false)
     private DataSource ds;
 
@@ -55,7 +51,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
 
     @Override
     public List<Comentario> getComentarios(Pelicula p) {
-        String query = "Select * from comentario as c , pelicula as p where c.pelicula = p.id AND p.url = '" + p.getUrl() + "'";
+        final String query = "Select * from comentario as c , pelicula as p where c.pelicula = p.id AND p.url = '" + p.getUrl() + "'";
         List<Comentario> comentarios = new ArrayList<>();
         try (
                 Connection conn = ds.getConnection();
@@ -74,7 +70,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
 
     @Override
     public boolean insertar(Comentario c) {
-        String query = "INSERT INTO COMENTARIO (PELICULA, USUARIO, FECHA, TITULO, TEXTO) VALUES (("
+        final String query = "INSERT INTO COMENTARIO (PELICULA, USUARIO, FECHA, TITULO, TEXTO) VALUES (("
                 + "SELECT id "
                 + "FROM pelicula as p "
                 + "WHERE p.url = '" + c.getPelicula().getUrl() + "'"
@@ -120,7 +116,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
 
     @Override
     public List<Comentario> getComentarios(Usuario u) {
-        String query = "Select * "
+        final String query = "Select * "
                 + "from comentario as c  "
                 + "LEFT JOIN pelicula as p "
                 + "on p.id = c.pelicula, "

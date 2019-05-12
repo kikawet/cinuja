@@ -26,7 +26,5 @@ class ControlComentario {
                 $(this.config.templateComentario + $(elem).attr('id')).toggle();
             });
         });
-
     }
-
 }

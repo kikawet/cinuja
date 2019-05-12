@@ -55,12 +55,4 @@ CREATE TABLE Comentario(
     PRIMARY KEY(id)
 );
 
---Se borran con las tablas
---DROP INDEX pel_url;
---DROP INDEX usr_nick;
---DROP INDEX com_pel;
-
 CREATE INDEX pel_url ON Pelicula(url);
--- Se crean con las primary key
---CREATE INDEX usr_nick ON Usuario(nick);
---CREATE INDEX com_pel ON Comentario(pelicula);

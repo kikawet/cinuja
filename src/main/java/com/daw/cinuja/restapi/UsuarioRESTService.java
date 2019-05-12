@@ -5,11 +5,8 @@
  */
 package com.daw.cinuja.restapi;
 
-import com.daw.cinuja.DAO.JDBC.UsuarioDAOJDBC;
 import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
-import com.daw.cinuja.DAO.models.Pelicula;
-import com.daw.cinuja.DAO.models.Sesion;
 import com.daw.cinuja.DAO.models.Usuario;
 import java.util.ArrayList;
 import java.util.HashMap;

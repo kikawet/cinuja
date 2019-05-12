@@ -5,7 +5,6 @@
  */
 package com.daw.cinuja.DTO;
 
-import java.util.Date;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -24,12 +23,10 @@ public class PeliculaDTO {
     @Pattern(regexp = "^[a-z]+(-[a-z]+)*", message = "La url no tiene el formato correcto (todo debe tener minusculas y separado por -)")
     private String url;
     //tambien puede ser una pelicula no estrenada
-    //@Past(message = "La fecha en la que se estrenó la pelicula tiene que ser anterior a la actual")
     private String fecha;//estreno
     @Pattern(regexp = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "La foto debe ser de una url")
     private String foto;//url 
     @Min(value = 0, message = "El genero debe de ser un indice de la lista de generos")
-    //@Max(value = PeliculaDAO.generos.size())
     private int genero;//indice
 
     public PeliculaDTO() {

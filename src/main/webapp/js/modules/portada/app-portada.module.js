@@ -32,7 +32,6 @@ class PortadaController {
         //sesion
         this.$http.get(this.serviceURL + '/API/sesion')
                 .then(response => {
-//                    this.generos = response.data;
                     if (response.data.length === 0)
                         this.usuario = {};
                     else

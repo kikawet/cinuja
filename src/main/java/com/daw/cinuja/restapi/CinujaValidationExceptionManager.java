@@ -22,7 +22,6 @@ public class CinujaValidationExceptionManager implements ExceptionMapper<Constra
 
     @Override
     public Response toResponse(ConstraintViolationException e) {
-
         List<Object> errors = new ArrayList<>();
 
         for (final ConstraintViolation<?> cv : e.getConstraintViolations()) {
@@ -37,7 +36,5 @@ public class CinujaValidationExceptionManager implements ExceptionMapper<Constra
         }
 
         return Response.status(Response.Status.BAD_REQUEST).entity(errors).build();
-
     }
-
 }

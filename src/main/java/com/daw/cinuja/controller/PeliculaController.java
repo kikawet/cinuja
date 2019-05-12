@@ -5,9 +5,6 @@
  */
 package com.daw.cinuja.controller;
 
-import com.daw.cinuja.DAO.JDBC.ComentarioDAOJDBC;
-import com.daw.cinuja.DAO.JDBC.PeliculaDAOJDBC;
-import com.daw.cinuja.DAO.JDBC.UsuarioDAOJDBC;
 import com.daw.cinuja.DAO.interfaces.ComentarioDAO;
 import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
@@ -18,11 +15,9 @@ import com.daw.cinuja.DAO.models.Sesion;
 import com.daw.cinuja.DTO.ComentarioDTO;
 import com.daw.cinuja.DTO.PeliculaDTO;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -34,8 +29,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,10 +51,6 @@ public class PeliculaController {
     @Autowired
     @Qualifier(DAOConfig.comentarioQualifier)
     private ComentarioDAO comentarios;
-
-    @Autowired
-    @Qualifier(DAOConfig.usuarioQualifier)
-    private UsuarioDAO usuarios;
 
     @Autowired
     private Sesion sesion;
@@ -88,14 +77,10 @@ public class PeliculaController {
             throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
 //        request.setCharacterEncoding("UTF-8");
-//        Pelicula p = peliculas.getPelicula(url_peli);
-//        model.addAttribute("pelicula", p);
-//        model.addAttribute("comentarios", comentarios.getComentarios(p));
     }
 
     @GetMapping("/{url_peli}")
     public String visualiza(ModelMap model, @PathVariable String url_peli) {
-
         if (sesion.getUsuario() != null) {
             model.addAttribute("comentarioDTO", new ComentarioDTO());
         }
@@ -109,9 +94,7 @@ public class PeliculaController {
 
     @GetMapping("/{url_peli}/borrar")
     public String borra(@PathVariable String url_peli) {
-
         peliculas.borrar(peliculas.getPelicula(url_peli));
-
         return "redirect:/portada";
     }
 
@@ -163,8 +146,6 @@ public class PeliculaController {
                 Logger.getLogger(PeliculaController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
         return url;
     }
-
 }

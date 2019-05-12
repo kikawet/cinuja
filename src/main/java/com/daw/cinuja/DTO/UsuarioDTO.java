@@ -31,7 +31,6 @@ public class UsuarioDTO {
         this.nick = "";
         this.nombre = "";
         this.apellidos = "";
-//    this.contrasena = null;
     }
 
     public String getNick() {

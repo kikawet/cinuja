@@ -13,7 +13,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
         <%@include file="/WEB-INF/jspf/links.jspf" %>
-        <title>JSP Usuario</title>
         <script src="${pageContext.request.contextPath}/js/modules/usuario/editar.js"></script>
     </head>
 
@@ -34,7 +33,7 @@
         </div>
         <div class="card-body col-xs-6">
             <div class=" d-block">
-                <h2 class="sub-header col-xs-6">Comentarios (prototipo) </h2>
+                <h2 class="sub-header col-xs-6">Comentarios</h2>
                 <div class="table-responsive col-xs-6">
 
                     <c:if test="${empty comentarios}">
@@ -44,15 +43,12 @@
                     <c:if test="${not empty comentarios}">
                         <table class="table table-striped col-xs-6">
                             <tr> 
-                                <th>Calificación</th>
                                 <th>Película</th>
-                                <th>Comentario</th>                               
-
+                                <th>Comentario</th>      
                             </tr>
                             <c:set var="pos" value="0"/>
                             <c:forEach items="${comentarios}" var="comentario">
                                 <tr>
-                                    <td>${comentario.valoracion}</td>
                                     <td>
                                         <div class="card" style="width: 14rem;">
                                             <a href="pelicula/${comentario.pelicula.url}">
@@ -97,7 +93,6 @@
                 </div>
             </div>               
         </div>
-
 
     </body>
 </html>

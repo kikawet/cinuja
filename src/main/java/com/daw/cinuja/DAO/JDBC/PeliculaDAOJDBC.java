@@ -25,14 +25,11 @@ import org.springframework.stereotype.Repository;
  *
  * @author lopez
  */
-//@RequestScoped
-//@DAOJDBC
 @Repository(PeliculaDAO.QUALIFIER_ + DAOConfig._DAOJDBC)
 public class PeliculaDAOJDBC implements PeliculaDAO {
 
-    private Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
+    private static final Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
 
-//    @Resource(lookup = "java:global/jdbc/Cinuja")
     @Autowired(required = false)
     private DataSource ds;
 
@@ -92,7 +89,6 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
 
     @Override
     public boolean borrar(Pelicula p) {
-        //Derby no tiene borrar en cascada :/        
         String query1 = "DELETE from comentario as c where c.pelicula = (select id from pelicula as p where p.url = ?)";
         String query2 = "DELETE FROM pelicula AS p WHERE p.url = ?";
         boolean res1 = false, res2 = false;
@@ -115,7 +111,7 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
 
     @Override
     public Pelicula getPelicula(String url) {
-        String query = "SELECT * "
+        final String query = "SELECT * "
                 + "FROM PELICULA AS p "
                 + "LEFT JOIN DIRECTOR AS d "
                 + "ON p.DIRECTOR = d.ID "

@@ -6,7 +6,7 @@
 
 $(() => {
     let ctrl = new ValidaCtrl();
-    ctrl.init(); //attach view-event handlers
+    ctrl.init();
 });
 
 class ValidaCtrl {

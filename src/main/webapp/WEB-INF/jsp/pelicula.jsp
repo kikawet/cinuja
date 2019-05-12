@@ -6,10 +6,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!--<a href="nb-configuration.xml"></a>-->
         <%@include file="/WEB-INF/jspf/links.jspf" %>
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-        <title>JSP pelicula</title>
         <script src="${pageContext.request.contextPath}/js/validacion/comentario.js"></script>
         <style>
 
@@ -101,7 +99,6 @@
     </head>
 
     <body>
-
         <header class="cabecera">
             <%@include file="/WEB-INF/jspf/cabecera.jspf" %>
         </header>
@@ -155,7 +152,6 @@
             </div> 
 
             <c:if test="${sesion.usuario.rol eq 'adm'}">
-                <a role="button" class="btn btn-primary" href="${pageContext.request.contextPath}/perfil/salir">Editar</a>
                 <a role="button" class="btn btn-danger" href="${pelicula.url}/borrar">Borrar</a>
             </c:if>
 
@@ -179,24 +175,12 @@
             </c:forEach>
         </ul>
 
-        <!--c:forEach items="${errores}" var="error">
-            <div class="alert alert-danger">
-        ${error.message}
-    </div>
-        <!--/c:forEach-->
-
-        <aside class="my-md-4 container input-group justify-content-center">                
-
+        <aside class="my-md-4 container input-group justify-content-center">        
             <c:if test="${empty sesion.usuario}">
                 <div class="alert alert-danger ">Inicia sesión para comentar</div>
             </c:if>
 
             <c:if test="${not empty sesion.usuario}">    
-
-
-
-
-
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -212,12 +196,10 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
 
                 <form:form id="frmcmt" method="POST" modelAttribute="comentarioDTO">
                     <div class="input-group mb-3">
@@ -229,7 +211,6 @@
                     <form:textarea path="texto" cssClass="input-group-text form-control text-left" id="texto" rows="10" cols="120" placeholder="Escribe aquí tu comentario"/>
                     <input class="btn btn-primary form-control" type="submit" data-toggle="modal" data-target="#exampleModal" value="Comentar" >
                 </form:form>
-
             </c:if>
         </aside>
 

@@ -20,23 +20,16 @@ and open the template in the editor.-->
         </nav>
 
         <div ng-show="$ctrl.usuario.rol === 'adm'">
-
             <button type="button" class="btn btn-success my-lg-5 px-4" style="margin-left:80px;" data-toggle="modal" data-target="#exampleModal" id="boton3">Añadir</button>
-
         </div>
     </aside>
 
-
-
     <section class="my-md-3 container d-flex justify-content-start">
         <div class="my-md-3 row d-flex justify-content-start">   
-
             <div ng-show="$ctrl.peliculas.length === 0">
                 <p>No hay películas de ese género</p>
             </div>
-
-            <div ng-repeat="pelicula in $ctrl.peliculas | orderBy:'-nota' | filter:filtro">
-
+            <div ng-repeat="pelicula in $ctrl.peliculas| orderBy:'-nota' | filter:filtro">
                 <nav class="col-md my-md-3">
                     <div class="card" style="width: 15rem;">
                         <a href="pelicula/{{pelicula.url}}">
@@ -53,13 +46,10 @@ and open the template in the editor.-->
                                 <li class="list-group-item">{{$ctrl.generos[pelicula.genero]}}</li>
                                 <li class="list-group-item"><b>{{pelicula.nota| number:1}}</b>/5</li>
                             </ul>
-
                         </div>
                     </div>
                 </nav>
-
             </div>
-
         </div>
     </section>
 </main>

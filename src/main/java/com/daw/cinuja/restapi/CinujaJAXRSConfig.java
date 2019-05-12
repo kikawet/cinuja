@@ -13,7 +13,6 @@ import org.glassfish.jersey.server.ResourceConfig;
  * @author axpos
  */
 @ApplicationPath("webservice")
-
 public class CinujaJAXRSConfig extends ResourceConfig {
 
     public CinujaJAXRSConfig() {

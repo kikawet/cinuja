@@ -67,10 +67,7 @@ public class Comentario {
         if (!Objects.equals(this.pelicula, other.pelicula)) {
             return false;
         }
-        if (!Objects.equals(this.fecha, other.fecha)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.fecha, other.fecha);
     }
 
     public Usuario getUsuario() {
@@ -120,5 +117,4 @@ public class Comentario {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-
 }

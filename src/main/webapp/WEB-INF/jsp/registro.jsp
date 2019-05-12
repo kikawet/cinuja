@@ -11,13 +11,11 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html" charset=UTF-8">
-        <title>JSP inicio</title>
         <%@include file="/WEB-INF/jspf/links.jspf" %>        
-        <!--<script type="text/javascript" >let errors = "${errors}";</script>-->
         <script src="${pageContext.request.contextPath}/js/validacion/usuario.js" type="text/javascript"></script>
     </head>
 
-    <body class="">
+    <body>
         <%@include file="/WEB-INF/jspf/cabecera.jspf" %>
         <div class="my-xl-5 mx-lg-5">
             <div class="bg-white m-auto mh-700" style="height: 700px">
@@ -93,7 +91,6 @@
                     </div>
                 </form:form>
                 <br>
-                <%--<form:errors path="usuarioDTO.*" id="errores" cssClass="alert alert-danger" element="div"/>--%>
             </div>
 
             <div class="modal fade" id="terminos" tabindex="-1" role="dialog" aria-labelledby="terminosLabel" aria-hidden="true">

@@ -11,15 +11,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 /**
+ * Para almacenar las preferencias y los datos de un usuario
  *
  * @author lopez
  */
-//@Named(value = "sesion")
 @Component
 @SessionScope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Sesion implements Serializable {
 
-    //@Valid
     private Usuario usuario;
 
     public Sesion() {
@@ -32,5 +31,4 @@ public class Sesion implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
 }

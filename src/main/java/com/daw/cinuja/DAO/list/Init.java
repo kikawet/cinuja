@@ -18,15 +18,14 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.context.annotation.ApplicationScope;
 
 /**
  *
  * @author lopez
  */
-@Configuration
-public class Init /*implements Serializable*/ {
+//Activar anotación si se van a usar los daos de listas
+//@Configuration
+public class Init {
 
     @Autowired(required = false)
     @Qualifier(PeliculaDAO.QUALIFIER_ + DAOConfig._DAOLIST)

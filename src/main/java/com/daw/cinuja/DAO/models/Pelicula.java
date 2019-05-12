@@ -8,15 +8,13 @@ package com.daw.cinuja.DAO.models;
 import java.util.Date;
 import java.util.Objects;
 import javax.validation.Valid;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
- * Para almacenar las preferencias y los datos de un usuario
+ *
  *
  * @author lopez
  */
@@ -33,20 +31,15 @@ public class Pelicula {
     private Date fecha;//estreno
     @Pattern(regexp = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "La foto debe ser de una url")
     private String foto;//url 
-//    @DecimalMin(value = "0", inclusive = true, message = "La nota debe ser mayor de {value}")
-//    @DecimalMax(value = "5", inclusive = true, message = "La nota debe ser menor de {value}")
-//    private float nota;
     @Min(value = 0, message = "La suma de los votos no puede ser menor que 0")
     private long sumaVotos;
     @Min(value = 0, message = "El numero de votos no puede ser menor que {value}")
     private long nVotos;
-    //@Size(min = 0/*,max = PeliculaDAO.generos.size()*/, message = "El genero debe de ser un indice de la lista de generos")
     @Min(value = 0, message = "El genero debe de ser un indice de la lista de generos")
     //@Max(value = PeliculaDAO.generos.size())
     private int genero;//indice
     @Size(min = 3, max = 256, message = "El tamaño de la descripción debe de estar entre {min} y {max}")
     private String descripcion;
-    //debe de ser true si el genero es el de +18 pero no se poner esa restricción :/
     private boolean restriccionEdad;//restricción de edad
     @Valid
     private Director director;
@@ -87,10 +80,7 @@ public class Pelicula {
         if (!Objects.equals(this.titulo, other.titulo)) {
             return false;
         }
-        if (!Objects.equals(this.fecha, other.fecha)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.fecha, other.fecha);
     }
 
     public String getTitulo() {

@@ -7,7 +7,6 @@ package com.daw.cinuja.DAO.JDBC;
 
 import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
-import com.daw.cinuja.DAO.models.Director;
 import com.daw.cinuja.DAO.models.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,14 +23,11 @@ import org.springframework.stereotype.Repository;
  *
  * @author lopez
  */
-//@RequestScoped
-//@DAOJDBC
 @Repository(UsuarioDAO.QUALIFIER_ + DAOConfig._DAOJDBC)
 public class UsuarioDAOJDBC implements UsuarioDAO {
 
-    private Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
+    private static final Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
 
-//    @Resource(lookup = "java:global/jdbc/Cinuja")
     @Autowired(required = false)
     private DataSource ds;
 
@@ -40,8 +36,7 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
 
     @Override
     public Usuario getUsuario(String nick) {
-
-        String query = "SELECT * "
+        final String query = "SELECT * "
                 + "FROM USUARIO AS u "
                 + "WHERE u.nick = '" + nick + "'";
 
@@ -77,8 +72,6 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
             st.setString(4, u.getFoto());
             st.setString(5, u.getContrasena());
             st.setString(6, u.getRol());
-//                        st.setString(7, u.getpFavorita().getUrl());
-//            st.setString(8, u.getdFavorito().getNombre());
 
             res = st.execute();
         } catch (SQLException ex) {

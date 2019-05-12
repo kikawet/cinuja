@@ -16,8 +16,6 @@ import org.springframework.stereotype.Repository;
  *
  * @author lopez
  */
-//@ApplicationScoped
-//@DAOList
 @Repository(PeliculaDAO.QUALIFIER_ + DAOConfig._DAOLIST)
 public class PeliculaDAOList implements PeliculaDAO {
 
