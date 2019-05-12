@@ -1,5 +1,6 @@
 package com.daw.cinuja.spring;
 
+import com.daw.cinuja.DAO.list.Init;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 import org.springframework.core.Ordered;
@@ -19,6 +20,8 @@ public class SpringApplicationInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext container) {
+
+//        Init init = new Init();
         //Launch and configure SpringMVC
         // Create the 'root' Spring application context
         AnnotationConfigWebApplicationContext rootContext

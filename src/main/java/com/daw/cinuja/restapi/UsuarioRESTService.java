@@ -6,6 +6,7 @@
 package com.daw.cinuja.restapi;
 
 import com.daw.cinuja.DAO.JDBC.UsuarioDAOJDBC;
+import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Sesion;
@@ -37,7 +38,7 @@ public class UsuarioRESTService {
     private UriInfo context;
 
     @Autowired     //Utilizamos anotaciones de inyección Spring
-    @Qualifier(UsuarioDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.usuarioQualifier)
     UsuarioDAO usuarios;
 
     @GET

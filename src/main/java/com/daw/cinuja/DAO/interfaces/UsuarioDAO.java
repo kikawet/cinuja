@@ -13,6 +13,8 @@ import com.daw.cinuja.DAO.models.Usuario;
  */
 public interface UsuarioDAO {
 
+    public final static String QUALIFIER_ = "Usuario";
+
     public final static String ROL_ADMIN = "adm";
 
     public final static String ROL_NONE = "non";

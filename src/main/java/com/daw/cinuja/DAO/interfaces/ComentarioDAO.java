@@ -17,6 +17,8 @@ import java.util.List;
  */
 public interface ComentarioDAO {
 
+    public final static String QUALIFIER_ = "Comentario";
+
     List<Comentario> getComentarios(Pelicula p);
 
     List<Comentario> getComentarios(Usuario u);
@@ -24,6 +26,6 @@ public interface ComentarioDAO {
     boolean insertar(Comentario c);
 
     boolean borrar(Comentario c);
-    
+
     boolean modificar(Comentario antiguo, Comentario nuevo);
 }

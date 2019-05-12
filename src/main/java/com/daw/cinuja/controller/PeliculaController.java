@@ -9,6 +9,7 @@ import com.daw.cinuja.DAO.JDBC.ComentarioDAOJDBC;
 import com.daw.cinuja.DAO.JDBC.PeliculaDAOJDBC;
 import com.daw.cinuja.DAO.JDBC.UsuarioDAOJDBC;
 import com.daw.cinuja.DAO.interfaces.ComentarioDAO;
+import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
@@ -51,15 +52,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PeliculaController {
 
     @Autowired
-    @Qualifier(PeliculaDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.peliculaQualifier)
     private PeliculaDAO peliculas;
 
     @Autowired
-    @Qualifier(ComentarioDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.comentarioQualifier)
     private ComentarioDAO comentarios;
 
     @Autowired
-    @Qualifier(UsuarioDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.usuarioQualifier)
     private UsuarioDAO usuarios;
 
     @Autowired

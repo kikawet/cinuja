@@ -5,6 +5,7 @@
  */
 package com.daw.cinuja.DAO.JDBC;
 
+import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.models.Pelicula;
 import java.sql.Connection;
@@ -26,12 +27,10 @@ import org.springframework.stereotype.Repository;
  */
 //@RequestScoped
 //@DAOJDBC
-@Repository(PeliculaDAOJDBC.qualifier)
+@Repository(PeliculaDAO.QUALIFIER_ + DAOConfig._DAOJDBC)
 public class PeliculaDAOJDBC implements PeliculaDAO {
 
     private Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
-
-    final static public String qualifier = "PeliculaDAOJDBC";
 
 //    @Resource(lookup = "java:global/jdbc/Cinuja")
     @Autowired(required = false)
@@ -172,7 +171,7 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
         try (
                 Connection conn = ds.getConnection();
                 PreparedStatement st = conn.prepareStatement(query);) {
-            
+
             st.setString(1, nueva.getTitulo());
             st.setDate(2, new java.sql.Date(nueva.getFecha().getTime()));
             st.setString(3, nueva.getFoto());

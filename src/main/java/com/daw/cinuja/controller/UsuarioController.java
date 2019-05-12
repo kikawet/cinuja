@@ -9,6 +9,7 @@ import com.daw.cinuja.DAO.JDBC.ComentarioDAOJDBC;
 import com.daw.cinuja.DAO.JDBC.PeliculaDAOJDBC;
 import com.daw.cinuja.DAO.JDBC.UsuarioDAOJDBC;
 import com.daw.cinuja.DAO.interfaces.ComentarioDAO;
+import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
@@ -45,15 +46,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UsuarioController {
 
     @Autowired
-    @Qualifier(UsuarioDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.usuarioQualifier)
     private UsuarioDAO usuarios;
 
     @Autowired
-    @Qualifier(PeliculaDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.peliculaQualifier)
     private PeliculaDAO peliculas;
 
     @Autowired
-    @Qualifier(ComentarioDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.comentarioQualifier)
     private ComentarioDAO comentarios;
 
     @Autowired
@@ -78,7 +79,7 @@ public class UsuarioController {
 //
 //    }
     @ModelAttribute
-    protected void processRequest(ModelMap model,HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(ModelMap model, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
@@ -132,18 +133,17 @@ public class UsuarioController {
         ComentarioDTO CDTO = new ComentarioDTO();
         CDTO.setTitulo(c.getTitulo());
         CDTO.setTexto(c.getTexto());
-        
+
         if (cDTO.equals(CDTO)) {
             errores.rejectValue("titulo", "error.comentario.titulo", "No se ha modificado el titulo");
             errores.rejectValue("texto", "error.comentario.texto", "No se ha modificado el texto");
         }
-            
+
         if (!errores.hasErrors()) {
             url = "redirect:/perfil";
-            System.out.println("redirect");
             c.setTitulo(cDTO.getTitulo());
             c.setTexto(cDTO.getTexto());
-            comentarios.modificar(c, c);            
+            comentarios.modificar(c, c);
         } else {
             model.addAttribute("comentarios", comentarios.getComentarios(sesion.getUsuario()));
             model.addAttribute("generos", PeliculaDAO.generos);
@@ -161,7 +161,7 @@ public class UsuarioController {
     @PostMapping(value = "/registro")
     public String comentario(ModelMap model,
             @ModelAttribute("usuarioDTO") @Valid UsuarioDTO uDTO, BindingResult errores,
-             @RequestParam(value = "contrasena2", defaultValue = "") String contrasena
+            @RequestParam(value = "contrasena2", defaultValue = "") String contrasena
     ) {
         String url = "registro";
 

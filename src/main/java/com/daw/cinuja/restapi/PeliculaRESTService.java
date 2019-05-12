@@ -6,6 +6,7 @@
 package com.daw.cinuja.restapi;
 
 import com.daw.cinuja.DAO.JDBC.PeliculaDAOJDBC;
+import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.models.Pelicula;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class PeliculaRESTService {
     private UriInfo context;
 
     @Autowired     //Utilizamos anotaciones de inyección Spring
-    @Qualifier(PeliculaDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.peliculaQualifier)
     PeliculaDAO peliculas;
 
     @GET

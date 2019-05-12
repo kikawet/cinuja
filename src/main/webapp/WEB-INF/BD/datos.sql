@@ -28,7 +28,7 @@ INSERT INTO DIRECTOR (NOMBRE,F_NAC,FOTO) VALUES ('Steve McQueen','12.2.1997','ht
 INSERT INTO DIRECTOR (NOMBRE,F_NAC,FOTO) VALUES ('Taika Waititi','7.8.2017','https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Taika_Waititi_by_Gage_Skidmore.jpg/240px-Taika_Waititi_by_Gage_Skidmore.jpg');
 
 
-INSERT INTO PELICULA (NOMBRE,FECHA,URL,DESCRIPCION,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Uno de los nuestros','01.01.1990','uno-de-los-nuestros','Un hombre de Brooklyn busca la fama y la fortuna en el crimen organizado',4.7,1,10,'http://es.web.img2.acsta.net/medias/nmedia/18/67/70/14/20077949.jpg',
+INSERT INTO PELICULA (NOMBRE,FECHA,URL,DESCRIPCION,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Uno de los nuestros','01.01.1990','uno-de-los-nuestros','Un hombre de Brooklyn busca la fama y la fortuna en el crimen organizado',47,10,10,'http://es.web.img2.acsta.net/medias/nmedia/18/67/70/14/20077949.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Martin Scorsese'));
 INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Pulp Fiction','01.01.1997','pulp-fiction',46,10,10,'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2016/09/pulp-fiction_0.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Quentin Tarantino'));
@@ -40,7 +40,7 @@ INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VA
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Bryan Singer'));
 INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Batman: The Dark Knight','17.10.2001','batman',45,10,0,'http://4.bp.blogspot.com/-nKSHSdwKeKc/UA2G4zIPHfI/AAAAAAAAOQI/8C-iUweMezE/s1600/elcaballerooscuroleyendarenace.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Christopher Nolan'));
-INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('12 años de esclavitud','12.2.1997','12-anos',44,10,8,'https://images-na.ssl-images-amazon.com/images/I/61QFAKXbb5L._SY679_.jpg',
+INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('12 años de esclavitud','12.2.1997','doce-anos',44,10,8,'https://images-na.ssl-images-amazon.com/images/I/61QFAKXbb5L._SY679_.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Steve McQueen'));
 INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Thor: Ragnarok','7.8.2017','thor',42,10,0,'http://www.cineycine.com/archivos/2017/10/thor-ragnarok-poster.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Taika Waititi'));

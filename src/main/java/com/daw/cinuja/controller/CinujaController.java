@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CinujaController {
 
     @Autowired
-    @Qualifier(PeliculaDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.peliculaQualifier)
     private PeliculaDAO peliculas;
 
     @Autowired

@@ -5,6 +5,7 @@
  */
 package com.daw.cinuja.DAO.JDBC;
 
+import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Director;
 import com.daw.cinuja.DAO.models.Usuario;
@@ -25,12 +26,10 @@ import org.springframework.stereotype.Repository;
  */
 //@RequestScoped
 //@DAOJDBC
-@Repository(UsuarioDAOJDBC.qualifier)
+@Repository(UsuarioDAO.QUALIFIER_ + DAOConfig._DAOJDBC)
 public class UsuarioDAOJDBC implements UsuarioDAO {
 
     private Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
-
-    final static public String qualifier = "UsuarioDAOJDBC";
 
 //    @Resource(lookup = "java:global/jdbc/Cinuja")
     @Autowired(required = false)

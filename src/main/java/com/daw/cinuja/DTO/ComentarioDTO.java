@@ -23,7 +23,6 @@ public class ComentarioDTO {
     @Size(min = 3, max = 256, message = "El texto no tiene un tamaño entre {min} y {max} caracteres")
     private String texto;
 
-   
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;

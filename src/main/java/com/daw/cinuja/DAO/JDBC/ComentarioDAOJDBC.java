@@ -6,6 +6,7 @@
 package com.daw.cinuja.DAO.JDBC;
 
 import com.daw.cinuja.DAO.interfaces.ComentarioDAO;
+import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
@@ -32,10 +33,9 @@ import org.springframework.stereotype.Repository;
  */
 //@RequestScoped
 //@DAOJDBC
-@Repository(ComentarioDAOJDBC.qualifier)
+@Repository(ComentarioDAO.QUALIFIER_ + DAOConfig._DAOJDBC)
 public class ComentarioDAOJDBC implements ComentarioDAO {
 
-    final static public String qualifier = "ComentarioDAOJDBC";
     private Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
 
 //    @Resource(lookup = "java:global/jdbc/Cinuja")
@@ -43,11 +43,11 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
     private DataSource ds;
 
     @Autowired
-    @Qualifier(UsuarioDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.usuarioQualifier)
     private UsuarioDAO usuarios;
 
     @Autowired
-    @Qualifier(PeliculaDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.peliculaQualifier)
     private PeliculaDAO peliculas;
 
     public ComentarioDAOJDBC() {
