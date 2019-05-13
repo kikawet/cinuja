@@ -26,7 +26,7 @@ class PortadaController {
             },
             {
                 msg: 'Nota',
-                value: 'nota'
+                value: '-nota'
             }
         ];
         

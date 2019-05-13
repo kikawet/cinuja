@@ -77,6 +77,25 @@
 
         </style>
 
+        <script>
+            let frm = '#frmStar';
+            let btn = '#btnStar';
+            let idVotos = '#votos';
+            let votos = ${pelicula.nVotos};
+
+            $(() => {
+                $(idVotos).text(votos);
+
+                $(frm).on('submit', (event) => {
+                    event.preventDefault();
+                    votos++;
+                    $(idVotos).text(votos);
+                    $(btn).prop("disabled", true);
+                });
+            });
+
+        </script>
+
     </head>
 
     <body>
@@ -96,7 +115,7 @@
                             <h2 class="card-title">${pelicula.titulo}</h2>
                             <p class="card-text">${not empty pelicula.descripcion ? pelicula.descripcion += ', en esta' : ''} película de ${pelicula.director.nombre}.</p>
 
-                            <div><h2 style="display: inline"><b><fmt:formatNumber type="number" maxFractionDigits="1" value="${pelicula.nota}"/></b></h2><h5 style="color: gray; display: inline">/5</h5 > de ${pelicula.nVotos} votos</div>
+                            <div><h2 style="display: inline"><b><fmt:formatNumber type="number" maxFractionDigits="1" value="${pelicula.nota}"/></b></h2><h5 style="color: gray; display: inline">/5</h5 > de <span id="votos"></span> votos</div>
                                         <c:if test="${not empty sesion.usuario}"> 
 
                                 <form action="${pelicula.url}" id="frmStar" method="POST">
