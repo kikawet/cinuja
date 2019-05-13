@@ -6,6 +6,7 @@ and open the template in the editor.-->
 
 <div class="form-inline ml-4 my-2">
     <input class="form-control mr-sm-2" type="text" placeholder="Buscar película" aria-label="Search" ng-model="filtro.titulo">
+    Ordenar: <button ng-click="$ctrl.ordenar()">{{$ctrl.orden[$ctrl.ordenacion]['msg']}}</button>
 </div>
 
 <main class="row">
@@ -29,7 +30,7 @@ and open the template in the editor.-->
             <div ng-show="$ctrl.peliculas.length === 0">
                 <p>No hay películas de ese género</p>
             </div>
-            <div ng-repeat="pelicula in $ctrl.peliculas| orderBy:'-nota' | filter:filtro">
+            <div ng-repeat="pelicula in $ctrl.peliculas| orderBy:'-'+$ctrl.orden[$ctrl.ordenacion]['value'] | filter:filtro">
                 <nav class="col-md my-md-3">
                     <div class="card" style="width: 15rem;">
                         <a href="pelicula/{{pelicula.url}}">

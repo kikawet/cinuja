@@ -17,6 +17,24 @@ class PortadaController {
 
         //Formulario
         this.pelicula = {};
+        
+        //Ordenar
+        this.orden = [
+            {
+                msg: 'Titulo',
+                value: 'titulo'
+            },
+            {
+                msg: 'Nota',
+                value: 'nota'
+            }
+        ];
+        
+        this.ordenacion = 0;
+    }
+    
+    ordenar(){
+        this.ordenacion = (this.ordenacion + 1)% this.orden.length;
     }
 
     descargarDatos() {
