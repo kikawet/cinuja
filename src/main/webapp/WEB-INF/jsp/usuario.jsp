@@ -76,12 +76,14 @@
                                             </div>
 
                                             <form:form id="form${pos}" style="display: none" method="POST" modelAttribute="comentario" action="perfil/modifica/comentario?id=${pos}">
-                                                <form:input path="titulo" value="${comentario.titulo}"/>
+                                                <form:input path="titulo" type="text" cssClass="form-control"  value="${comentario.titulo}"/>
                                                 <form:errors path="titulo" />
-                                                <form:input path="texto" value="${comentario.texto}"/>
+
+                                                <form:input role="textarea"  path="texto" type="text" cssClass="form-control" cssStyle="margin-top: 20px;"  value="${comentario.texto}"/>
+
                                                 <form:errors path="texto" />                                                
-                                                <input type="submit" class="btn btn-success" value="Aceptar"/>
-                                                <div role="button"  name="show" id="${pos}" class="btn btn-danger">Cancelar</div>
+                                                <input type="submit" class="btn btn-success" style="margin-top: 20px;" value="Aceptar"/>
+                                                <div role="button"  name="show" id="${pos}" style="margin-top: 20px;" class="btn btn-danger">Cancelar</div>
                                             </form:form>
                                         </div>
                                     </td>

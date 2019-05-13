@@ -52,8 +52,8 @@
                     <div class="invalid-feedback">Los campos son erroneos</div>
                 </c:if>
                 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Entrar"/>
-                <a class="btn btn-lg btn-primary btn-block" role="button" href="${pageContext.request.contextPath}/perfil/registro" >Registrarse</a>
                 <a class="btn btn-danger btn-block my-2 py-2 " role="button" aria-pressed="true" href="portada" ><h5>Cancelar</h5></a>
+                 <a class="text-center" role="link" style="color: seagreen;" href="${pageContext.request.contextPath}/perfil/registro" >¿Aún no tienes cuenta? Registrate pinchando aquí</a>
             </form>
         </div>
     </body>

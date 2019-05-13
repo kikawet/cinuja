@@ -138,7 +138,7 @@
 
         </main>
 
-        <ul class="list-unstyled" >
+                                <ul class="list-unstyled" style="margin-left: 50px;" >
 
             <c:if test="${empty comentarios}">
                 <p> No hay comentarios deja el tuyo </p>
