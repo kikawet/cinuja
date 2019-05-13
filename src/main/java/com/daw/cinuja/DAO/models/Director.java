@@ -31,13 +31,13 @@ public class Director {
     private String biografia;
 
     public Director() {
+        this.nombre = "Martin Scorsese";
+        this.fnacimiento = new Date(0, 0, 0);
+        this.foto = "";
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -45,10 +45,7 @@ public class Director {
             return false;
         }
         final Director other = (Director) obj;
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.nombre, other.nombre);
     }
 
     public String getNombre() {
@@ -90,5 +87,4 @@ public class Director {
     public void setBiografia(String biografia) {
         this.biografia = biografia;
     }
-
 }

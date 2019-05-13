@@ -16,6 +16,8 @@ import java.util.List;
  */
 public interface PeliculaDAO {
 
+    public final static String QUALIFIER_ = "Pelicula";
+
     /**
      * generos posibles de las peliculas
      */

@@ -10,14 +10,6 @@
     <head>
         <%@include file="/WEB-INF/jspf/links.jspf" %>
         <meta http-equiv="Content-Type" content="text/html" charset=UTF-8">
-        <title>JSP pelicula</title>
-        <!--        <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1">-->
-        <title>HTML and CSS Form with Bootstrap 4</title>
-        <!--        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
         <style type="text/css">
             .wrapper {
                 margin: 80px;
@@ -49,11 +41,6 @@
     </head>
 
     <body background="https://s2.best-wallpaper.net/wallpaper/1920x1200/1711/Warm-light-circles-glare_1920x1200.jpg">
-        <!--        <header class="cabecera">
-        <%--<%@include file="/WEB-INF/jspf/cabecera.jspf" %>--%>
-    </header>-->
-
-
 
         <div id="cuadro" class="wrapper">
             <form class="form-signin" action="j_security_check" method="post">               
@@ -64,15 +51,10 @@
                 <c:if test="${param.error}">
                     <div class="invalid-feedback">Los campos son erroneos</div>
                 </c:if>
-                <!--label class="checkbox">
-                    <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe">
-                    Recuerdame
-                </label-->
                 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Entrar"/>
-                <a class="btn btn-lg btn-primary btn-block" role="button" href="portada/registro" >Registrarse</a>
+                <a class="btn btn-lg btn-primary btn-block" role="button" href="${pageContext.request.contextPath}/perfil/registro" >Registrarse</a>
                 <a class="btn btn-danger btn-block my-2 py-2 " role="button" aria-pressed="true" href="portada" ><h5>Cancelar</h5></a>
             </form>
-
         </div>
     </body>
 </html>

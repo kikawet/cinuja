@@ -5,7 +5,7 @@
  */
 package com.daw.cinuja.DTO;
 
-import java.io.Serializable;
+import java.util.Objects;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -15,7 +15,6 @@ import javax.validation.constraints.Size;
  */
 public class ComentarioDTO {
 
-    private int id;    //id de la base de datos
     @NotNull(message = "Todos los comentarios necesitan un titulo")
     @Size(min = 3, max = 20, message = "El titulo debe de tener un tamaño entre {min} y {max} caracteres")
     private String titulo;
@@ -23,18 +22,21 @@ public class ComentarioDTO {
     @Size(min = 3, max = 256, message = "El texto no tiene un tamaño entre {min} y {max} caracteres")
     private String texto;
 
+    @Override
+    public boolean equals(Object obj) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ComentarioDTO other = (ComentarioDTO) obj;
+        if (!Objects.equals(this.titulo, other.titulo)) {
+            return false;
+        }
+        return Objects.equals(this.texto, other.texto);
+    }
+
     public ComentarioDTO() {
-        this.id = 0;
         this.titulo = "";
         this.texto = "";
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitulo() {
@@ -52,5 +54,4 @@ public class ComentarioDTO {
     public void setTexto(String texto) {
         this.texto = texto;
     }
-
 }

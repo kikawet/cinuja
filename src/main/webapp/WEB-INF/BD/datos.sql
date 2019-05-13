@@ -19,16 +19,16 @@ INSERT INTO USUARIO (NICK,CONTRASENA,NOMBRE,ROL,FOTO) VALUES ('boa','ponme_un_10
 INSERT INTO USUARIO (NICK,CONTRASENA,NOMBRE,ROL,FOTO) VALUES ('web','daw','Rodrigo','non','http://pm1.narvii.com/6265/5bba4fd8638ebdea1100eb9b06940944a8913fc0_128.jpg');
 
 INSERT INTO DIRECTOR (NOMBRE,F_NAC,FOTO) VALUES ('Martin Scorsese','02.04.2018','http://d3iln1l77n73l7.cloudfront.net/couch_images/attachments/000/057/537/original/Martin_Scorsese.jpg?2014');
-INSERT INTO DIRECTOR (NOMBRE,F_NAC) VALUES ('Quentin Tarantino','15.02.2017');
-INSERT INTO DIRECTOR (NOMBRE,F_NAC) VALUES ('Steven Spielberg','14.02.2017');
-INSERT INTO DIRECTOR (NOMBRE,F_NAC) VALUES ('Pixar','06.10.2000');
-INSERT INTO DIRECTOR (NOMBRE,F_NAC) VALUES ('Bryan Singer','16.10.2000');
-INSERT INTO DIRECTOR (NOMBRE,F_NAC) VALUES ('Christopher Nollan','17.10.2001');
-INSERT INTO DIRECTOR (NOMBRE,F_NAC) VALUES ('Steve McQueen','12.2.1997');
-INSERT INTO DIRECTOR (NOMBRE,F_NAC) VALUES ('Taika Waititi','7.8.2017');
+INSERT INTO DIRECTOR (NOMBRE,F_NAC,FOTO) VALUES ('Quentin Tarantino','15.02.2017', 'https://www.cooperativa.cl/noticias/site/artic/20161104/imag/foto_0000000120161104090517.png');
+INSERT INTO DIRECTOR (NOMBRE,F_NAC,FOTO) VALUES ('Steven Spielberg','14.02.2017','https://media.metrolatam.com/2019/02/20/capturadepantalla20190219alas210214-35b457738219a1b024fbd90a66cb8914-600x400.jpg');
+INSERT INTO DIRECTOR (NOMBRE,F_NAC,FOTO) VALUES ('Pixar','06.10.2000','https://www.taquillaespana.es/wp-content/uploads/2018/06/Pixar-en-Espa%C3%B1a-740x445.jpg');
+INSERT INTO DIRECTOR (NOMBRE,F_NAC,FOTO) VALUES ('Bryan Singer','16.10.2000','https://ichef.bbci.co.uk/news/660/cpsprodpb/1126/production/_105509340_hi051882259.jpg');
+INSERT INTO DIRECTOR (NOMBRE,F_NAC,FOTO) VALUES ('Christopher Nolan','17.10.2001','https://pixel.nymag.com/imgs/daily/vulture/2018/09/11/15-Nolan.w330.h330.jpg');
+INSERT INTO DIRECTOR (NOMBRE,F_NAC,FOTO) VALUES ('Steve McQueen','12.2.1997','https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Steve_McQueen.png/220px-Steve_McQueen.png');
+INSERT INTO DIRECTOR (NOMBRE,F_NAC,FOTO) VALUES ('Taika Waititi','7.8.2017','https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Taika_Waititi_by_Gage_Skidmore.jpg/240px-Taika_Waititi_by_Gage_Skidmore.jpg');
 
 
-INSERT INTO PELICULA (NOMBRE,FECHA,URL,DESCRIPCION,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Uno de los nuestros','01.01.1990','uno-de-los-nuestros','Un hombre de Brooklyn busca la fama y la fortuna en el crimen organizado',4.7,1,10,'http://es.web.img2.acsta.net/medias/nmedia/18/67/70/14/20077949.jpg',
+INSERT INTO PELICULA (NOMBRE,FECHA,URL,DESCRIPCION,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Uno de los nuestros','01.01.1990','uno-de-los-nuestros','Un hombre de Brooklyn busca la fama y la fortuna en el crimen organizado',47,10,10,'http://es.web.img2.acsta.net/medias/nmedia/18/67/70/14/20077949.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Martin Scorsese'));
 INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Pulp Fiction','01.01.1997','pulp-fiction',46,10,10,'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2016/09/pulp-fiction_0.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Quentin Tarantino'));
@@ -39,8 +39,8 @@ INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VA
 INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Bohemian Rhapsody','01.01.2018','bohemian-rhapsody',43,10,11,'https://www.heraldo.es/ocio/sites/default/files/bohemian.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Bryan Singer'));
 INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Batman: The Dark Knight','17.10.2001','batman',45,10,0,'http://4.bp.blogspot.com/-nKSHSdwKeKc/UA2G4zIPHfI/AAAAAAAAOQI/8C-iUweMezE/s1600/elcaballerooscuroleyendarenace.jpg',
-                                                                                (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Christopher Nollan'));
-INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('12 años de esclavitud','12.2.1997','12-anos',44,10,8,'https://images-na.ssl-images-amazon.com/images/I/61QFAKXbb5L._SY679_.jpg',
+                                                                                (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Christopher Nolan'));
+INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('12 años de esclavitud','12.2.1997','doce-anos',44,10,8,'https://images-na.ssl-images-amazon.com/images/I/61QFAKXbb5L._SY679_.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Steve McQueen'));
 INSERT INTO PELICULA (NOMBRE,FECHA,URL,SUMAVOTOS,NVOTOS,GENERO,FOTO,DIRECTOR) VALUES ('Thor: Ragnarok','7.8.2017','thor',42,10,0,'http://www.cineycine.com/archivos/2017/10/thor-ragnarok-poster.jpg',
                                                                                 (SELECT ID FROM DIRECTOR AS d WHERE d.NOMBRE = 'Taika Waititi'));
@@ -51,4 +51,3 @@ INSERT INTO COMENTARIO (TITULO,TEXTO,FECHA,PELICULA,USUARIO) VALUES ('No está m
                                                                                 (SELECT ID FROM PELICULA AS p WHERE p.URL = 'uno-de-los-nuestros'),'boa');
 INSERT INTO COMENTARIO (TITULO,TEXTO,FECHA,PELICULA,USUARIO) VALUES ('Aburrida','Yo me aburrí. Preferiría morirme en este momento.',CURRENT_TIMESTAMP,
                                                                                 (SELECT ID FROM PELICULA AS p WHERE p.URL = 'uno-de-los-nuestros'),'web');
-

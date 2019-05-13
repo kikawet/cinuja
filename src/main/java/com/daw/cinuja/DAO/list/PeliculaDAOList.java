@@ -5,6 +5,7 @@
  */
 package com.daw.cinuja.DAO.list;
 
+import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.models.Pelicula;
 import java.util.ArrayList;
@@ -15,14 +16,10 @@ import org.springframework.stereotype.Repository;
  *
  * @author lopez
  */
-//@ApplicationScoped
-//@DAOList
-@Repository(PeliculaDAOList.qualifier)
+@Repository(PeliculaDAO.QUALIFIER_ + DAOConfig._DAOLIST)
 public class PeliculaDAOList implements PeliculaDAO {
 
     private List<Pelicula> peliculas;
-
-    final static public String qualifier = "PeliculaDAOList";
 
     public PeliculaDAOList() {
 
@@ -46,17 +43,23 @@ public class PeliculaDAOList implements PeliculaDAO {
 
     @Override
     public Pelicula getPelicula(String url) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int i = 0;
+
+        while (i < peliculas.size() && !peliculas.get(i).getUrl().equals(url)) {
+            i++;
+        }
+
+        return peliculas.get(i);
     }
 
     @Override
     public List<Pelicula> getPeliculas(int genero) {
 
-        List<Pelicula> pelis = new ArrayList<>(peliculas);
+        List<Pelicula> pelis = new ArrayList<>();
 
-        for (int i = pelis.size() - 1; i >= 0; i--) {
-            if (PeliculaDAO.generos.get(pelis.get(i).getGenero()).hashCode() != genero) {
-                pelis.remove(i);
+        for (Pelicula pelicula : peliculas) {
+            if (pelicula.getGenero() == genero) {
+                pelis.add(pelicula);
             }
         }
 
@@ -65,7 +68,13 @@ public class PeliculaDAOList implements PeliculaDAO {
 
     @Override
     public boolean modificar(Pelicula antiguo, Pelicula nueva) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int pos = peliculas.indexOf(antiguo);
+
+        if (pos != -1) {
+            peliculas.set(pos, nueva);
+        }
+
+        return pos != -1;
     }
 
 }

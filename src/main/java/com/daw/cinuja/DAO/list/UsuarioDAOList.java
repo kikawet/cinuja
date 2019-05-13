@@ -5,6 +5,7 @@
  */
 package com.daw.cinuja.DAO.list;
 
+import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Usuario;
 import java.util.ArrayList;
@@ -15,13 +16,10 @@ import org.springframework.stereotype.Repository;
  *
  * @author lopez
  */
-//@ApplicationScoped
-@Repository(UsuarioDAOList.qualifier)
+@Repository(UsuarioDAO.QUALIFIER_ + DAOConfig._DAOLIST)
 public class UsuarioDAOList implements UsuarioDAO {
 
     private List<Usuario> usuarios;
-
-    final static public String qualifier = "UsuarioDAOList";
 
     public UsuarioDAOList() {
         usuarios = new ArrayList<>();
@@ -55,5 +53,4 @@ public class UsuarioDAOList implements UsuarioDAO {
         usuarios.get(usuarios.indexOf(antiguo)).copy(nuevo);
         return true;
     }
-
 }

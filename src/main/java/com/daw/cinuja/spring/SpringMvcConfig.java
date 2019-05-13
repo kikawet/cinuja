@@ -49,7 +49,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("redirect:/index.jsp");
+        registry.addViewController("/").setViewName("redirect:/portada");
     }
 
     @Bean

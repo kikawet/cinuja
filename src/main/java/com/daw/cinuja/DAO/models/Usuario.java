@@ -6,13 +6,12 @@
 package com.daw.cinuja.DAO.models;
 
 import java.util.Objects;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
- * Para almacenar las preferencias y los datos de un usuario
+ *
  *
  * @author lopez
  */
@@ -30,12 +29,14 @@ public class Usuario {
     @Size(min = 6, message = "La contraseña debe de tener un minimo de {min} caracteres")
     private String contrasena;// solo se usa para registrar
     private String rol;//cambiar roles como los generos
-    @Valid
-    private Pelicula pFavorita;
-    @Valid
-    private Director dFavorito;
 
     public Usuario() {
+        this.nick = "";
+        this.nombre = "";
+        this.apellidos = "";
+        this.foto = "";
+        this.contrasena = "";
+        this.rol = "non";
     }
 
     public void copy(Usuario otro) {
@@ -47,10 +48,7 @@ public class Usuario {
             this.setFoto(otro.getFoto());
             this.setContrasena(otro.getContrasena());
             this.setRol(otro.getRol());
-            this.setpFavorita(otro.getpFavorita());
-            this.setdFavorito(otro.getdFavorito());
         }
-
     }
 
     @Override
@@ -62,9 +60,6 @@ public class Usuario {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -72,10 +67,7 @@ public class Usuario {
             return false;
         }
         final Usuario other = (Usuario) obj;
-        if (!Objects.equals(this.nick, other.nick)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.nick, other.nick);
     }
 
     public String getNick() {
@@ -118,22 +110,6 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public Pelicula getpFavorita() {
-        return pFavorita;
-    }
-
-    public void setpFavorita(Pelicula pFavorita) {
-        this.pFavorita = pFavorita;
-    }
-
-    public Director getdFavorito() {
-        return dFavorito;
-    }
-
-    public void setdFavorito(Director dFavorito) {
-        this.dFavorito = dFavorito;
-    }
-
     public String getContrasena() {
         return contrasena;
     }
@@ -141,5 +117,4 @@ public class Usuario {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-
 }

@@ -5,6 +5,7 @@
  */
 package com.daw.cinuja.DAO.JDBC;
 
+import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.models.Pelicula;
 import java.sql.Connection;
@@ -24,16 +25,11 @@ import org.springframework.stereotype.Repository;
  *
  * @author lopez
  */
-//@RequestScoped
-//@DAOJDBC
-@Repository(PeliculaDAOJDBC.qualifier)
+@Repository(PeliculaDAO.QUALIFIER_ + DAOConfig._DAOJDBC)
 public class PeliculaDAOJDBC implements PeliculaDAO {
 
-    private Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
+    private static final Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
 
-    final static public String qualifier = "PeliculaDAOJDBC";
-
-//    @Resource(lookup = "java:global/jdbc/Cinuja")
     @Autowired(required = false)
     private DataSource ds;
 
@@ -66,7 +62,7 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
 
     @Override
     public boolean insertar(Pelicula p) {
-        String query = "INSERT INTO PELICULA (nombre,fecha,foto,url,sumaVotos,nVotos,genero,DESCRIPCION,RESTRICCION,director) VALUES (?,?,?,?,?,?,?,?,(SELECT id FROM director AS d WHERE d.nombre = ?))";
+        String query = "INSERT INTO PELICULA (nombre,fecha,foto,url,sumaVotos,nVotos,genero,DESCRIPCION,RESTRICCION,director) VALUES (?,?,?,?,?,?,?,?,?,(SELECT id FROM director AS d WHERE d.nombre = ?))";
 
         boolean res = false;
         try (
@@ -79,8 +75,9 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
             st.setLong(5, p.getSumaVotos());
             st.setLong(6, p.getnVotos());
             st.setInt(7, p.getGenero());
-            st.setBoolean(8, p.isRestriccionEdad());
-            st.setString(9, p.getDirector().getNombre());
+            st.setString(8, p.getDescripcion());
+            st.setBoolean(9, p.isRestriccionEdad());
+            st.setString(10, p.getDirector().getNombre());
 
             res = st.execute();
         } catch (SQLException ex) {
@@ -92,7 +89,6 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
 
     @Override
     public boolean borrar(Pelicula p) {
-        //Derby no tiene borrar en cascada :/        
         String query1 = "DELETE from comentario as c where c.pelicula = (select id from pelicula as p where p.url = ?)";
         String query2 = "DELETE FROM pelicula AS p WHERE p.url = ?";
         boolean res1 = false, res2 = false;
@@ -115,7 +111,7 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
 
     @Override
     public Pelicula getPelicula(String url) {
-        String query = "SELECT * "
+        final String query = "SELECT * "
                 + "FROM PELICULA AS p "
                 + "LEFT JOIN DIRECTOR AS d "
                 + "ON p.DIRECTOR = d.ID "
@@ -171,6 +167,7 @@ public class PeliculaDAOJDBC implements PeliculaDAO {
         try (
                 Connection conn = ds.getConnection();
                 PreparedStatement st = conn.prepareStatement(query);) {
+
             st.setString(1, nueva.getTitulo());
             st.setDate(2, new java.sql.Date(nueva.getFecha().getTime()));
             st.setString(3, nueva.getFoto());

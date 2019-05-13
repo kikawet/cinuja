@@ -5,23 +5,29 @@
  */
 package com.daw.cinuja.controller;
 
-import com.daw.cinuja.DAO.JDBC.ComentarioDAOJDBC;
-import com.daw.cinuja.DAO.JDBC.PeliculaDAOJDBC;
-import com.daw.cinuja.DAO.JDBC.UsuarioDAOJDBC;
 import com.daw.cinuja.DAO.interfaces.ComentarioDAO;
+import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Sesion;
 import com.daw.cinuja.DAO.models.Usuario;
+import com.daw.cinuja.DTO.ComentarioDTO;
+import com.daw.cinuja.DTO.UsuarioDTO;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,116 +38,39 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author lopez
  */
-//@WebServlet(name = "Usuario", urlPatterns = {"/perfil/*"})
 @Controller
 @RequestMapping("/perfil")
 public class UsuarioController {
 
     @Autowired
-    @Qualifier(UsuarioDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.usuarioQualifier)
     private UsuarioDAO usuarios;
 
     @Autowired
-    @Qualifier(PeliculaDAOJDBC.qualifier)
-    private PeliculaDAO peliculas;
-
-    @Autowired
-    @Qualifier(ComentarioDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.comentarioQualifier)
     private ComentarioDAO comentarios;
 
     @Autowired
     private Sesion sesion;
+
+    @ModelAttribute("comentario")
+    public ComentarioDTO getComentario() {
+        return new ComentarioDTO();
+    }
 
     @ModelAttribute("sesion")
     public Sesion getSesion() {
         return sesion;
     }
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//
-////        request.authenticate(response);
-//        sesion.setUsuario(usuarios.getUsuario(request.getRemoteUser()));
-//
-//    }
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-//    @Override
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        processRequest(request, response);
-//
-//        if ("/salir".equals(request.getPathInfo())) {
-//
-//            request.logout();
-//            request.getSession().invalidate();
-//
-//            response.sendRedirect(request.getContextPath() + "/portada");
-//            return;
-//        }
-//
-//        if ("/cc".equals(request.getPathInfo())) {
-//
-//            String contr = request.getParameter("contrase");
-//
-//            if (contr != null) {
-//                Usuario u = usuarios.getUsuario(sesion.getUsuario().getNick());
-//                u.setContrasena(contr);
-//
-//                usuarios.modificar(usuarios.getUsuario(sesion.getUsuario().getNick()), u);
-//
-//                request.logout();
-//                request.getSession().invalidate();
-//
-//                response.sendRedirect(request.getContextPath() + "/portada");
-//                return;
-//            }
-//
-//            request.getRequestDispatcher("/WEB-INF/jsp/contrasena.jsp").forward(request, response);
-//
-//        } else {
-//
-//            String user = sesion.getUsuario().getNick();
-//
-//            ArrayList<Comentario> total = new ArrayList<>();
-//
-//            for (Pelicula p : peliculas.getPeliculas()) {
-//                if (comentarios.getComentarios(p) != null) {
-//                    ArrayList<Comentario> c = new ArrayList<>(comentarios.getComentarios(p));
-//                    for (int i = c.size() - 1; i >= 0; i--) {
-//                        if (!c.get(i).getUsuario().getNick().equals(user)) {
-//                            c.remove(i);
-//                        }
-//                    }
-//                    total.addAll(c);
-//                }
-//            }
-//
-//            request.getSession().setAttribute("comentarios", total);
-//            request.getSession().setAttribute("generos", PeliculaDAO.generos);
-//            request.getSession().setAttribute("perfil", usuarios.getUsuario(user));
-//
-//            request.getRequestDispatcher("/WEB-INF/jsp/usuario.jsp").forward(request, response);
-//        }
-//
-//    }
+    @ModelAttribute
+    protected void processRequest(ModelMap model, HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        model.addAttribute("usuarioDTO", new UsuarioDTO());
+    }
+
     @GetMapping("")
     public String visualiza(ModelMap model, HttpServletRequest request) {
         sesion.setUsuario(usuarios.getUsuario(request.getRemoteUser()));
@@ -175,71 +104,89 @@ public class UsuarioController {
     @GetMapping("/borrar/comentario")
     public String borrarComentario(@RequestParam(value = "id", defaultValue = "0") Integer id, ModelMap model) {
         comentarios.borrar(comentarios.getComentarios(sesion.getUsuario()).get(id));
-//        model.clear();
         return "redirect:/perfil";
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        processRequest(request, response);
-//
-//        if (request.getPathInfo().contains("/borrar/comentario")) {
-//            int hashComentario = new Integer(request.getParameter("com"));
-//            int hashPelicula = new Integer(request.getParameter("pel"));
-//            //buscar con has y borrarlo
-//
-//            //        ArrayList<Comentario> total = new ArrayList<>();
-//            Comentario com = null;
-//            List<Pelicula> pelis = peliculas.getPeliculas();
-//
-//            for (Pelicula p : pelis) {
-//                List<Comentario> cmtrs = comentarios.getComentarios(p);
-//                if (cmtrs != null) {
-////                ArrayList<Comentario> c = new ArrayList<>(comentarios.getComentarios(p));
-////                for (int i = c.size() - 1; i >= 0; i--) {
-////                    if (!c.get(i).getUsuario().getNick().equals(sesion.getUsuario().getNick())) {
-////                        c.remove(i);
-////                    }
-////                }
-//                    for (Comentario cmtr : cmtrs) {
-//                        if (cmtr.getPelicula().getTitulo().hashCode() == hashPelicula && cmtr.getTexto().hashCode() == hashComentario) {
-//                            com = cmtr;
-//                            break;
-//                        }
-//                    }
-//
-//                }
-//
-//                if (com != null) {
-//                    break;
-//                }
-//
-//            }
-//
-//            comentarios.borrar(com);
-//
-//            response.sendRedirect(request.getContextPath() + "/perfil");
-//            return;
-//        }
-//
-//    }
-//
-//    /**
-//     * Returns a short description of the servlet.
-//     *
-//     * @return a String containing servlet description
-//     */
-//    @Override
-//    public String getServletInfo() {
-//        return "Servlet para el perfil del usuario";
-//    }// </editor-fold>
+    @PostMapping("/modifica/comentario")
+    public String modificarComentario(
+            @ModelAttribute("comentario") @Valid ComentarioDTO cDTO, BindingResult errores,
+            @RequestParam(value = "id", defaultValue = "0") Integer id, ModelMap model) {
+        String url = "usuario";
+
+        Comentario c = comentarios.getComentarios(sesion.getUsuario()).get(id);
+        ComentarioDTO CDTO = new ComentarioDTO();
+        CDTO.setTitulo(c.getTitulo());
+        CDTO.setTexto(c.getTexto());
+
+        if (cDTO.equals(CDTO)) {
+            errores.rejectValue("titulo", "error.comentario.titulo", "No se ha modificado el titulo");
+            errores.rejectValue("texto", "error.comentario.texto", "No se ha modificado el texto");
+        }
+
+        if (!errores.hasErrors()) {
+            url = "redirect:/perfil";
+            c.setTitulo(cDTO.getTitulo());
+            c.setTexto(cDTO.getTexto());
+            comentarios.modificar(c, c);
+        } else {
+            model.addAttribute("comentarios", comentarios.getComentarios(sesion.getUsuario()));
+            model.addAttribute("generos", PeliculaDAO.generos);
+            model.addAttribute("perfil", sesion.getUsuario());
+        }
+
+        return url;
+    }
+
+    @GetMapping("/registro")
+    public String registro() {
+        return "registro";
+    }
+
+    @PostMapping(value = "/registro")
+    public String comentario(ModelMap model,
+            @ModelAttribute("usuarioDTO") @Valid UsuarioDTO uDTO, BindingResult errores,
+            @RequestParam(value = "contrasena2", defaultValue = "") String contrasena
+    ) {
+        String url = "registro";
+
+        if (!uDTO.isTerminos()) {
+            errores.rejectValue("terminos", "error.cliente.terminos", "Debes de aceptar los terminos de usuario");
+        }
+
+        if (!uDTO.getContrasena().equals(contrasena) || contrasena.isEmpty()) {
+            errores.addError(new FieldError("contrasena2", "contrasena2", "Las contraseñas no son iguales"));
+        } else {
+            model.addAttribute("contrasena2", contrasena);
+        }
+
+        if (usuarios.getUsuario(uDTO.getNick()) != null) {
+            errores.rejectValue("nick", "error.cliente.nick", "Ya hay otro usuario con ese nick");
+        }
+
+        if (!errores.hasErrors()) {
+            url = "redirect:/perfil";
+            Usuario u = new Usuario();
+            u.setNick(uDTO.getNick());
+            u.setNombre(uDTO.getNombre());
+            u.setApellidos(uDTO.getApellidos());
+            u.setContrasena(uDTO.getContrasena());
+            u.setFoto("http://scapp.ie20deenero.edu.co/assets/img/defaultcon.png");
+            usuarios.insertar(u);
+            model.clear();
+        } else {
+            List<Object> errs = new ArrayList<>();
+
+            for (FieldError e : errores.getFieldErrors()) {
+                final String name = e.getField();
+                final String msg = e.getDefaultMessage();
+                String m = "{\"name\":\"" + name + "\",\"msg\":\"" + msg + "\"}";
+                errs.add(m);
+            }
+            model.addAttribute("errors", errs);
+        }
+
+        //si hay errores no hacer redirect
+        return url;
+    }
+
 }

@@ -67,19 +67,17 @@ public class Comentario {
         if (!Objects.equals(this.pelicula, other.pelicula)) {
             return false;
         }
-        if (!Objects.equals(this.fecha, other.fecha)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.fecha, other.fecha);
     }
 
-//    public Usuario getUsuario() {
-//        return usuario;
-//    }
-//
-//    public void setUsuario(Usuario usuario) {
-//        this.usuario = usuario;
-//    }
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public Pelicula getPelicula() {
         return pelicula;
     }
@@ -119,13 +117,4 @@ public class Comentario {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
 }

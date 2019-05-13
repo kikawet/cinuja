@@ -6,12 +6,12 @@
 package com.daw.cinuja.DAO.JDBC;
 
 import com.daw.cinuja.DAO.interfaces.ComentarioDAO;
+import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.PeliculaDAO;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
 import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Usuario;
-import com.daw.cinuja.DTO.ComentarioDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,24 +30,20 @@ import org.springframework.stereotype.Repository;
  *
  * @author lopez
  */
-//@RequestScoped
-//@DAOJDBC
-@Repository(ComentarioDAOJDBC.qualifier)
+@Repository(ComentarioDAO.QUALIFIER_ + DAOConfig._DAOJDBC)
 public class ComentarioDAOJDBC implements ComentarioDAO {
 
-    final static public String qualifier = "ComentarioDAOJDBC";
-    private Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
+    private static final Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
 
-//    @Resource(lookup = "java:global/jdbc/Cinuja")
     @Autowired(required = false)
     private DataSource ds;
 
     @Autowired
-    @Qualifier(UsuarioDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.usuarioQualifier)
     private UsuarioDAO usuarios;
 
     @Autowired
-    @Qualifier(PeliculaDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.peliculaQualifier)
     private PeliculaDAO peliculas;
 
     public ComentarioDAOJDBC() {
@@ -55,7 +51,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
 
     @Override
     public List<Comentario> getComentarios(Pelicula p) {
-        String query = "Select * from comentario as c , pelicula as p where c.pelicula = p.id AND p.url = '" + p.getUrl() + "'";
+        final String query = "Select * from comentario as c , pelicula as p where c.pelicula = p.id AND p.url = '" + p.getUrl() + "'";
         List<Comentario> comentarios = new ArrayList<>();
         try (
                 Connection conn = ds.getConnection();
@@ -74,7 +70,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
 
     @Override
     public boolean insertar(Comentario c) {
-        String query = "INSERT INTO COMENTARIO (PELICULA, USUARIO, FECHA, TITULO, TEXTO) VALUES (("
+        final String query = "INSERT INTO COMENTARIO (PELICULA, USUARIO, FECHA, TITULO, TEXTO) VALUES (("
                 + "SELECT id "
                 + "FROM pelicula as p "
                 + "WHERE p.url = '" + c.getPelicula().getUrl() + "'"
@@ -99,7 +95,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
 
     @Override
     public boolean borrar(Comentario c) {
-        String query = "DELETE FROM comentario AS c WHERE c.usuario = ? AND c.pelicula = (SELECT id FROM pelicula WHERE pelicula.url = ?)";
+        String query = "DELETE FROM comentario AS c WHERE c.usuario = ? AND c.pelicula = (SELECT id FROM pelicula WHERE pelicula.url = ?) AND c.fecha = ?";
 
         boolean res = false;
         try (
@@ -107,6 +103,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
                 PreparedStatement st = conn.prepareStatement(query);) {
             st.setString(1, c.getUsuario().getNick());
             st.setString(2, c.getPelicula().getUrl());
+            st.setTimestamp(3, new java.sql.Timestamp(c.getFecha().getTime()));
 
             res = st.execute();
 
@@ -119,11 +116,12 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
 
     @Override
     public List<Comentario> getComentarios(Usuario u) {
-        String query = "Select * "
-                + "from comentario as c , "
-                + "usuario as u , "
-                + "pelicula as p "
-                + "where c.pelicula = p.id AND c.usuario = u.nick AND u.nick = '" + u.getNick() + "'";
+        final String query = "Select * "
+                + "from comentario as c  "
+                + "LEFT JOIN pelicula as p "
+                + "on p.id = c.pelicula, "
+                + "usuario as u "
+                + "where c.usuario = u.nick AND u.nick = '" + u.getNick() + "'";
 
         List<Comentario> comentarios = new ArrayList<>();
 
@@ -135,7 +133,7 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
             Pelicula p;
 
             while (rs.next()) {
-                p = peliculas.getPelicula(rs.getString(20));
+                p = peliculas.getPelicula(rs.getString(12));
                 comentarios.add(Utils.comentarioMapper(rs, p, usuarios.getUsuario(rs.getString("usuario"))));
             }
 
@@ -143,6 +141,31 @@ public class ComentarioDAOJDBC implements ComentarioDAO {
             logger.log(Level.SEVERE, null, ex);
         }
         return comentarios;
+    }
+
+    @Override
+    public boolean modificar(Comentario antiguo, Comentario nuevo) {
+        String query = "UPDATE comentario SET titulo = ?, texto = ? "
+                + " WHERE fecha = ? AND usuario = ? AND pelicula = (select id from pelicula where pelicula.url = ?)";
+
+        boolean res = false;
+        try (
+                Connection conn = ds.getConnection();
+                PreparedStatement st = conn.prepareStatement(query);) {
+
+            st.setString(1, nuevo.getTitulo());
+            st.setString(2, nuevo.getTexto());
+            st.setTimestamp(3, new java.sql.Timestamp(antiguo.getFecha().getTime()));
+            st.setString(4, antiguo.getUsuario().getNick());
+            st.setString(5, antiguo.getPelicula().getUrl());
+
+            res = st.execute();
+
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
+
+        return res;
     }
 
 }

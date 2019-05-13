@@ -10,7 +10,6 @@ import com.daw.cinuja.DAO.models.Comentario;
 import com.daw.cinuja.DAO.models.Director;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Usuario;
-import com.daw.cinuja.DTO.ComentarioDTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -47,7 +46,7 @@ public class Utils {
         Pelicula p = new Pelicula();
 
         p.setTitulo(rs.getString(offset + 2));
-        p.setFecha(rs.getDate(offset + 3));
+        p.setFecha(new java.util.Date(rs.getDate(offset + 3).getTime()));
         p.setFoto(rs.getString(offset + 4));
         p.setUrl(rs.getString(offset + 5));
         p.setSumaVotos(rs.getLong(offset + 6));
@@ -72,17 +71,14 @@ public class Utils {
         return d;
     }
 
-    public static Usuario usuarioMapper(ResultSet rs, int offset, Pelicula p, Director d) throws SQLException {
+    public static Usuario usuarioMapper(ResultSet rs, int offset) throws SQLException {
         Usuario u = new Usuario();
 
         u.setNick(rs.getString(offset + 1));
         u.setNombre(rs.getString(offset + 2));
         u.setApellidos(rs.getString(offset + 3));
         u.setFoto(rs.getString(offset + 4));
-        //5 contraseña
         u.setRol(rs.getString(offset + 6));
-        u.setpFavorita(p);
-        u.setdFavorito(d);
 
         return u;
     }

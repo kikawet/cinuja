@@ -9,7 +9,10 @@ import com.daw.cinuja.DAO.JDBC.*;
 import com.daw.cinuja.DAO.interfaces.*;
 import com.daw.cinuja.DAO.models.Pelicula;
 import com.daw.cinuja.DAO.models.Sesion;
+import com.daw.cinuja.DTO.PeliculaDTO;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -28,16 +31,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CinujaController {
 
     @Autowired
-    @Qualifier(PeliculaDAOJDBC.qualifier)
+    @Qualifier(DAOConfig.peliculaQualifier)
     private PeliculaDAO peliculas;
-
-    @Autowired
-    @Qualifier(UsuarioDAOJDBC.qualifier)
-    private UsuarioDAO usuarios;
-
-    @Autowired
-    @Qualifier(ComentarioDAOJDBC.qualifier)
-    private ComentarioDAO comentarios;
 
     @Autowired
     private Sesion sesion;
@@ -47,28 +42,32 @@ public class CinujaController {
         return sesion;
     }
 
+    @ModelAttribute
+    private void processReques(ModelMap model) {
+        if (this.sesion.getUsuario() != null && this.sesion.getUsuario().getRol().equals(UsuarioDAO.ROL_ADMIN)) {
+            model.addAttribute("peliculaDTO", new PeliculaDTO());
+            Map<Integer, String> generos = new HashMap<>();
+            for (int i = 0; i < PeliculaDAO.generos.size(); i++) {
+                generos.put(i, PeliculaDAO.generos.get(i));
+            }
+            model.addAttribute("mapGeneros", generos);
+        }
+        model.addAttribute("generos", PeliculaDAO.generos);
+
+    }
+
     @GetMapping("")
     public String visualizar(ModelMap model) {
-
         model.addAttribute("peliculas", peliculas.getPeliculas());
-        model.addAttribute("generos", PeliculaDAO.generos);
 
         return "portada";
     }
 
     @GetMapping(value = "", params = "genero")
     public String visualizaGenero(@RequestParam(value = "genero", required = true) int genero, ModelMap model) {
-
         List<Pelicula> p = peliculas.getPeliculas(Utils.indiceGenero(genero));
         model.addAttribute("peliculas", p);
-        model.addAttribute("generos", PeliculaDAO.generos);
 
         return "portada";
     }
-
-    @GetMapping("/registro")
-    public String registro() {
-        return "registro";
-    }
-
 }

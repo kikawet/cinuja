@@ -18,15 +18,40 @@
         <min-pool-size>5</min-pool-size>
     </data-source>
     <security-constraint>
+        <display-name>registro</display-name>
+        <web-resource-collection>
+            <web-resource-name>registro usuario</web-resource-name>
+            <description/>
+            <url-pattern>/perfil/registro</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
+    <security-constraint>
         <display-name>login</display-name>
         <web-resource-collection>
-            <web-resource-name>perfiles</web-resource-name>
+            <web-resource-name>login</web-resource-name>
             <description/>
             <url-pattern>/perfil/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
             <role-name>non</role-name>
+            <role-name>adm</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>peliculas</display-name>
+        <web-resource-collection>
+            <web-resource-name>borrar</web-resource-name>
+            <description>borrar peliculas</description>
+            <url-pattern>/pelicula/*/borrar</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>crear</web-resource-name>
+            <description>crear peliculas</description>
+            <url-pattern>/pelicula/crear</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
             <role-name>adm</role-name>
         </auth-constraint>
     </security-constraint>

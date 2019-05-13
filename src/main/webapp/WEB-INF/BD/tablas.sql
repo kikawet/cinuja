@@ -24,7 +24,7 @@ CREATE TABLE Pelicula(
     nombre VARCHAR(50) NOT NULL UNIQUE,
     fecha DATE NOT NULL UNIQUE,
     foto VARCHAR(300),-- una url no se
-    url VARCHAR(30),
+    url VARCHAR(30) NOT NULL UNIQUE,
     sumaVotos BIGINT,
     nVotos BIGINT,
     genero INTEGER,
@@ -41,8 +41,6 @@ CREATE TABLE Usuario(
     foto VARCHAR(300),
     contrasena VARCHAR(20),
     rol VARCHAR(3) CHECK( rol IN ('non','adm')) NOT NULL,
-    pelicula_fav INTEGER REFERENCES Pelicula(id), 
-    director_fav INTEGER REFERENCES Director(id),
     PRIMARY KEY(nick)
 );
 
@@ -57,12 +55,4 @@ CREATE TABLE Comentario(
     PRIMARY KEY(id)
 );
 
---Se borran con las tablas
---DROP INDEX pel_url;
---DROP INDEX usr_nick;
---DROP INDEX com_pel;
-
 CREATE INDEX pel_url ON Pelicula(url);
--- Se crean con las primary key
---CREATE INDEX usr_nick ON Usuario(nick);
---CREATE INDEX com_pel ON Comentario(pelicula);

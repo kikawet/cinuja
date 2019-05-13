@@ -5,8 +5,8 @@
  */
 package com.daw.cinuja.DAO.JDBC;
 
+import com.daw.cinuja.DAO.interfaces.DAOConfig;
 import com.daw.cinuja.DAO.interfaces.UsuarioDAO;
-import com.daw.cinuja.DAO.models.Director;
 import com.daw.cinuja.DAO.models.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,16 +23,11 @@ import org.springframework.stereotype.Repository;
  *
  * @author lopez
  */
-//@RequestScoped
-//@DAOJDBC
-@Repository(UsuarioDAOJDBC.qualifier)
+@Repository(UsuarioDAO.QUALIFIER_ + DAOConfig._DAOJDBC)
 public class UsuarioDAOJDBC implements UsuarioDAO {
 
-    private Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
+    private static final Logger logger = Logger.getLogger(ComentarioDAOJDBC.class.getName());
 
-    final static public String qualifier = "UsuarioDAOJDBC";
-
-//    @Resource(lookup = "java:global/jdbc/Cinuja")
     @Autowired(required = false)
     private DataSource ds;
 
@@ -41,11 +36,8 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
 
     @Override
     public Usuario getUsuario(String nick) {
-
-        String query = "SELECT * "
+        final String query = "SELECT * "
                 + "FROM USUARIO AS u "
-                + "LEFT JOIN PELICULA AS p ON p.ID = u.PELICULA_FAV "
-                + "LEFT JOIN DIRECTOR AS d ON d.ID = u.DIRECTOR_FAV "
                 + "WHERE u.nick = '" + nick + "'";
 
         Usuario usuario = null;
@@ -56,8 +48,7 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
                 ResultSet rs = st.executeQuery(query);) {
 
             if (rs.next()) {
-                Director d = Utils.directorMapper(rs, 19);
-                usuario = Utils.usuarioMapper(rs, 0, Utils.peliculaMapper(rs, 8, d), d);
+                usuario = Utils.usuarioMapper(rs, 0);
             }
 
         } catch (SQLException ex) {
@@ -69,7 +60,7 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
 
     @Override
     public boolean insertar(Usuario u) {
-        String query = "INSERT INTO usuario VALUES (?,?,?,?,?,?,(SELECT id FROM pelicula AS p WHERE p.url = ?),(SELECT id FROM director AS d WHERE d.nombre = ?))";
+        String query = "INSERT INTO usuario VALUES (?,?,?,?,?,?)";
 
         boolean res = false;
         try (
@@ -81,8 +72,6 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
             st.setString(4, u.getFoto());
             st.setString(5, u.getContrasena());
             st.setString(6, u.getRol());
-            st.setString(7, u.getpFavorita().getUrl());
-            st.setString(8, u.getdFavorito().getNombre());
 
             res = st.execute();
         } catch (SQLException ex) {
