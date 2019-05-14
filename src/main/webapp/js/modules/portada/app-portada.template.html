@@ -6,7 +6,7 @@ and open the template in the editor.-->
 
 <div class="form-inline ml-4 my-2">
     <input class="form-control mr-sm-2" type="text" placeholder="Buscar película" aria-label="Search" ng-model="filtro.titulo">
-    Ordenar:   <button type="button" class="btn btn-secondary" style="margin-left: 20px;" ng-click="$ctrl.ordenar()">{{$ctrl.orden[$ctrl.ordenacion]['msg']}}</button>
+    Ordenar: <button class="btn btn-primary" style="margin-left: 20px" ng-click="$ctrl.ordenar()">{{$ctrl.orden[$ctrl.ordenacion]['msg']}}</button>
 </div>
 
 <main class="row">
